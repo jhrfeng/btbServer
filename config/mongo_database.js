@@ -41,26 +41,30 @@ var User = new Schema({
 
 // 商品
 var Post = new Schema({
-    title: { type: String, required: true },
-    tags: [ {type: String} ],
-    is_published: { type: Boolean, default: false },
-    content: { type: String, required: true },
-    created: { type: Date, default: Date.now },
+    pid:     { type: String, required: true }, // 商品id
+    name:    { type: String, required: false},  // 商品名称
+    weeks:   { type: String, required: true }, // 周期天数
+    shouyi:  { type: String, required: true }, // 收益率
+    join:    { type: String, required: true }, // 起投金额
+    created: { type: Date, default: Date.now }, //
     updated: { type: Date, default: Date.now },
-    read: { type: Number, default: 0 },
-    likes: { type: Number, default: 0 }
+    status:  { type: String, default: "1" },   // 状态有效1
 });
 
 // 订单
-var Post = new Schema({
-    title: { type: String, required: true },
-    tags: [ {type: String} ],
-    is_published: { type: Boolean, default: false },
-    content: { type: String, required: true },
-    created: { type: Date, default: Date.now },
-    updated: { type: Date, default: Date.now },
-    read: { type: Number, default: 0 },
-    likes: { type: Number, default: 0 }
+var Order = new Schema({
+    userid:   { type: String, required: true }, // 关联的用户
+    orderid:  { type: String, required: true, unique: true }, // 订单号号
+    pid:      { type: Object, required: true }, // 商品id
+    payAmount:{ type: Number, required: true }, // 订单金额
+    tradeno:  { type: String, required: true, unique: true }, // 交易流水号凭证
+    outtrade: { type: String, required: true, unique: true }, // 商户订单号
+    opendate: { type: Date, default: Date.now }, // 赎回日期
+    openAmount:{type: Number, default: 0}, // 预期收益
+    openStatus:{type: String, default: "0"}, // 0未清算，1已清算
+    created:  { type: Date, default: Date.now }, //
+    updated:  { type: Date, default: Date.now },
+    status:   { type: String, default: "0" },   // 状态有效， 未完成订单，1已完成订单
 });
 
 
@@ -84,7 +88,9 @@ User.methods.comparePassword = function(password, cb) {
 
 //Define Models
 var userModel = mongoose.model('User', User);
+var orderModel = mongoose.model('Order', Order);
 
 
 // Export Models
 exports.userModel = userModel;
+exports.orderModel = orderModel;

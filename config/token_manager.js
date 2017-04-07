@@ -39,6 +39,12 @@ exports.getUser = function(req){
 	return user;
 }
 
+exports.getUserId = function(req){
+	var token = getToken(req.headers);
+	var json = jwt.decode(token, secret.secretToken);
+	return json._doc._id;
+}
+
 var getToken = function(headers) {
 	if (headers && headers.authorization) {
 		var authorization = headers.authorization;

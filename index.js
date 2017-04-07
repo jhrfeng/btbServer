@@ -8,6 +8,7 @@ var secret = require('./config/secret');
 var routes = {};
 routes.golds = require('./route/gold.js');
 routes.users = require('./route/user.js');
+routes.order = require('./route/order.js');
 
 var app = express();
 var serverPort = process.env.PORT || 3000;
@@ -28,6 +29,21 @@ app.use(function(req, res, next) {
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+//默认跳转主页
+app.get('/', function(req, res){
+  res.redirect('http://www.baidu.com');
+});
+
+
+//查询当前用户所有订单
+app.get('/order/queryAllorder', jwt({secret: secret.secretToken}), tokenManager.verifyToken, routes.order.queryAllOrder);
+
+//查询订单
+app.post('/order/queryorder', jwt({secret: secret.secretToken}), tokenManager.verifyToken, routes.order.queryOrder);
+
+//生成订单
+app.post('/order/neworder', jwt({secret: secret.secretToken}), tokenManager.verifyToken, routes.order.newOrder);
 
 //Logout
 app.get('/user/logout', jwt({secret: secret.secretToken}), routes.users.logout); 
