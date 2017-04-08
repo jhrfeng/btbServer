@@ -1,0 +1,153 @@
+
+	<div id="gy_bargain_red_bag">
+		<div class="px1000 gy_bargain_red_bagsd" >
+			 <div class="gy_bargain_red_bag_div">
+				
+			</div>
+		</div>
+	</div>
+		<div class="flexslider">
+			<ul class="slides">
+			    <li style="background:url(images/banner2.png) no-repeat center; background-size:100% auto;"></li>
+				<li style="background:url(images/banner3.png) no-repeat center; background-size:100% auto;"></li>
+				<li style="background:url(images/banner1.png) no-repeat center; background-size:100% auto;"></li>
+				<li style="background:url(images/banner4.png) no-repeat center; background-size:100% auto;"></li>
+			</ul>
+		</div>
+		
+		<!--<div class="flexheader">
+			<ul class="slides">
+			    <li style="background:url(images/banner2.png) no-repeat center; background-size:100% auto;"></li>
+			    <li style="background:url(images/banner3.png) no-repeat center; background-size:100% auto;"></li>
+			    <li style="background:url(images/banner1.png) no-repeat center; background-size:100% auto;"></li>
+			    <li style="background:url(images/banner4.png) no-repeat center; background-size:100% auto;"></li>
+			</ul>
+		</div>-->
+
+	
+	<script type="text/javascript">
+		$(document).ready(function(){
+		$('.flexslider').flexslider({
+			directionNav: true,
+			pauseOnAction: false
+		});
+	});
+	</script>
+<!--
+
+	<div id="gy_bargain_sum">
+		<div class="px1000 gy_bargain_sum_main">
+			<div class="gy_bargain_sum_main_mover">
+				<span class="gybargain_summain_dv">成交总金额<span class="gy_bargain_sum_sz"><b>4,210,214,02</b></span>万元</span>
+				<span class="gy_bargain_sum_jg">|</span>
+				<span class="gybargain_summain_dv">成交总金额<span class="gy_bargain_sum_sz"><b>4,210,214,02</b></span>万元</span>
+				<span class="gy_bargain_sum_jg">|</span>
+				<span class="gybargain_summain_dv">累计投资<span class="gy_bargain_sum_sz"><b>12491</b></span>万元</span>
+				<span class="gy_bargain_sum_jg">|</span>
+				<span class="gybargain_summain_dv">累计为投资人赚取<span class="gy_bargain_sum_sz"><b>12491.00</b></span>万元</span>
+			</div>
+		</div>
+	</div>-->
+		
+
+	<!--<div id="gy_guide_help">
+		<div class="px1000 clearfix">
+			<div class="fl gy_guide_help_l"><a href=""><img src="images/gy_guide_help_zl.png"></a></div>
+			<div class="fl gy_guide_help_r" ><img src="images/gy_guide_help_zlxx.png"></div>
+		</div>
+	</div>-->
+	<!--1-->
+	
+	<br>
+	<div ng-repeat="product in productList">
+		<div id="gy_treasure_xszx_bids">
+			<div class="gy_treasure_xsbid_masin px1000 clearfix">
+				<div class="">
+					<div class="gy_treasure_xsbid_left fl">
+						<div class="gy_treasure_xsbid_left_up">
+							<div class="fl gy_caifu_oone" >
+								<p class="gy_treasure_ccp_bid">
+									<span class="">{{product.name}}</span>
+									<span><img src="images/gy_treasure_xszx_bid_hot.png"></span>
+								</p>
+								<p class="gy_treasure_bili_bid">
+									<span>{{product.shouyi}}</span>
+									<span style="font-size:20.49px;">%</span>
+								</p>
+								<p>年化收益率</p>
+							</div>
+							<div class="fl gy_caifu_oont">
+								<p class="gy_treasure_bili_bid">{{product.week}}</p>
+								<p>比特币产品期限（天）</p>
+							</div>
+							<div class="gy_treasure_xsbid_right fl">
+								<p>距下场更新：<span>16 时 53 分 08 秒</span></p>
+								<div class="gy_treasure_xsbid_right_one">
+								<div class="fl" style="color:#29A7E1">正在筹集</div>
+								<div class="gy_treasur_bg1 fl">
+									<div class="gy_treasur_bg2" style="width:80%;">
+										
+									</div>
+								</div>
+								<span class="fl" style="font-size:15.27px;color:#29A7E1;">80%</span>
+								</div>
+							</div>
+						</div>
+						<div class="fl">
+							<div class="gy_treasure_xsbid_down">
+								<span class="gy_treasure_x_cp">起投金额：{{product.join}}</span>
+								<span class="gy_treasure_x_cp">付息方式：按月</span>
+								<span class="gy_treasure_x_cp">赎回方式：T+10， 投资满30天即可申请赎回</span>
+							</div>
+						</div>
+						<div class="fl">
+							<div class="gy_treasure_xsll_down">
+								<span class="gy_treasure_xsll_cp"></span>
+							</div>
+						</div>
+					</div>
+					<div class="gy_treasure_xsbid_r_rdo fr" id="gy_treasure_xsbid_r_pos">
+						<div class="gy_treasure_xsbid_r_rping" style="height:160px;">
+							<input type="text" value="输入金额" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '输入金额';}"/>
+							<img src="images/gy_treasure_small_bgt.png">
+							<input type="text" value="预期收益" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '预期收益';}"/>
+							<div class="gy_treasure_xsbid_down_tbmain"
+								ng-click="goOrder(product.pid)">
+								<a href="">
+									<p class="gy_treasure_xsbid_down_tb">
+									立即投资
+									</p>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+<script type="text/javascript">
+	function guideone(){
+		document.getElementById("gy_guide_staten_xkds2").style.display="block";
+		document.getElementById("gy_guide_staten_xkds5").style.display="none";
+		document.getElementById("gy_guide_sarter1").style.background="url(images/gy_guide_sarter1.png) no-repeat";
+		document.getElementById("gy_guide_sarter2").style.background="url(images/gy_guide_sarter2.png) no-repeat";
+		document.getElementById("gy_guide_sarter1").style.color="#089ADC";
+		document.getElementById("gy_guide_sarter2").style.color="#A2A2A2";
+		document.getElementById("gy_guide_sarter1").style.padding="12px 35px 2px 35px";
+		document.getElementById("gy_guide_sarter2").style.padding="12px 35px 1px 35px";
+	}
+	function guidetwo(){
+		document.getElementById("gy_guide_staten_xkds2").style.display="none";
+		document.getElementById("gy_guide_staten_xkds5").style.display="block";
+		document.getElementById("gy_guide_sarter1").style.background="url(images/gy_guide_sarter2.png) no-repeat";
+		document.getElementById("gy_guide_sarter2").style.background="url(images/gy_guide_sarter1.png) no-repeat";
+		document.getElementById("gy_guide_sarter2").style.color="#089ADC";
+		document.getElementById("gy_guide_sarter1").style.color="#A2A2A2";
+		document.getElementById("gy_guide_sarter2").style.padding="12px 35px 2px 35px";
+		document.getElementById("gy_guide_sarter1").style.padding="12px 35px 1px 35px";
+	}
+</script>
+
+</body>
+</html>

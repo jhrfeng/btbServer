@@ -1,0 +1,55 @@
+<script type="text/javascript" src="lib/app/all.js"></script>
+
+<br><br>
+<div id="form_main" class="px1000 clearfix">
+	<div id="login1" class="left_form fl" >
+		<form class="bs-example bs-example-form" role="form">
+			<div class="input-group">
+				<span class="input-group-addon">手机号</span>
+				<input ng-model="user.username" type="text" class="form-control" placeholder="请输入手机号">
+			</div>
+			<br>
+			<div class="input-group">
+				<span class="input-group-addon">密&nbsp;&nbsp;&nbsp;码</span>
+				<input ng-model="user.password" type="password" class="form-control" placeholder="请输入密码">
+			</div>
+			<br>
+			<div class="input-group">
+				<span class="input-group-addon">验证码</span>
+				<input type="text" class="form-control" placeholder="请输入验证码">
+				<span class="input-group-addon addval">1+1=?</span>
+			</div>
+			<br><br>
+			<p style="text-align: center;">
+				<button id="register" class="btn btn-primary" 
+					ng-click="login()"
+					style="width:400px;"
+					data-loading-text="登录中..." 
+	   			type="button"> 登&nbsp;&nbsp;&nbsp;&nbsp;录
+	   			</button>
+			</p>
+		</form>
+	</div>
+	<div class="right_pic fl" >
+		<p><img src="images/login.jpg"></p>
+	</div>
+</div>
+<script>
+//  $(function() {
+//      $(".btn").click(function(){
+//          $(this).button('loading').delay(2000).queue(function() {
+//             $(this).button('reset');
+//          // $(this).dequeue(); 
+//          });
+//      });
+//  });  
+</script>
+<style>
+	#login1{
+		margin-top:80px;
+	}
+	.addval{
+		background: #333333;
+		color: #fff;
+	}
+</style>

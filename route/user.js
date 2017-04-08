@@ -63,15 +63,13 @@ exports.register = function(req, res) {
 	var user = new db.userModel();
 	user.username = username;
 	user.password = password;
-
+	user.remoteip = new Array(req.connection.remoteAddress);
 	user.save(function(err) {
 		if (err) {
 			console.log(err);
 			return res.sendStatus(500);
 		}	
 		return res.sendStatus(200)
-		
-
 	});
 }
 

@@ -9,10 +9,11 @@ var routes = {};
 routes.golds = require('./route/gold.js');
 routes.users = require('./route/user.js');
 routes.order = require('./route/order.js');
+routes.aplipay = require('./route/aplipay.js');
 
 var app = express();
 var serverPort = process.env.PORT || 3000;
-app.listen(serverPort, "0.0.0.0", function (err) { // 192.168.7.148
+app.listen(serverPort, "127.0.0.1", function (err) { // 192.168.7.148
   if (err) {
     console.log(err);
     return;
@@ -21,7 +22,7 @@ app.listen(serverPort, "0.0.0.0", function (err) { // 192.168.7.148
 });
 
 app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Origin", "*"); 
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
   res.header('Access-Control-Allow-Methods: GET, POST, PUT,DELETE');
   next();
@@ -29,12 +30,12 @@ app.use(function(req, res, next) {
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, 'btb')))
 
-//默认跳转主页
-app.get('/', function(req, res){
-  res.redirect('http://www.baidu.com');
+// index.html//默认跳转主页
+app.get('/', function (req, res) {
+    res.sendFile(__dirname + '/index.html');
 });
-
 
 //查询当前用户所有订单
 app.get('/order/queryAllorder', jwt({secret: secret.secretToken}), tokenManager.verifyToken, routes.order.queryAllOrder);
@@ -56,6 +57,12 @@ app.post('/user/register', routes.users.register);
 
 //获取用户信息
 app.get('/me', jwt({secret: secret.secretToken}), tokenManager.verifyToken, routes.users.me);
+
+//支付宝回调
+app.get('/aplipay/return', jwt({secret: secret.secretToken}), tokenManager.verifyToken, routes.aplipay.return);
+
+//支付宝交易
+app.get('/aplipay/pay', jwt({secret: secret.secretToken}), tokenManager.verifyToken, routes.aplipay.pay);
 
 // 上传头像
 app.post("/uploadImg", routes.golds.uploadImg);

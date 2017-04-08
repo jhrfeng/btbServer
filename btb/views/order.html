@@ -1,0 +1,69 @@
+<script type="text/javascript" src="lib/app/all.js"></script>
+
+<br><br>
+<div id="form_main" class="px1000 clearfix">
+	<div id="login1" class="left_form" >
+		<table class="table table-bordered">
+			<caption>生成订单</caption>
+			<thead>
+				<tr>
+					<th>产品名称</th>
+					<th>产品周期</th>
+					<th>年化回报率</th>
+					<th>起投金额</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>{{product.name}}</td>
+					<td>{{product.week}}天</td>
+					<td>{{product.shouyi}}%</td>
+					<td>{{product.join}}</td>
+				</tr>
+			</tbody>
+		</table>
+		<br>
+		<form class="bs-example bs-example-form" role="form">
+			<div class="input-group">
+				<span class="input-group-addon">购买金额</span>
+				<input type="number" ng-model="order.payAmount" class="form-control" placeholder="请输入您要投资的金额">
+				<span class="input-group-addon">元</span>
+			</div>
+			<br><br>
+			<p style="text-align: right;">
+				<button id="register" class="btn btn-primary" 
+					ng-click="generate()"
+					style="width:200px;"
+					data-loading-text="生成订单中..." 
+	   				type="button"> 生成订单
+	   			</button>
+			</p>
+		</form>
+	</div>
+</div>
+<style>
+	#form_main{
+		padding-left: 20%;
+	}
+	.left_form {
+	    border: 1px solid #ddd;
+	    padding: 40px;
+	    width: 500px;
+	}
+	.input-group-addon {
+	    font-size: 16px;
+	    color: #f9f9f9;
+	    background-color: #8BC34A;
+	}
+	.table-bordered>tbody>tr>td{
+		font-weight: bold;
+		font-size: 15px;;
+	}
+	.btn-primary {
+	    background-color: #FF9800;
+	    border-color: #FFC107;
+	}
+	.form-control{
+		font-size: 17px;
+	}		
+</style>

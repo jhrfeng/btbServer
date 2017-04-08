@@ -1,6 +1,5 @@
 var moment = require('moment');
 var db = require('../config/mongo_database');
-var redisClient = require('../config/redis_database').redisClient;
 var tokenManager = require('../config/token_manager');
 
 var product = {

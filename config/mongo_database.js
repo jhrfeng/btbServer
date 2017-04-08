@@ -24,7 +24,7 @@ var User = new Schema({
     mailSec:  { type: Boolean, default: false },  //邮箱认证，是否安全是自己的
     address:  { type: String, default: ""}, //地址
     otherTel: { type: String, default: ""}, //其他联系人的联系方式
-    remoteip: { type: String, default: ""}, //登录者的ip
+    remoteip: { type: Array             }, //登录者的ip
     zijinPay: { type: String, default: ""}, // 资金管理密码 MD5加密
     zhifuPay: { type: String, default: ""}, // 支付管理密码 MD5加密
     is_admin: { type: Boolean, default: false }, // 账号类型
@@ -49,6 +49,13 @@ var Post = new Schema({
     created: { type: Date, default: Date.now }, //
     updated: { type: Date, default: Date.now },
     status:  { type: String, default: "1" },   // 状态有效1
+});
+
+// 日志
+var Log = new Schema({
+    name:    { type: String},  // 模块名称
+    content: { type: Object},   // 日志内容
+    created: { type: Date, default: Date.now }
 });
 
 // 订单
@@ -89,8 +96,10 @@ User.methods.comparePassword = function(password, cb) {
 //Define Models
 var userModel = mongoose.model('User', User);
 var orderModel = mongoose.model('Order', Order);
+var logModel = mongoose.model('Log', Log);
 
 
 // Export Models
 exports.userModel = userModel;
 exports.orderModel = orderModel;
+exports.logModel = logModel;

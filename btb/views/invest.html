@@ -1,0 +1,126 @@
+<script type="text/javascript" src="lib/app/all.js"></script>
+<!-- 首页 我要投资 -->
+	
+	<div id="gy_guide_index_xzk">
+		<div class="px1000">
+			<div class="gy_guide_index_xzk_header">
+				<img src="images/gy_guide_index_xzk_picx.png"/>
+				<span><a href="">首页</a></span>
+				>
+				<span><a href="">我要投资</a></span>
+			</div>
+			<div class="gy_guide_index_xzk_main clearfix">
+				<div class="gy_guide_index_xzk_main_left fl">
+					<div class="fl gy_guide_index_xzk_main_leftcp">
+						<ul class="gy_guide_index_xzk_mleft_one">
+							<span>信用期限：</span>
+							<li class="gy_guide_index_xzk_mleft_div" id="gy_guide_index_xzk_mleft_yi" style="background: #29A7E1;color:#FFFFFF;">不限</li>
+							<li class="gy_guide_index_xzk_mleft_div" id="gy_guide_index_xzk_mleft_yi">3个月以下</li>
+							<li class="gy_guide_index_xzk_mleft_div" id="gy_guide_index_xzk_mleft_yi">4-6个月</li>
+							<li class="gy_guide_index_xzk_mleft_div" id="gy_guide_index_xzk_mleft_yi">7-12个月</li>
+							<li class="gy_guide_index_xzk_mleft_div" id="gy_guide_index_xzk_mleft_yi">12个月以上</li>
+						</ul>
+					</div><br/>
+					<div class="fl gy_guide_index_xzk_main_leftcp"><ul class="gy_guide_index_xzk_mleft_two">
+						<span>年化利率：</span>
+						<li class="gy_guide_index_xzk_mleft_div" id="gy_guide_index_xzk_mleft_er" style="background: #29A7E1;color:#FFFFFF;">不限</li>
+						<li class="gy_guide_index_xzk_mleft_div" id="gy_guide_index_xzk_mleft_er">10%以下</li>
+						<li class="gy_guide_index_xzk_mleft_div" id="gy_guide_index_xzk_mleft_er">11%-20%</li>
+						<li class="gy_guide_index_xzk_mleft_div" id="gy_guide_index_xzk_mleft_er">20%以上</li>
+
+					</ul>
+					</div>
+					<br/>
+					<div class="gy_guide_index_xzk_mleft_four fl">投资建议：如果您有任何疑问请您与我们<a href="" style="color:#29A7E1;">在线客服</a>联系。</div>
+				</div>
+
+			</div>
+
+
+			<div id="gy_guide_index_xzk_bitou_main">
+				<div class="gy_guide_index_xzk_bitou">
+					<span id="gy_guide_index_xzk_bitou1">全部理财产品</span>
+				</div>
+
+				<!--全部理财产品-->
+				<div>
+				<div class="gy_guide_index_xzk_bid_rit" id="gy_guide_index_xzk_bid_rit" style="display:block;"
+					ng-repeat="data in productList">
+					<div class="clearfix gy_guide_index_xzkbid_six">
+						<span class="fl gy_guide_index_xzkbi1" id="gy_guide_index_xzkbi5">
+							<p>	
+								<span style="font-size:14px;color:#808080;">{{data.name}}</span>
+								<img src="images/gy_guide_index_xzk_bid_ritre.png">
+							</p>
+							<p>担保公司：浙江中新力合担保服务有限公司</p>
+						</span>
+						<span class="fl gy_guide_index_xzkbi2" id="gy_guide_index_xzkbi5">
+							<p><span style="font-size:25px;color:#FC8026;">{{data.shouyi}}</span><span style="font-size:18px;color:#FC8026;">%</span></p>
+							<p>预期年化收益率</p>
+						</span>
+						<span class="fl gy_guide_index_xzkbi3" id="gy_guide_index_xzkbi5">
+							<p><span style="font-size:25px;color:#FC8026;">{{data.week}}</span><span style="font-size:18px;color:#FC8026;">天</span></p>
+							<p>投资期限</p>
+						</span>
+						<span class="fl gy_guide_index_xzkbi4" id="gy_guide_index_xzkbi5" style="text-align:center;">
+							<p>还款方式：到期还本付息</p>
+							<div class="gy_treasur_bg1">
+								<div class="gy_treasur_bg2" style="width:70%;">
+								</div>
+							</div>
+							<p><span style="color:#000;">214,000.00 /</span>  70 万</p>
+						</span>
+						<span class="fl gy_guide_index_xzkbi5" id="gy_guide_index_xzkbi5">
+							<p><a style="font-size:18px;color:#fff;" href="">立即投资</a></p>
+						</span>
+					</div>
+				</div>
+			</div>
+			<div class="gy_guide_index_xzkbid_paging">
+					共8页
+					<span class="gy_guide_paging"><a href="">首页</a></span>
+					<span class="gy_guide_paging"><a href="">&#60;</a></span>
+					<span class="gy_guide_paging" style="background:#29A7E1;">
+					<a href="">1</a></span>
+					<!--<span class="gy_guide_paging"><a href="">2</a></span>
+					<span class="gy_guide_paging"><a href="">3</a></span>
+					<span class="gy_guide_paging"><a href="">4</a></span>
+					<span class="gy_guide_paging"><a href="">5</a></span>-->
+					<span class="gy_guide_paging"><a href="">&#62;</a></span>
+					<span class="gy_guide_paging"><a href="">尾页</a></span>
+				</div>
+		</div>
+		
+		<div class="gy_guide_index_xzk_main clearfix">
+			<p class="question">常见问题</p>
+			<ul ng-repeat="question in questionList">
+				<li style="margin-top: 15px;">
+					<em class="question-title">问
+					</em>
+					<span class="question-content">{{question.que}}</span></a>
+				</li>
+				<li>
+					<em class="answer-title">答
+					<i style="color: #29A7E1; margin: -8px -5px 0px 0px;position: absolute;right: 0px;top: 50%;"></i>
+					</em>
+					<span style="font-size: 10px;padding-left: 10px;">{{question.answer}}</span></a>
+				</li>
+			</ul>
+		</div>
+	</div>
+<style>
+	.question{
+		font-size:35px;color:#B0B0B0;text-align: center;
+	}
+	.question-title{
+		background-color: #29A7E1;color: #F3F3F3;font-size: 18px;width: 40px;height: 40px;font-weight: 300;
+		padding-left: 10px;
+	}
+	.question-content{
+		font-size: 15px;padding-left: 10px;font-weight: bold;
+	}
+	.answer-title{
+		background-color: #29A7E1;color: #F3F3F3;font-size: 18px;width: 40px;height: 40px;font-weight: 100;
+		padding-left: 10px;
+	}
+</style>
