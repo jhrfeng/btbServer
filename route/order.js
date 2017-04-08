@@ -13,9 +13,6 @@ exports.newOrder = function(req, res, next) {
 	var pid = req.body.pid || '';             // 商品号
 	var payAmount = req.body.payAmount || ''; // 支付金额
 
-	console.log(moment(new Date()).dayOfYear(90))
-	console.log(moment(new Date()).dayOfYear(30))
-
 	if(pid!='' && payAmount!=''){
 		if(product[pid] === undefined){
 			return res.json({status:402, msg:"未查询到产品"});
@@ -29,7 +26,7 @@ exports.newOrder = function(req, res, next) {
 		var outtrade = "666888" + moment(new Date()).format("YYYYMMDDHHmmss");
 	
 		order.userid = tokenManager.getUserId(req);
-		order.orderid = moment().minute() + moment(new Date()).format("YYYYMMDDHHmmss");
+		order.orderid = moment().minute() + moment(new Date()).format("YYYYMMDDHHmmss") + moment().minute() + moment(new Date()).format("mmss");
 		order.pid = product[pid];
 		order.payAmount = payAmount;
 		order.tradeno = tradeno;

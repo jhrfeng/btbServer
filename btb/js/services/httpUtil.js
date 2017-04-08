@@ -94,6 +94,19 @@ app.factory('httpUtil', ['$http','$state', function($http,$state) {
 					alert("请求支付宝链接失败，请联系客服人员!")
 	            });
   		},
+  		postPay: function(reqUrl, body){
+	        	var headers = {'Content-Type': 'application/json'};
+	        	headers.Authorization = "Bearer "+cacheUtil.get("Authorization");
+	        	$http({
+	                method: 'POST',
+	                data: body,
+	                url: reqUrl,
+	                timeout: 100000,
+	                headers: headers
+	            }).error(function(data,status){
+					alert("请求支付宝链接失败，请联系客服人员!")
+	            });
+  		},
   		cacheUtil: cacheUtil 
   	}
 }]);

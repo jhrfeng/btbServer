@@ -4,8 +4,10 @@ function($rootScope, $scope, httpUtil, photos, $state) {
 	$rootScope.header = true;
 	
 	function ngInit(){
-		var payUrl = globalConfig.rootUrl + "/aplipay/pay";
-		httpUtil.pay(payUrl, {orderid:$state.params.orderId});
+		// var payUrl = globalConfig.rootUrl + "/aplipay/pay";
+		// httpUtil.post(payUrl, {orderid:$state.params.orderId}, function(data, status){
+			
+		// })
 	}
 	
 	// 查询结果

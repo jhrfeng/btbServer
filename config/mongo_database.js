@@ -55,6 +55,7 @@ var Post = new Schema({
 var Log = new Schema({
     name:    { type: String},  // 模块名称
     content: { type: Object},   // 日志内容
+    msg:     { type: String},
     created: { type: Date, default: Date.now }
 });
 

@@ -59,10 +59,10 @@ app.post('/user/register', routes.users.register);
 app.get('/me', jwt({secret: secret.secretToken}), tokenManager.verifyToken, routes.users.me);
 
 //支付宝回调
-app.get('/aplipay/return', jwt({secret: secret.secretToken}), tokenManager.verifyToken, routes.aplipay.return);
+app.get('/aplipay/return', routes.aplipay.return);
 
 //支付宝交易
-app.get('/aplipay/pay', jwt({secret: secret.secretToken}), tokenManager.verifyToken, routes.aplipay.pay);
+app.post('/aplipay/pay', jwt({secret: secret.secretToken}), tokenManager.verifyToken, routes.aplipay.pay);
 
 // 上传头像
 app.post("/uploadImg", routes.golds.uploadImg);
