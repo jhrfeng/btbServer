@@ -6,7 +6,6 @@ var tokenManager = require('./config/token_manager');
 var secret = require('./config/secret');
 //Routes
 var routes = {};
-routes.golds = require('./route/gold.js');
 routes.users = require('./route/user.js');
 routes.order = require('./route/order.js');
 routes.aplipay = require('./route/aplipay.js');
@@ -64,14 +63,6 @@ app.get('/aplipay/return', routes.aplipay.return);
 //支付宝交易
 app.post('/aplipay/pay', jwt({secret: secret.secretToken}), tokenManager.verifyToken, routes.aplipay.pay);
 
-// 上传头像
-app.post("/uploadImg", routes.golds.uploadImg);
-
-// 美元指数查询
-app.get('/usaMoney', routes.golds.usaMoney);
-
-// 黄金价格查询
-app.get('/auGold', routes.golds.auGold);
 
 process.on('uncaughtException', function(err){
   console.log(err);
