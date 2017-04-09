@@ -13,7 +13,7 @@ routes.aplipay = require('./route/aplipay.js');
 
 var app = express();
 var serverPort = process.env.PORT || 3000;
-app.listen(serverPort, "127.0.0.1", function (err) { // 192.168.7.148
+app.listen(serverPort, "localhost", function (err) { // 192.168.7.148
   if (err) {
     console.log(err);
     return;
