@@ -8,7 +8,6 @@ function($rootScope,$scope, photos, $state) {
 	});
 	
 	$scope.goOrder = function(pid){
-		console.log(pid);
 		$state.go("order", {pid:pid});
 	}
 	

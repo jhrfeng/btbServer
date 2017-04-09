@@ -18,7 +18,6 @@ function($rootScope, $scope, httpUtil, photos, $state) {
 		$("#register").button('loading');
 		var payUrl = globalConfig.rootUrl + "/aplipay/pay";
 		httpUtil.post(payUrl, {orderid:$state.params.orderId}, function(data, status){
-			console.log(data, status)
 			if(status==200){
 				if(data.status==200){
 					window.location.href=data.url;

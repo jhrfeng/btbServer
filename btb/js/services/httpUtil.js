@@ -81,7 +81,7 @@ app.factory('httpUtil', ['$http','$state', function($http,$state) {
 	                callback(data, status);
 	            });
   		},
-  		pay: function(reqUrl, body){
+  		pay: function(reqUrl, body, callback){
 	        	var headers = {'Content-Type': 'application/json'};
 	        	headers.Authorization = "Bearer "+cacheUtil.get("Authorization");
 	        	$http({
@@ -90,8 +90,10 @@ app.factory('httpUtil', ['$http','$state', function($http,$state) {
 	                url: reqUrl,
 	                timeout: 100000,
 	                headers: headers
+	            }).success(function(data, status){
+	                callback(data, status);
 	            }).error(function(data,status){
-					alert("请求支付宝链接失败，请联系客服人员!")
+					alert("订单处理失败，请联系客服人员!")
 	            });
   		},
   		postPay: function(reqUrl, body){

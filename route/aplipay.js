@@ -5,16 +5,16 @@ var db = require('../config/mongo_database');
 
 directAlipay.config({
 	//签约支付宝账号或卖家收款支付宝帐户
-    seller_email: 'jyjjh@mail.ccnu.edu.cn',
+    seller_email: 'jyjjh@mail.ccnu.edu.cn', //'2876073312@qq.com', //
     //合作身份者ID，以2088开头由16位纯数字组成的字符串
-    partner: '2088911275465084',
+    partner: '2088911275465084', //'2088121509997265', //
     //交易安全检验码，由数字和字母组成的32位字符串
-    key: 'tws3ri4d3sg8ohc4t7k9dnj8kumvia05',
+    key:'tws3ri4d3sg8ohc4t7k9dnj8kumvia05',  //'4nhzzd0qkf8awyu7q613l1sdbidyj1ua', //
     //支付宝服务器通知的页面
     notify_url: 'http://cat-vip.vicp.io/aplipay/notify',
     //支付后跳转后的页面
-    return_url: 'http://127.0.0.1:3000/aplipay/return'
-    // return_url: 'http://127.0.0.1:8020/angularjs_btc/index.html#/payorder'
+    // return_url: 'http://cat-vip.vicp.io/aplipay/return'
+    return_url: 'http://cat-vip.vicp.io/#/payorder'
 }); 
 
 exports.pay = function(req, res) {
@@ -44,18 +44,16 @@ exports.pay = function(req, res) {
 
 exports.return = function(req, res){
 	var params = req.query;
-	console.log("进到了回调页面")
-    directAlipay.verify(params, function (err, result) {
-    	console.log("验证回调页面", result)
-        if (err) {
-            console.error(err);
-        } else {
-            if (result === true) {
-				updateOrderStatus(params);
-            	//该通知是来自支付宝的合法通知
-                res.reply('支付成功');
-            }
-        }
+	params.notify_time = params.notify_time.replace('+', ' ');
+	console.log(params)
+    directAlipay.verify(params).then(function(result) {
+    	if(result)
+        	updateOrderStatus(params);
+        //该通知是来自支付宝的合法通知
+        res.json({status:200, msg:"支付成功"});
+    }).catch(function(err) {
+        console.error(err);
+        res.json({status:500, msg:err});
     });
     res.end('');
 };
@@ -67,18 +65,15 @@ function updateOrderStatus(params){
 	log.name = "订单支付";
 	log.content = params;
 
-	db.orderModel.findOne({orderid:params.out_trade_no}, function (err, order) {
-		console.log(order)
-		var whereData = {orderid:params.out_trade_no};
-        var updateDat = {$set: {"status":"1"}}; //如果不用$set，替换整条数据
-		order.update(whereData, updateDat, function(err, uporder){ // 执行订单状态变更
-			console.log(uporder)
-			if(err){ // 保存此次订单更新失败状态
-				console.log(err)
-            	log.msg = "支付已成功，但订单更新失败："+params.out_trade_no;
-				log.save(function(err) {})
-			}
+	var whereData = {orderid:params.out_trade_no};
+    var updateDat = {$set: {status:'1'}}; //如果不用$set，替换整条数据
+	db.orderModel.update(whereData, updateDat, function(err, uporder){ // 执行订单状态变更
+		console.log(uporder)
+		if(err){ // 保存此次订单更新失败状态
+			console.log(err)
+        	log.msg = "支付已成功，但订单更新失败："+params.out_trade_no;
 			log.save(function(err) {})
-		})
-   });
+		}
+		log.save(function(err) {})
+	})
 }

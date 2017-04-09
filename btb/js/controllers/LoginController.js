@@ -11,7 +11,6 @@ function($rootScope, $scope, httpUtil, $state) {
 			$("#register").button('loading');
 			httpUtil.signin(reqUrl, $scope.user, function(data, status){
 				$("#register").button('reset');
-				console.log(data, status);
 				if(status==200){
 					httpUtil.cacheUtil.put("Authorization", data.token);
 					$rootScope.me = true;

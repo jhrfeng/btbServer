@@ -129,7 +129,7 @@ app.config(function ($stateProvider, $urlRouterProvider) { //$routeProvider,
 			 	}]
 			}
 		}).state('payorder',{
-			url:'/payorder/{orderId}',
+			url:'/payorder',
 			templateUrl: 'views/payorder.html',
 			controller: 'PayorderController',
 			resolve: {

@@ -15,11 +15,11 @@
 							<a href="">用户信息</a>
 						</p>
 					</li>
-					<li>
+<!-- 					<li>
 						<p class="btn user-left" ng-click="toChangeView(2)">
 							<a href="">我的资金</a>
 						</p>
-					</li>
+					</li> -->
 					<li>
 						<p class="btn user-left" ng-click="toChangeView(3)">
 							<a href="">我的订单</a>
@@ -78,21 +78,20 @@
 								<tr>
 									<th>订单号</th>
 									<th>产品名称</th>
-									<th>收益率</th>
 									<th>购买金额</th>
 									<th>购买日期</th>
-									<th>赎回日期</th>
+									<th>周期</th>
 									<th>订单状态</th>
 								</tr>
 							</thead>
 							<tr ng-repeat="order in orderList">
 								<td>{{order.orderid}}</td>
 								<td>{{order.pid.name}}</td>
-								<td>{{order.pid.shouyi}}%</td>
 								<td>{{order.payAmount}}元</td>
 								<td>{{order.created | date:"yyyy/MM/dd"}}</td>
 								<td>{{order.pid.week}}天</td>
-								<td>{{order.status | orderStatus}}</td>
+								<td ng-if="order.status=='0'"><a href="#/placeorder/{{order.orderid}}">{{order.status | orderStatus}}</a></td>
+								<td ng-if="order.status!='0'">{{order.status | orderStatus}}</td>
 							</tr>
 						</tbody>
 					</table>
@@ -107,5 +106,9 @@
 		font-size: 16px;
 		line-height: 30px;
 		color: #003147;
+	}
+	td a{
+		color: #03a9f4;
+		font-weight: bold;
 	}
 </style>

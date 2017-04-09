@@ -69,7 +69,7 @@ exports.queryAllOrder = function(req, res, next) {
 			return res.sendStatus(500); //res.json({status:500, msg:"未查询到订单，请重新生成新单"});
 		}
 		return res.json({status:200, order:order, msg:"订单查询成功"});
-	});
+	}).sort({ created : -1 });
 };
 
 
