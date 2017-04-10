@@ -11,10 +11,10 @@ directAlipay.config({
     //交易安全检验码，由数字和字母组成的32位字符串
     key:'tws3ri4d3sg8ohc4t7k9dnj8kumvia05',  //'4nhzzd0qkf8awyu7q613l1sdbidyj1ua', //
     //支付宝服务器通知的页面
-    notify_url: 'www.ljzbtcbank.xyz/aplipay/notify',
+    notify_url: 'http://www.ljzbtcbank.xyz/aplipay/notify',
     //支付后跳转后的页面
     // return_url: 'http://cat-vip.vicp.io/aplipay/return'
-    return_url: 'www.ljzbtcbank.xyz/#/payorder'
+    return_url: 'http://www.ljzbtcbank.xyz/#/payorder'
 }); 
 
 exports.pay = function(req, res) {
