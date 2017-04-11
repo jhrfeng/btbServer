@@ -12,6 +12,7 @@
   "author": "jinghaoran",
   "license": "ISC",
   "dependencies": {
+    "ali-mns": "^2.6.0",
     "ali-oss": "^4.7.3",
     "body-parser": "^1.15.2",
     "co": "^4.6.0",
