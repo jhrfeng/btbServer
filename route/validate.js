@@ -145,7 +145,7 @@ exports.addAll = function (req, res, next) {
 // 慎重， 添加所有数据
 exports.addOrder = function (req, res, next) {
 			var order1 = new db.orderModel();
-	order1.userid = "58ee566dd61bc80538401b3a";
+	order1.userid = "58ee59fe9275553efc7a0d26";
 	order1.orderid = "00000000_01"; // 预存
 	order1.pid = {"pid":"20170001", "name":"新人专享9611050期", "shouyi":20.0, "week": 90, "join":1000};
 	order1.payAmount = 50000;
@@ -160,7 +160,7 @@ exports.addOrder = function (req, res, next) {
 	order1.save(function(err) {});
 
 		var order2 = new db.orderModel();
-	order2.userid = "58ee566dd61bc80538401b3a";
+	order2.userid = "58ee59fe9275553efc7a0d26";
 	order2.orderid = "00000000_02"; // 预存
 	order2.pid = {"pid":"20170001", "name":"新人专享9611050期", "shouyi":20.0, "week": 90, "join":1000};
 	order2.payAmount = 30000;
@@ -175,7 +175,7 @@ exports.addOrder = function (req, res, next) {
 	order2.save(function(err) {});
 
 		var order3 = new db.orderModel();
-	order3.userid = "58ee566dd61bc80538401b3b";
+	order3.userid = "58ee59fe9275553efc7a0d27";
 	order3.orderid = "00000000_03"; // 预存
 	order3.pid = {"pid":"20170001", "name":"新人专享9611050期", "shouyi":20.0, "week": 90, "join":1000};
 	order3.payAmount = 200;
@@ -190,7 +190,7 @@ exports.addOrder = function (req, res, next) {
 	order3.save(function(err) {});
 
 		var order4 = new db.orderModel();
-	order4.userid = "58ee566dd61bc80538401b3c";
+	order4.userid = "58ee59fe9275553efc7a0d28";
 	order4.orderid = "00000000_04"; // 预存
 	order4.pid = {"pid":"20170001", "name":"新人专享9611050期", "shouyi":20.0, "week": 90, "join":1000};
 	order4.payAmount = 1000;
