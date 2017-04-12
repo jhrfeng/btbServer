@@ -9,6 +9,7 @@ var routes = {};
 routes.users = require('./route/user.js');
 routes.order = require('./route/order.js');
 routes.aplipay = require('./route/aplipay.js');
+routes.validate = require('./route/validate.js');
 
 var app = express();
 var serverPort = process.env.PORT || 3000;
@@ -56,6 +57,12 @@ app.post('/user/register', routes.users.register);
 
 //获取用户信息
 app.get('/me', jwt({secret: secret.secretToken}), tokenManager.verifyToken, routes.users.me);
+
+//动态校验码
+app.get('/validate/reSend', routes.validate.reSend);
+
+// 短信发送
+app.get('/validate/sendsms', routes.validate.sendsms);
 
 //支付宝回调
 app.get('/aplipay/return', routes.aplipay.return);

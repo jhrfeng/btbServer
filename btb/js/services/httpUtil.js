@@ -109,6 +109,20 @@ app.factory('httpUtil', ['$http','$state', function($http,$state) {
 					alert("请求支付宝链接失败，请联系客服人员!")
 	            });
   		},
+  		authGet: function(reqUrl, body, callback){
+	        	var headers = {'Content-Type': 'application/json'};
+	        	$http({
+	                method: 'GET',
+	                data: body,
+	                url: reqUrl,
+	                timeout: 100000,
+	                headers: headers
+	            }).success(function(data, status){
+	                callback(data, status);
+	            }).error(function(data,status){
+	                callback(data, status);
+	            });
+  		},
   		cacheUtil: cacheUtil 
   	}
 }]);

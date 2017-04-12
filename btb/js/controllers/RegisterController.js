@@ -4,6 +4,10 @@ function($rootScope, $scope, httpUtil, $state) {
 	$rootScope.header = true;
 	$scope.user = {};
 	
+	function ngInit(){
+		$scope.reSend();
+	}
+
 	$scope.register = function(){
 		var reqUrl = globalConfig.rootUrl + "/user/register";
 		if(validate()){
@@ -21,7 +25,31 @@ function($rootScope, $scope, httpUtil, $state) {
 			});
 		}
 	}
+
+	//短信验证码 http://www.yunpian.com/admin/main
+	$scope.sendSms = function(){
+		if(validate()){
+			$('#sms').button('loading').delay(30000).queue(function() {
+	            $('#sms').button('reset');
+	        });
+			var reqUrl = globalConfig.rootUrl + "/validate/sendsms";
+	        httpUtil.authGet(reqUrl, $scope.user, function(data, status){
+	        	console.log(data, status)
+	        })
+		}
+	}
 	
+	// 动态校验码
+	$scope.reSend = function(){
+		var reqUrl = globalConfig.rootUrl + "/validate/reSend";
+		httpUtil.get(reqUrl, function(data, status){
+			if(status==200){
+				$scope.user.vcode = data.vcode;
+				$scope.user.vid = data.vid;
+			}
+		});
+	}
+
 	$scope.login = function(){
 		$state.go('/login'); 
 	}
@@ -46,6 +74,12 @@ function($rootScope, $scope, httpUtil, $state) {
 			alert("两次密码输入不一致")
 			return false;
 		}
+		if($scope.user.vcode=="" || null==$scope.user.vcode){
+			alert("请输入动态验证码")
+			return false;
+		}
 		return true;
 	}
+
+	ngInit();
 }]);

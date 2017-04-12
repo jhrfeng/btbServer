@@ -1,9 +1,30 @@
+var request = require('request');
 var md5 = require('md5');
 var db = require('../config/mongo_database');
 var jwt = require('jsonwebtoken');
 var secret = require('../config/secret');
 var redisClient = require('../config/redis_database').redisClient;
 var tokenManager = require('../config/token_manager');
+
+
+// 发送短信
+exports.sendsms = function(req, res){
+	var smsJson = {
+		apikey:"966f88af7f6c20b51bb758ffa50c197c",
+		text:"【比特币网站】欢迎使用陆家嘴比特币，您的验证码是220022， 本次验证码10分钟内有效",
+		mobile:"13641892349"
+	};
+	let url = 'https://sms.yunpian.com/v2/sms/single_send.json';
+
+	request.post({url:url, form: smsJson}, function(err,httpResponse,body){
+		var object = JSON.parse(body);
+		if(object["code"]==0)
+			console.log("body")
+	})
+
+}
+
+
 
 exports.signin = function(req, res) {
 	var username = req.body.username || '';
@@ -51,6 +72,7 @@ exports.logout = function(req, res) {
 exports.me = function(req, res){
 	res.json(tokenManager.getUser(req));
 }
+
 
 exports.register = function(req, res) {
 	var username = req.body.username || '';

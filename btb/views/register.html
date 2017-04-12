@@ -19,12 +19,21 @@
 				<input ng-model="user.passwordConfirmation" type="password" class="form-control" placeholder="请再次输入密码">
 			</div>
 			<br>
-<!-- 			<div class="input-group">
-				<span class="input-group-addon">验证码&nbsp;&nbsp;</span>
-				<input type="text" class="form-control" placeholder="请输入手机短信验证码">
+			<div class="input-group">
+				<span class="input-group-addon">动态验证码</span>
+				<input ng-model="user.vcode" type="text" class="form-control" placeholder="请输入验证码答案">
 				<span class="btn input-group-addon addval"
-					data-loading-text="已发送...">点击发送</span>
-			</div> -->
+					ng-click="reSend()">1+1=?</span>
+			</div>
+			<br>
+			<div class="input-group">
+				<span class="input-group-addon">验证码&nbsp;&nbsp;</span>
+				<input ng-model="user.smscode" type="text" class="form-control" placeholder="请输入手机短信验证码">
+				<span class="btn input-group-addon addval"
+					id="sms"
+					ng-click="sendSms()"
+					data-loading-text="稍后可重新发送">点击发送</span>
+			</div>
 			<br><br>
 			<p style="text-align: center;">
 				<button id="register" class="btn btn-primary" 
