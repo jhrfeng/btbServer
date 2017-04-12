@@ -113,7 +113,7 @@ app.factory('httpUtil', ['$http','$state', function($http,$state) {
 	        	var headers = {'Content-Type': 'application/json'};
 	        	$http({
 	                method: 'GET',
-	                data: body,
+	                params: body,
 	                url: reqUrl,
 	                timeout: 100000,
 	                headers: headers

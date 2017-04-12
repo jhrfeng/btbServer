@@ -76,6 +76,7 @@ exports.me = function(req, res){
 
 exports.register = function(req, res) {
 	var username = req.body.username || '';
+	var smscode = req.body.smscode || '';
 	var password = req.body.password || '';
 	var passwordConfirmation = req.body.passwordConfirmation || '';
 	if (username == '' || password == '' || password != passwordConfirmation) {
@@ -86,13 +87,22 @@ exports.register = function(req, res) {
 	user.username = username;
 	user.password = password;
 	user.remoteip = new Array(req.connection.remoteAddress);
-	user.save(function(err) {
-		if (err) {
-			console.log(err);
-			return res.sendStatus(500);
-		}	
-		return res.sendStatus(200)
+	console.log(user.remoteip)
+	redisClient.get(username, function (err, code) {
+		console.log(err, code);
+		if(err) res.sendStatus(501); //不是绑定短信手机号
+		if(smscode==code){ 
+			user.save(function(err) {
+				if (err) {
+					console.log(err);
+					return res.sendStatus(500);
+				}	
+				return res.sendStatus(200)
+			});
+
+		}else res.sendStatus(502); // 手机验证码不对
 	});
+	
 }
 
 // 发送短信验证码

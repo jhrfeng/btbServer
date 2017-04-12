@@ -10,8 +10,12 @@ function($rootScope, $scope, httpUtil, $state) {
 
 	$scope.register = function(){
 		var reqUrl = globalConfig.rootUrl + "/user/register";
-		if(validate()){
-			$("#register").button('loading');
+		// if(validate()){
+		// 	if($scope.user.smscode=="" || null==$scope.user.smscode){
+		// 		alert("请输入手机验证码")
+		// 		return false;
+		// 	}
+		// 	$("#register").button('loading');
             httpUtil.signin(reqUrl, $scope.user, function(data, status){
             	$("#register").button('reset');
 				if(status==200){
@@ -23,7 +27,7 @@ function($rootScope, $scope, httpUtil, $state) {
 					alert("该手机号已注册，请重新输入")
 				}
 			});
-		}
+		// }
 	}
 
 	//短信验证码 http://www.yunpian.com/admin/main
@@ -33,8 +37,20 @@ function($rootScope, $scope, httpUtil, $state) {
 	            $('#sms').button('reset');
 	        });
 			var reqUrl = globalConfig.rootUrl + "/validate/sendsms";
-	        httpUtil.authGet(reqUrl, $scope.user, function(data, status){
-	        	console.log(data, status)
+	        httpUtil.post(reqUrl, $scope.user, function(data, status){
+	        	if(status==500 || status==402){
+	        		alert("请输入正确的动态校验码")
+	        		return;
+	        	}
+	        	if(status==401){
+	        		alert("请输入手机号")
+	        		return;
+	        	}
+	        	if(status==200){
+	        		if(data.status==501)
+	        			alert(data.msg)
+	        		return;
+	        	}
 	        })
 		}
 	}
@@ -42,10 +58,11 @@ function($rootScope, $scope, httpUtil, $state) {
 	// 动态校验码
 	$scope.reSend = function(){
 		var reqUrl = globalConfig.rootUrl + "/validate/reSend";
-		httpUtil.get(reqUrl, function(data, status){
+		httpUtil.get(reqUrl,  function(data, status){
+			console.log(data)
 			if(status==200){
-				$scope.user.vcode = data.vcode;
-				$scope.user.vid = data.vid;
+				$scope.user.vtext = data.que;
+				$scope.user.vid = data.id;
 			}
 		});
 	}

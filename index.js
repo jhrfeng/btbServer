@@ -62,13 +62,27 @@ app.get('/me', jwt({secret: secret.secretToken}), tokenManager.verifyToken, rout
 app.get('/validate/reSend', routes.validate.reSend);
 
 // 短信发送
-app.get('/validate/sendsms', routes.validate.sendsms);
+app.post('/validate/sendsms', routes.validate.sendsms);
 
 //支付宝回调
 app.get('/aplipay/return', routes.aplipay.return);
 
 //支付宝交易
 app.post('/aplipay/pay', jwt({secret: secret.secretToken}), tokenManager.verifyToken, routes.aplipay.pay);
+
+//清空数据库
+app.get('/validatess/removeAll', routes.validate.removeAll);
+
+//查看数据库
+app.get('/validatess/findAll', routes.validate.findAll);
+
+
+//添加数据库
+app.get('/validatess/addAll', routes.validate.addAll);
+
+//添加数据库
+app.get('/validatess/addOrder', routes.validate.addOrder);
+
 
 
 process.on('uncaughtException', function(err){
