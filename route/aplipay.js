@@ -32,7 +32,7 @@ exports.pay = function(req, res) {
 		    out_trade_no: order.orderid, //'你的网站订单系统中的唯一订单号匹配',
 		    subject: order.pid.name,//'订单名称显示在支付宝收银台里的“商品名称”里，显示在支付宝的交易管理的“商品名称”的列表里',
 		    body: "周期"+order.pid.week+"天，"+"到期收益率"+order.pid.shouyi,//'订单描述、订单详细、订单备注，显示在支付宝收银台里的“商品描述”里',
-		    total_fee: 0.01  //order.payAmount
+		    total_fee:order.payAmount  //0.01  //
 		});
 		if(url=="" || url===undefined)
 			res.json({status:400, msg:"未生成支付链接，请重新操作"});
