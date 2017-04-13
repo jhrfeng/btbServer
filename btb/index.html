@@ -32,8 +32,8 @@
 	  	    </div>
 	  	   	<div class="gy_top_r fr clearfix">
 	  	   		<a href="#/home">首页</a><span>|</span>
-	  	    	<a href="#/login">登录</a><span>|</span>
-            <a href="#/register">注册</a><span>|</span>
+	  	    	<a ng-show="!me" href="#/login">登录</a><span>|</span>
+            <a ng-show="!me" href="#/register">注册</a><span>|</span>
             <a ng-show="me" href="#/me" 
             	style="font-weight:bold;color: #0061AE;">我的账号</a>
 	  	    </div>
@@ -111,7 +111,7 @@
 				 	  		<li><a href="https://www.huobi.com/" style="color:#5DB0D7">火币网</a></li>
 				 	  		<li><a href="https://www.btcchina.com/" style="color:#5DB0D7">比特币中国</a></li>
 				 	  		<li><a href="https://www.btctrade.com/" style="color:#5DB0D7">比特币交易网</a></li>
-				 	  		<li><a href="https://www.okcoin.cn/" style="color:#5DB0D7">KCoin币行</a></li>
+				 	  		<li><a href="https://www.okcoin.cn/" style="color:#5DB0D7">OKCoin币行</a></li>
 				 	  		<li><a href="http://www.btcside.com/" style="color:#5DB0D7">比特帮</a></li>
 				 	  		<li><a href="https://www.bitbill.com/" style="color:#5DB0D7">比特宝</a></li>
 				 	  	</ul>
