@@ -10,12 +10,12 @@ function($rootScope, $scope, httpUtil, $state) {
 
 	$scope.register = function(){
 		var reqUrl = globalConfig.rootUrl + "/user/register";
-		// if(validate()){
-		// 	if($scope.user.smscode=="" || null==$scope.user.smscode){
-		// 		alert("请输入手机验证码")
-		// 		return false;
-		// 	}
-		// 	$("#register").button('loading');
+		if(validate()){
+			if($scope.user.smscode=="" || null==$scope.user.smscode){
+				alert("请输入手机验证码")
+				return false;
+			}
+			$("#register").button('loading');
             httpUtil.signin(reqUrl, $scope.user, function(data, status){
             	$("#register").button('reset');
 				if(status==200){
@@ -27,10 +27,10 @@ function($rootScope, $scope, httpUtil, $state) {
 					alert("该手机号已注册，请重新输入")
 				}
 			});
-		// }
+		}
 	}
 
-	//短信验证码 http://www.yunpian.com/admin/main
+	//短信验证码 
 	$scope.sendSms = function(){
 		if(validate()){
 			$('#sms').button('loading').delay(30000).queue(function() {
