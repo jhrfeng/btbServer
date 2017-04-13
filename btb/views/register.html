@@ -6,38 +6,38 @@
 		<form class="bs-example bs-example-form" role="form">
 			<div class="input-group">
 				<span class="input-group-addon">手机号&nbsp;&nbsp;</span>
-				<input ng-model="user.username" type="text" class="form-control" placeholder="请输入手机号">
+				<input maxlength="11" ng-model="user.username" type="text" class="form-control" placeholder="请输入手机号">
 			</div>
 			<br>
 			<div class="input-group">
 				<span class="input-group-addon">密码&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-				<input ng-model="user.password" type="password" class="form-control" placeholder="请输入密码">
+				<input maxlength="12" ng-model="user.password" type="password" class="form-control" placeholder="请输入密码">
 			</div>
 			<br>
 			<div class="input-group">
 				<span class="input-group-addon">确认密码</span>
-				<input ng-model="user.passwordConfirmation" type="password" class="form-control" placeholder="请再次输入密码">
+				<input maxlength="12" ng-model="user.passwordConfirmation" type="password" class="form-control" placeholder="请再次输入密码">
 			</div>
 			<br>
 			<div class="input-group">
-				<span class="input-group-addon">动态验证码</span>
-				<input ng-model="user.vcode" type="text" class="form-control" placeholder="请输入验证码答案">
+				<span class="input-group-addon">问题校验</span>
+				<input maxlength="4" ng-model="user.vcode" type="text" class="form-control" placeholder="请输入验证码答案">
 				<span class="btn input-group-addon addval"
 					ng-click="reSend()">{{user.vtext}}</span>
 			</div>
 			<br>
 			<div class="input-group">
 				<span class="input-group-addon">验证码&nbsp;&nbsp;</span>
-				<input ng-model="user.smscode" type="text" class="form-control" placeholder="请输入手机短信验证码">
-				<span class="btn input-group-addon addval"
-					id="sms"
-					ng-click="sendSms()"
-					data-loading-text="稍后可重新发送">点击发送</span>
+				<input maxlength="6" ng-model="user.smscode" type="text" class="form-control" placeholder="请输入手机短信验证码">
+				<span class="btn input-group-addon addval"> 
+					<button id="sms" ng-click="sendSms()"  class="btn sms">点击发送</button>
+				</span>
 			</div>
 			<br><br>
 			<p style="text-align: center;">
 				<button id="register" class="btn btn-primary" 
 					ng-click="register()"
+
 					style="width:400px;"
 					data-loading-text="注册中..." 
 	   			type="button"> 注&nbsp;&nbsp;&nbsp;&nbsp;册
@@ -69,5 +69,9 @@
 	}
 	span{
 		width:100px;
+	}
+	.sms{
+		padding: 0px;
+		background: #828c24;
 	}
 </style>

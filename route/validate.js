@@ -75,7 +75,7 @@ exports.sendsms = function(req, res){
 		if (err)
 		    res.sendStatus(500); // 验证码错误
 		if (vcode==code) { // 验证成功发送验证码
-			var smsCode =  moment(new Date()).format("HHmmss");
+			var smsCode =  moment(new Date()).format("mmssSS");
 			smsJson.mobile = username;
 			smsJson.text = smsJson.text.replace("000000", smsCode);
 			

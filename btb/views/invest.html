@@ -15,19 +15,18 @@
 						<ul class="gy_guide_index_xzk_mleft_one">
 							<span>信用期限：</span>
 							<li class="gy_guide_index_xzk_mleft_div" id="gy_guide_index_xzk_mleft_yi" style="background: #29A7E1;color:#FFFFFF;">不限</li>
-							<li class="gy_guide_index_xzk_mleft_div" id="gy_guide_index_xzk_mleft_yi">3个月以下</li>
-							<li class="gy_guide_index_xzk_mleft_div" id="gy_guide_index_xzk_mleft_yi">4-6个月</li>
-							<li class="gy_guide_index_xzk_mleft_div" id="gy_guide_index_xzk_mleft_yi">7-12个月</li>
-							<li class="gy_guide_index_xzk_mleft_div" id="gy_guide_index_xzk_mleft_yi">12个月以上</li>
+							<li class="gy_guide_index_xzk_mleft_div" id="gy_guide_index_xzk_mleft_yi">3期</li>
+							<li class="gy_guide_index_xzk_mleft_div" id="gy_guide_index_xzk_mleft_yi">6期</li>
+							<li class="gy_guide_index_xzk_mleft_div" id="gy_guide_index_xzk_mleft_yi">12期</li>
 						</ul>
 					</div><br/>
 					<div class="fl gy_guide_index_xzk_main_leftcp"><ul class="gy_guide_index_xzk_mleft_two">
-						<span>年化利率：</span>
+						<!-- <span>年化利率：</span>
 						<li class="gy_guide_index_xzk_mleft_div" id="gy_guide_index_xzk_mleft_er" style="background: #29A7E1;color:#FFFFFF;">不限</li>
 						<li class="gy_guide_index_xzk_mleft_div" id="gy_guide_index_xzk_mleft_er">10%以下</li>
 						<li class="gy_guide_index_xzk_mleft_div" id="gy_guide_index_xzk_mleft_er">11%-20%</li>
 						<li class="gy_guide_index_xzk_mleft_div" id="gy_guide_index_xzk_mleft_er">20%以上</li>
-
+ -->
 					</ul>
 					</div>
 					<br/>
@@ -39,10 +38,10 @@
 
 			<div id="gy_guide_index_xzk_bitou_main">
 				<div class="gy_guide_index_xzk_bitou">
-					<span id="gy_guide_index_xzk_bitou1">全部理财产品</span>
+					<span id="gy_guide_index_xzk_bitou1">全部比特币产品</span>
 				</div>
 
-				<!--全部理财产品-->
+				<!--全部比特币产品-->
 				<div>
 				<div class="gy_guide_index_xzk_bid_rit" id="gy_guide_index_xzk_bid_rit" style="display:block;"
 					ng-repeat="data in productList">
@@ -51,8 +50,7 @@
 							<p>	
 								<span style="font-size:14px;color:#808080;">{{data.name}}</span>
 								<img src="images/gy_guide_index_xzk_bid_ritre.png">
-							</p>
-							<p>担保公司：浙江中新力合担保服务有限公司</p>
+							</p>							
 						</span>
 						<span class="fl gy_guide_index_xzkbi2" id="gy_guide_index_xzkbi5">
 							<p><span style="font-size:25px;color:#FC8026;">{{data.shouyi}}</span><span style="font-size:18px;color:#FC8026;">%</span></p>
@@ -63,12 +61,12 @@
 							<p>投资期限</p>
 						</span>
 						<span class="fl gy_guide_index_xzkbi4" id="gy_guide_index_xzkbi5" style="text-align:center;">
-							<p>还款方式：到期还本付息</p>
+							<p>还款方式：到期付息还本</p>
 							<div class="gy_treasur_bg1">
-								<div class="gy_treasur_bg2" style="width:70%;">
+								<div class="gy_treasur_bg2" style="width:{{data.shouyi/8}}%;">
 								</div>
 							</div>
-							<p><span style="color:#000;">214,000.00 /</span>  70 万</p>
+							<p><span style="color:#000;">正在筹集</span>{{data.shouyi/8}}%</p>
 						</span>
 						<span class="fl gy_guide_index_xzkbi5" id="gy_guide_index_xzkbi5" ng-click="goOrder(data.pid)">>
 							<p><a style="font-size:18px;color:#fff;" href="">立即投资</a></p>

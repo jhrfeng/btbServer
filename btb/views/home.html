@@ -78,26 +78,26 @@
 							</div>
 							<div class="fl gy_caifu_oont">
 								<p class="gy_treasure_bili_bid">{{product.week}}</p>
-								<p>比特币产品期限（天）</p>
+								<p>比特币产品封闭期限（天）</p>
 							</div>
 							<div class="gy_treasure_xsbid_right fl">
 								<!-- <p>距下场更新：<span>16 时 53 分 08 秒</span></p> -->
 								<div class="gy_treasure_xsbid_right_one">
 								<div class="fl" style="color:#29A7E1">正在筹集</div>
 								<div class="gy_treasur_bg1 fl">
-									<div class="gy_treasur_bg2" style="width:80%;">
+									<div class="gy_treasur_bg2" style="width:{{product.shouyi/8}}%;">
 										
 									</div>
 								</div>
-								<span class="fl" style="font-size:15.27px;color:#29A7E1;">80%</span>
+								<span class="fl" style="font-size:15.27px;color:#29A7E1;">{{product.shouyi/8}}%</span>
 								</div>
 							</div>
 						</div>
 						<div class="fl">
 							<div class="gy_treasure_xsbid_down">
 								<span class="gy_treasure_x_cp">起投金额：{{product.join}}</span>
-								<span class="gy_treasure_x_cp">付息方式：按月</span>
-								<span class="gy_treasure_x_cp">赎回方式：T+10， 投资满30天即可申请赎回</span>
+								<span class="gy_treasure_x_cp">付息方式：到期付息还本</span>
+								<span class="gy_treasure_x_cp">赎回方式：T+5， 投资满{{product.week}}天即可申请赎回</span>
 							</div>
 						</div>
 						<div class="fl">

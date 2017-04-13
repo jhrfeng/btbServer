@@ -1,4 +1,4 @@
-app.factory('httpUtil', ['$http','$state', function($http,$state) {
+app.factory('httpUtil', ['$http','$state', '$rootScope', function($http,$state,$rootScope) {
   	var cacheUtil = {
         put: function (key, value) {
             try {
@@ -57,6 +57,7 @@ app.factory('httpUtil', ['$http','$state', function($http,$state) {
 	            	if(status==401){
 						alert("用户已失效，请重新登录!")
 						cacheUtil.remove("Authorization")
+						$rootScope.me = false;
 						$state.go("login")
 					}
 	                callback(data, status);
@@ -76,6 +77,7 @@ app.factory('httpUtil', ['$http','$state', function($http,$state) {
 	            	if(status==401){
 						alert("用户已失效，请重新登录!")
 						cacheUtil.remove("Authorization")
+						$rootScope.me = false;
 						$state.go("login")
 					}
 	                callback(data, status);

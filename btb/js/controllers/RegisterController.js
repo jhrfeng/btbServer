@@ -3,6 +3,7 @@ app.controller('RegisterController',
 function($rootScope, $scope, httpUtil, $state) {
 	$rootScope.header = true;
 	$scope.user = {};
+	$scope.smsable = false;
 	
 	function ngInit(){
 		$scope.reSend();
@@ -25,6 +26,8 @@ function($rootScope, $scope, httpUtil, $state) {
 					alert("密码输入有误，请重新输入")
 				}else if(status==500){
 					alert("该手机号已注册，请重新输入")
+				}else if(status==502){
+					alert("手机验证码不正确，请核实")
 				}
 			});
 		}
@@ -33,13 +36,11 @@ function($rootScope, $scope, httpUtil, $state) {
 	//短信验证码 
 	$scope.sendSms = function(){
 		if(validate()){
-			$('#sms').button('loading').delay(30000).queue(function() {
-	            $('#sms').button('reset');
-	        });
 			var reqUrl = globalConfig.rootUrl + "/validate/sendsms";
 	        httpUtil.post(reqUrl, $scope.user, function(data, status){
 	        	if(status==500 || status==402){
-	        		alert("请输入正确的动态校验码")
+	        		alert("问题校验答案不正确，请刷新")
+	        		$scope.reSend();
 	        		return;
 	        	}
 	        	if(status==401){
@@ -47,19 +48,21 @@ function($rootScope, $scope, httpUtil, $state) {
 	        		return;
 	        	}
 	        	if(status==200){
+	        		countDown(60); // 倒计时
 	        		if(data.status==501)
 	        			alert(data.msg)
 	        		return;
 	        	}
+
 	        })
 		}
 	}
+
 	
 	// 动态校验码
 	$scope.reSend = function(){
 		var reqUrl = globalConfig.rootUrl + "/validate/reSend";
 		httpUtil.get(reqUrl,  function(data, status){
-			console.log(data)
 			if(status==200){
 				$scope.user.vtext = data.que;
 				$scope.user.vid = data.id;
@@ -97,6 +100,23 @@ function($rootScope, $scope, httpUtil, $state) {
 		}
 		return true;
 	}
+
+
+	function countDown(times){
+		$('#sms').attr({"disabled":"disabled"});
+    	if(!times||isNaN(parseInt(times)))return;
+    	var args = arguments;
+    	var self = this;
+     	$('#sms').text(times+"s  ");
+     	setTimeout(function(){
+     		args.callee.call(self,--times);
+     		if(times==0){
+     			$('#sms').removeAttr("disabled");
+     			$('#sms').text('点击发送');
+     		}
+
+     	},1000); 	
+ 	}
 
 	ngInit();
 }]);

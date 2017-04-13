@@ -18,7 +18,7 @@ app.config(function ($stateProvider, $urlRouterProvider) { //$routeProvider,
 			resolve: {
 			 	load: ['$ocLazyLoad', function($ocLazyLoad) {
 			 		return $ocLazyLoad.load([
-			 			'js/json/home.js'
+			 			// 'js/json/home.js'
 			 		]);
 			 	}]
 			}
@@ -90,7 +90,7 @@ app.config(function ($stateProvider, $urlRouterProvider) { //$routeProvider,
 			resolve: {
 			 	load: ['$ocLazyLoad', function($ocLazyLoad) {
 			 		return $ocLazyLoad.load([
-			 			'js/json/invest.js'
+			 			// 'js/json/invest.js'
 			 		]);
 			 	}]
 			}
