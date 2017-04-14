@@ -75,6 +75,7 @@ exports.me = function(req, res){
 
 
 exports.register = function(req, res) {
+	console.log(req.body)
 	var username = req.body.username || '';
 	var smscode = req.body.smscode || '';
 	var password = req.body.password || '';

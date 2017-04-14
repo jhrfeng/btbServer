@@ -4,12 +4,9 @@ var moment = require('moment');
 var request = require('request');
 var md5 = require('md5');
 var TIME_OUT = 60 * 5;
-var smsJson = {
-	apikey:"966f88af7f6c20b51bb758ffa50c197c",
-	text:"【比特币网站】欢迎使用陆家嘴比特币，您的验证码是000000， 本次验证码10分钟内有效",
-	mobile:""
-};
 let SMS_URL = 'https://sms.yunpian.com/v2/sms/single_send.json';
+// let SMS_CODE = ['281822','283711','190982','367291','903831','368731','094823','283746','766321','476261',
+// 				'495871','984731','374781','048473','371673','756463','239183','476236','499837','373677'];
 
 // 注册动态校验码第一次
 exports.regSend = function (req, res, next) {
@@ -36,6 +33,7 @@ exports.regSend = function (req, res, next) {
 // 动态校验码
 exports.reSend = function (req, res, next) {
 	let question = {
+		"0" : {"id":"1"  ,"que":"1 + 2 = ?", "ok":"3"},
 		"1" : {"id":"1"  ,"que":"1 + 1 = ?", "ok":"2"},
 		"2" : {"id":"2"  ,"que":"2 + 4 = ?", "ok":"6"},
 		"3" : {"id":"3"  ,"que":"3 * 3 = ?", "ok":"9"},
@@ -44,11 +42,13 @@ exports.reSend = function (req, res, next) {
 		"6" : {"id":"6"  ,"que":"18 - 10 = ?", "ok":"8"},
 		"7" : {"id":"7"  ,"que":"4 - 2 = ?", "ok":"2"},
 		"8" : {"id":"8"  ,"que":"5 * 1 = ?", "ok":"5"},
-		"9" : {"id":"9"  ,"que":"9 - 6 = ?", "ok":"3"}
+		"9" : {"id":"9"  ,"que":"9 - 6 = ?", "ok":"3"},
+		"9" : {"id":"10"  ,"que":"9 - 5 = ?", "ok":"4"}
 	};
-	var resque = question[Math.round(Math.random()*9+1)];
-	resque["id"]= moment(new Date()).format("YYYYMMDDHHmmss");
+	var index = Math.round(Math.random()*9);
+	var resque = question[index];
 	console.log(resque)
+	resque["id"]= moment(new Date()).format("YYYYMMDDHHmmss");
 	redisClient.set(resque["id"], resque["ok"]);
     redisClient.expire(resque["id"], TIME_OUT); // 5分钟失败
 
@@ -75,19 +75,27 @@ exports.sendsms = function(req, res){
 		if (err)
 		    res.sendStatus(500); // 验证码错误
 		if (vcode==code) { // 验证成功发送验证码
-			var smsCode =  moment(new Date()).format("mmssSS");
-			smsJson.mobile = username;
-			smsJson.text = smsJson.text.replace("000000", smsCode);
+
+			var smsJson = {
+				apikey:"966f88af7f6c20b51bb758ffa50c197c",
+				text:"【比特币网站】欢迎使用陆家嘴比特币，您的验证码是000000， 本次验证码10分钟内有效",
+				mobile:""
+			};
 			
-			console.log(smsJson);// 监测是否有IP，有新增+1，没有新增初始化1
+			var SMS_CODE = moment(new Date()).format("mmssSS"); //验证码
+			smsJson.mobile = username;
+			smsJson.text = smsJson.text.replace("000000", SMS_CODE); // 验证码替换模板
+			
+			console.log(smsJson);
 
 			request.post({url:SMS_URL, form: smsJson}, function(err,httpResponse,body){
 				console.log(body)
 				var object = JSON.parse(body);
 				if(object["code"]==0){
-					redisClient.set(username, smsCode);
+					console.log("redissms", username, SMS_CODE)
+					redisClient.set(username, SMS_CODE);
     				redisClient.expire(username, TIME_OUT*2); // 10分钟失败
-    				redisClient.del(vid, smsCode);
+    				redisClient.del(vid);
     				res.sendStatus(200);
 				}else{
 					 res.json({status:501, msg:object["msg"] });
