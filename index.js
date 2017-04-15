@@ -46,6 +46,9 @@ app.post('/order/queryorder', jwt({secret: secret.secretToken}), tokenManager.ve
 //生成订单
 app.post('/order/neworder', jwt({secret: secret.secretToken}), tokenManager.verifyToken, routes.order.newOrder);
 
+//取消订单
+app.post('/order/cancelOrder', jwt({secret: secret.secretToken}), tokenManager.verifyToken, routes.order.cancelOrder);
+
 //Logout
 app.get('/user/logout', jwt({secret: secret.secretToken}), routes.users.logout); 
 
@@ -55,14 +58,23 @@ app.post('/user/signin', routes.users.signin);
 //创建新用户
 app.post('/user/register', routes.users.register); 
 
+//找回密码
+app.post('/user/findpwd', routes.users.findpwd); 
+
 //获取用户信息
 app.get('/me', jwt({secret: secret.secretToken}), tokenManager.verifyToken, routes.users.me);
+
+//修改密码
+app.post('/user/updatepwd', jwt({secret: secret.secretToken}), tokenManager.verifyToken, routes.users.updatepwd);
 
 //动态校验码
 app.get('/validate/reSend', routes.validate.reSend);
 
 // 短信发送
 app.post('/validate/sendsms', routes.validate.sendsms);
+
+// 忘记密码短信发送
+app.post('/validate/sendpwdsms', routes.validate.sendpwdsms);
 
 //支付宝回调
 app.get('/aplipay/return', routes.aplipay.return);

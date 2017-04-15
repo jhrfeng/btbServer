@@ -1,0 +1,61 @@
+<script type="text/javascript" src="lib/app/all.js"></script>
+
+<br><br>
+<div id="form_main" class="px1000 clearfix">
+	<div id="login1" class="left_form fl" >
+		<form class="bs-example bs-example-form" role="form">
+			<div class="input-group">
+				<span class="input-group-addon">已注册的手机号</span>
+				<input ng-model="user.username" type="text" class="form-control" placeholder="请输入手机号">
+			</div>
+			<br>
+			<div class="input-group">
+				<span class="input-group-addon">问题校验</span>
+				<input maxlength="4" ng-model="user.vcode" type="text" class="form-control" placeholder="请输入验证码答案">
+				<span class="btn input-group-addon addval"
+					ng-click="reSend()">{{user.vtext}}</span>
+			</div>
+			<br>
+			<div class="input-group">
+				<span class="input-group-addon">验证码&nbsp;&nbsp;</span>
+				<input maxlength="6" ng-model="user.smscode" type="text" class="form-control" placeholder="请输入手机短信验证码">
+				<span class="btn input-group-addon addval"> 
+					<button id="sms" ng-click="sendpwdSms()"  class="btn sms">点击发送</button>
+				</span>
+			</div>
+			<br><br>
+			<p style="text-align: center;">
+				<button id="register" class="btn btn-primary" 
+					ng-click="findpwd()"
+					style="width:400px;"
+					data-loading-text="登录中..." 
+	   			type="button"> 找&nbsp;&nbsp;&nbsp;&nbsp;回
+	   			</button>
+			</p>
+			<br>
+			<p style="text-align: center;">
+				<a href="#/login">已有账号，点击登录</a>
+			</p>
+		</form>
+	</div>
+	<div class="right_pic fl" >
+		<p><img src="images/login.jpg"></p>
+	</div>
+</div>
+
+<style>
+	#login1{
+		margin-top:80px;
+	}
+	.addval{
+		background: #828c24;
+		color: #fff;
+	}
+	span{
+		width:100px;
+	}
+	.sms{
+		padding: 0px;
+		background: #828c24;
+	}
+</style>

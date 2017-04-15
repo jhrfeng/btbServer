@@ -43,7 +43,7 @@ function($rootScope, $scope, httpUtil, $state) {
 	        		$scope.reSend();
 	        		return;
 	        	}
-	        	if(status==401){
+	        	if(status==403){
 	        		alert("请输入手机号")
 	        		return;
 	        	}
@@ -56,6 +56,75 @@ function($rootScope, $scope, httpUtil, $state) {
 
 	        })
 		}
+	}
+
+		//find验证码 
+	$scope.sendpwdSms = function(){
+		if(!validatemobile($scope.user.username)){
+			return false;
+		} 
+		if($scope.user.vcode=="" || null==$scope.user.vcode){
+			alert("请输入动态验证码")
+			return false;
+		}
+	
+		var reqUrl = globalConfig.rootUrl + "/validate/sendpwdsms";
+        httpUtil.post(reqUrl, $scope.user, function(data, status){
+        	if(status==500 || status==402){
+        		alert("问题校验答案不正确，请刷新")
+        		$scope.reSend();
+        		return;
+        	}
+        	if(status==403){
+        		alert("该手机号未注册")
+        		return;
+        	}
+        	if(status==200){
+        		countDown(60); // 倒计时
+        		if(data.status==501)
+        			alert(data.msg)
+        		return;
+        	}
+
+        })
+
+	}
+
+	$scope.findpwd = function(){
+		var reqUrl = globalConfig.rootUrl + "/user/findpwd";
+		if(!validatemobile($scope.user.username)){
+			return false;
+		}
+		if($scope.user.smscode=="" || null==$scope.user.smscode){
+			alert("请输入手机验证码")
+			return false;
+		}
+		$("#register").button('loading');
+        httpUtil.signin(reqUrl, $scope.user, function(data, status){
+        	$("#register").button('reset');
+        	if(status==200){
+        		if(data.status==200){
+        			alert("重置密码已通过短信发送到您的手机中，请注意查收")
+        			$state.go("login")
+        		}else{
+        			alert(data.msg)
+        			return;
+        		}
+        	}
+        	if(status==500){
+        		alert("密码找回失败")
+        		return;
+        	}
+        	if(status==501){
+        		alert("不是绑定的手机号")
+        		return;
+        	}
+        	if(status==502){
+        		alert("验证码校验错误")
+        		return;
+        	}
+		});
+
 	}
 
 	

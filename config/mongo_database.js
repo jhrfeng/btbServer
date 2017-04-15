@@ -72,7 +72,7 @@ var Order = new Schema({
     openStatus:{type: String, default: "0"}, // 0未清算，1已清算
     created:  { type: Date, default: Date.now }, //
     updated:  { type: Date, default: Date.now },
-    status:   { type: String, default: "0" },   // 状态有效， 未完成订单，1已完成订单
+    status:   { type: String, default: "0" },   // 状态有效， 0未完成订单，1已完成订单
 });
 
 

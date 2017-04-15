@@ -8,6 +8,17 @@ var product = {
 	"20170003": {"pid":"20170003", "name":"比特币套利基金全年", "shouyi":40.0, "week":365, "join":1000}
 }
 
+// 取消订单
+exports.cancelOrder = function(req, res, next){
+	var orderid = req.body.orderid || '';
+	var userid = tokenManager.getUserId(req);
+	var whereData = {orderid:orderid, userid:userid, status:"0"};
+	db.orderModel.remove(whereData, function(err){ 
+		res.sendStatus(200);
+	})
+	// res.sendStatus(200);
+}
+
 // 生成订单
 exports.newOrder = function(req, res, next) {
 	var pid = req.body.pid || '';             // 商品号

@@ -55,7 +55,6 @@ app.factory('httpUtil', ['$http','$state', '$rootScope', function($http,$state,$
 	                callback(data, status);
 	            }).error(function(data,status){
 	            	if(status==401){
-						alert("用户已失效，请重新登录!")
 						cacheUtil.remove("Authorization")
 						$rootScope.me = false;
 						$state.go("login")
@@ -75,7 +74,6 @@ app.factory('httpUtil', ['$http','$state', '$rootScope', function($http,$state,$
 	                callback(data, status);
 	            }).error(function(data,status){
 	            	if(status==401){
-						alert("用户已失效，请重新登录!")
 						cacheUtil.remove("Authorization")
 						$rootScope.me = false;
 						$state.go("login")

@@ -47,6 +47,17 @@ app.config(function ($stateProvider, $urlRouterProvider) { //$routeProvider,
 			 	}]
 			}
 		})
+		.state('findpwd',{
+			url:'/findpwd',
+			templateUrl: 'views/findpwd.html',
+			controller: 'RegisterController',
+			resolve: {
+			 	load: ['$ocLazyLoad', function($ocLazyLoad) {
+			 		return $ocLazyLoad.load([
+			 		]);
+			 	}]
+			}
+		})
 		.state('register',{
 			url:'/register',
 			templateUrl: 'views/register.html',
