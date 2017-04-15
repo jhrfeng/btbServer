@@ -59,7 +59,7 @@
 	<!--1-->
 	
 	<br>
-	<div ng-repeat="product in productList">
+	<div ng-repeat="(index, product) in productList">
 		<div id="gy_treasure_xszx_bids">
 			<div class="gy_treasure_xsbid_masin px1000 clearfix">
 				<div class="">
@@ -85,11 +85,11 @@
 								<div class="gy_treasure_xsbid_right_one">
 								<div class="fl" style="color:#29A7E1">正在筹集</div>
 								<div class="gy_treasur_bg1 fl">
-									<div class="gy_treasur_bg2" style="width:{{product.shouyi/8}}%;">
+									<div class="gy_treasur_bg2" style="width:{{percenter[index]}}%;">
 										
 									</div>
 								</div>
-								<span class="fl" style="font-size:15.27px;color:#29A7E1;">{{product.shouyi/8}}%</span>
+								<span class="fl" style="font-size:15.27px;color:#29A7E1;">{{percenter[index]}}%</span>
 								</div>
 							</div>
 						</div>
@@ -97,7 +97,7 @@
 							<div class="gy_treasure_xsbid_down">
 								<span class="gy_treasure_x_cp">起投金额：{{product.join}}</span>
 								<span class="gy_treasure_x_cp">付息方式：到期付息还本</span>
-								<span class="gy_treasure_x_cp">赎回方式：T+5， 投资满{{product.week}}天即可申请赎回</span>
+								<span class="gy_treasure_x_cp">赎回方式：T+0， 投资满{{product.week}}天即可申请赎回</span>
 							</div>
 						</div>
 						<div class="fl">

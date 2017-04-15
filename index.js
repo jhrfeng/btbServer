@@ -10,6 +10,7 @@ routes.users = require('./route/user.js');
 routes.order = require('./route/order.js');
 routes.aplipay = require('./route/aplipay.js');
 routes.validate = require('./route/validate.js');
+routes.home = require('./route/home.js');
 
 var app = express();
 var serverPort = process.env.PORT || 3000;
@@ -66,6 +67,9 @@ app.get('/me', jwt({secret: secret.secretToken}), tokenManager.verifyToken, rout
 
 //修改密码
 app.post('/user/updatepwd', jwt({secret: secret.secretToken}), tokenManager.verifyToken, routes.users.updatepwd);
+
+//购买量,首页动态展示
+app.get('/home/percenter', routes.home.percenter); 
 
 //动态校验码
 app.get('/validate/reSend', routes.validate.reSend);

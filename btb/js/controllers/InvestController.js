@@ -1,12 +1,20 @@
-app.controller('InvestController', ['$scope', 'photos', '$state', function($scope, photos, $state) {
+app.controller('InvestController', ['$scope', 'photos', '$state', 'httpUtil', function($scope, photos, $state, httpUtil) {
 //	$scope.questionList = questionList; // 通过懒加载，加载配置JSON信息
-
-	photos.success(function(data) {
-    	$scope.questionList = data.questionList;
+	function ngInit(){
+		// 初始化产品加载
+		photos.success(function(data) {
+	    	$scope.questionList = data.questionList;
     	$scope.productList = data.productList;
-	});
+		});
+		httpUtil.get(globalConfig.rootUrl + "/home/percenter", function(data, status){
+			$scope.percenter = data;
+		})
+
+	}
 
 	$scope.goOrder = function(pid){
 		$state.go("order", {pid:pid});
 	}
+
+	ngInit();
 }]);
