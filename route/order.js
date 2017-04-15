@@ -3,7 +3,7 @@ var db = require('../config/mongo_database');
 var tokenManager = require('../config/token_manager');
 
 var product = {
-	"20170000": {"pid":"20170000", "name":"比特币套利基金新月", "shouyi":20.0, "week": 30, "join":1000},
+	"20170000": {"pid":"20170000", "name":"比特币套利基金新月", "shouyi":12.0, "week": 30, "join":1000},
 	"20170001": {"pid":"20170001", "name":"比特币套利基金一季", "shouyi":20.0, "week": 90, "join":1000},
 	"20170002": {"pid":"20170002", "name":"比特币套利基金半年", "shouyi":30.0, "week":180, "join":1000},
 	"20170003": {"pid":"20170003", "name":"比特币套利基金全年", "shouyi":40.0, "week":365, "join":1000}
