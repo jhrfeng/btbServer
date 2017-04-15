@@ -91,7 +91,7 @@ function($rootScope, $scope, httpUtil, $state) {
 		}
 		// 构造两个日期
 		var now = new Date();
-		var date = new Date('2016-04-16'); // order.created
+		var date = new Date(order.created); //
 		// 调用日期差方法，求得参数日期与系统时间相差的天数
 		var diff = now.diff(date);
 		diff = diff.toFixed(0);
