@@ -26,6 +26,11 @@
 						</p>
 					</li>
 				</ul>
+				<nav>
+					<p class="gy_member_submenu_zc">
+						<a class="btn-warning" ng-click="logout()">登出</a>
+					</p>
+				</nav>
 			</div>
 			<!--split line-->
 			<div class="fl gy_guide_announcement_rigth" id="gsjj" style="display:block;text-align:left;height: 100%;" ng-show="tabshow=='1'">
@@ -70,7 +75,7 @@
 									<th>购买日期</th>
 									<th>周期</th>
 									<th>年收益率</th>
-									<!-- <th>到期本息收益</th> -->
+									<th>累计收益</th>
 									<th>订单状态</th>
 									<th>操作</th>
 								</tr>
@@ -82,7 +87,7 @@
 								<td>{{order.created | date:"yyyy/MM/dd"}}</td>
 								<td>{{order.pid.week}}天</td>
 								<td>{{order.pid.shouyi}}%</td>
-								<!-- <td>{{order.openAmount}}元</td> -->
+								<td style="color:#20b326">{{order | income}}元</td>
 								<td ng-if="order.status=='0'"><a href="#/placeorder/{{order.orderid}}">{{order.status | orderStatus}}</a></td>
 								<td ng-if="order.status!='0'">{{order.status | orderStatus}}</td>
 								<td><button class="btn btn-danger" ng-if="order.status=='0'" ng-click="cancelOrder(order.orderid)">取消订单</button></td>

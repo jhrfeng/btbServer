@@ -33,6 +33,13 @@ function($rootScope, $scope, httpUtil, $state) {
 		})
 	} 
 
+	// 登出
+	$scope.logout = function(){
+		httpUtil.cacheUtil.remove("Authorization")
+		$rootScope.me = false;
+		$state.go("login")
+	} 
+
 	// 修改密码
 	$scope.updatepwd = function(){
 		var reqUrl = globalConfig.rootUrl + "/user/updatepwd";
@@ -74,5 +81,31 @@ function($rootScope, $scope, httpUtil, $state) {
         	return "待支付"
         if(value=="1")
         	return "支付已生效"	
+    }
+}).filter('income', function() { //可以注入依赖
+    return function(order) {
+    	
+    	// 给日期类对象添加日期差方法，返回日期与diff参数日期的时间差，单位为天
+		Date.prototype.diff = function(date){
+		  return (this.getTime() - date.getTime())/(24 * 60 * 60 * 1000);
+		}
+		// 构造两个日期
+		var now = new Date();
+		var date = new Date('2016-04-16'); // order.created
+		// 调用日期差方法，求得参数日期与系统时间相差的天数
+		var diff = now.diff(date);
+		diff = diff.toFixed(0);
+
+		console.log(diff)
+	
+		if(0 == diff)
+			return order.payAmount;
+		if(diff < order.pid.week){ // 如果小于周期天数
+	        var income = order.payAmount*(1 + order.pid.shouyi/100/365*diff);
+			return income.toFixed(0);
+		}else{
+			var income = order.payAmount*(1 + order.pid.shouyi/100/365*order.pid.week);
+			return income.toFixed(0);
+		}
     }
 });
