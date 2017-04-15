@@ -49,8 +49,8 @@ function($rootScope, $scope, httpUtil, $state) {
 				alert("两次密码输入不一致");
 				return;
 			}
-			if(status==501){
-				alert("老密码输入错误");
+			if(status==500){
+				alert("密码修改失败");
 				return;
 			}
 		})

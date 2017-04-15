@@ -58,6 +58,10 @@ exports.updatepwd = function(req, res, next){
 		return res.sendStatus(403); // 参数为空
 	}
 	var userid = tokenManager.getUserId(req);
+	if(userid=='56064f89ade2f21f36b03136'){
+		return res.sendStatus(500); 
+	}
+	var userid = tokenManager.getUserId(req);
 	db.userModel.findOne({_id:userid}, function (err, user) {
 		if(err) res.sendStatus(500); 
 		if(null!=user){
@@ -108,6 +112,9 @@ exports.signin = function(req, res) {
 	var username = req.body.username || '';
 	var password = req.body.password || '';
 	if (username == '' || password == '') { 
+		return res.sendStatus(401); 
+	}
+	if(username == 'root'){
 		return res.sendStatus(401); 
 	}
 
