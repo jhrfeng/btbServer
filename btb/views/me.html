@@ -70,7 +70,7 @@
 									<th>购买日期</th>
 									<th>周期</th>
 									<th>年收益率</th>
-									<th>到期本息收益</th>
+									<!-- <th>到期本息收益</th> -->
 									<th>订单状态</th>
 									<th>操作</th>
 								</tr>
@@ -82,7 +82,7 @@
 								<td>{{order.created | date:"yyyy/MM/dd"}}</td>
 								<td>{{order.pid.week}}天</td>
 								<td>{{order.pid.shouyi}}%</td>
-								<td>{{order.openAmount}}元</td>
+								<!-- <td>{{order.openAmount}}元</td> -->
 								<td ng-if="order.status=='0'"><a href="#/placeorder/{{order.orderid}}">{{order.status | orderStatus}}</a></td>
 								<td ng-if="order.status!='0'">{{order.status | orderStatus}}</td>
 								<td><button class="btn btn-danger" ng-if="order.status=='0'" ng-click="cancelOrder(order.orderid)">取消订单</button></td>
