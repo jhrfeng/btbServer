@@ -47,6 +47,30 @@ app.config(function ($stateProvider, $urlRouterProvider) { //$routeProvider,
 			 	}]
 			}
 		})
+		.state('black',{
+			url:'/black',
+			templateUrl: 'views/black.html',
+			controller: 'BlackController',
+			resolve: {
+			 	load: ['$ocLazyLoad', function($ocLazyLoad) {
+			 		return $ocLazyLoad.load([
+			 			'js/controllers/BlackController.js'
+			 		]);
+			 	}]
+			}
+		})
+		.state('blackMe',{
+			url:'/blackMe',
+			templateUrl: 'views/blackMe.html',
+			controller: 'BlackController',
+			resolve: {
+			 	load: ['$ocLazyLoad', function($ocLazyLoad) {
+			 		return $ocLazyLoad.load([
+			 			'js/controllers/BlackController.js'
+			 		]);
+			 	}]
+			}
+		})
 		.state('findpwd',{
 			url:'/findpwd',
 			templateUrl: 'views/findpwd.html',

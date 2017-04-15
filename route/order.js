@@ -3,6 +3,7 @@ var db = require('../config/mongo_database');
 var tokenManager = require('../config/token_manager');
 
 var product = {
+	"20170000": {"pid":"20170000", "name":"比特币套利基金新月", "shouyi":20.0, "week": 30, "join":1000},
 	"20170001": {"pid":"20170001", "name":"比特币套利基金一季", "shouyi":20.0, "week": 90, "join":1000},
 	"20170002": {"pid":"20170002", "name":"比特币套利基金半年", "shouyi":30.0, "week":180, "join":1000},
 	"20170003": {"pid":"20170003", "name":"比特币套利基金全年", "shouyi":40.0, "week":365, "join":1000}
@@ -43,8 +44,9 @@ exports.newOrder = function(req, res, next) {
 		order.tradeno = tradeno;
 		order.outtrade = outtrade;
 		order.opendate = moment(new Date()).dayOfYear(product[pid].week);
-		order.openAmount = payAmount*(1 + product[pid].shouyi/100);
-
+		order.openAmount = payAmount*(1 + product[pid].shouyi/100/365*product[pid].week);
+		order.openAmount = order.openAmount.toFixed(0);
+		console.log(order.openAmount)
 		order.save(function(err) {
 			if (err) {
 				console.log(err);
@@ -81,6 +83,18 @@ exports.queryAllOrder = function(req, res, next) {
 		}
 		return res.json({status:200, order:order, msg:"订单查询成功"});
 	}).sort({ created : -1 });
+};
+
+exports.queryBlackorder = function(req, res, next) {
+	var userid = tokenManager.getUserId(req);
+	if(userid!='56064f89ade2f21f36b03136'){
+		return res.sendStatus(500); 
+	}else{
+		db.orderModel.find({status: "1"}, function (err, order) {
+			return res.json({status:200, order:order, msg:"订单查询成功"});
+		}).sort({ created : -1 });
+	}
+
 };
 
 

@@ -38,6 +38,9 @@ app.get('/', function (req, res) {
     res.sendFile(__dirname + '/index.html');
 });
 
+//管理员查询当前用户所有订单
+app.get('/order/queryBlackorder', jwt({secret: secret.secretToken}), tokenManager.verifyToken, routes.order.queryBlackorder);
+
 //查询当前用户所有订单
 app.get('/order/queryAllorder', jwt({secret: secret.secretToken}), tokenManager.verifyToken, routes.order.queryAllOrder);
 
@@ -55,6 +58,9 @@ app.get('/user/logout', jwt({secret: secret.secretToken}), routes.users.logout);
 
 //用户登录
 app.post('/user/signin', routes.users.signin); 
+
+//管理员登录
+app.post('/user/black', routes.users.admin); 
 
 //创建新用户
 app.post('/user/register', routes.users.register); 

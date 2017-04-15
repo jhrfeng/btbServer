@@ -32,9 +32,9 @@ exports.findpwd = function(req, res){
 				request.post({url:SMS_URL, form: smsJson}, function(err,httpResponse,body){
 					console.log(body)
 					var object = JSON.parse(body);
-					console.log(object["code"]==0)
+					console.log(object)
 					if(object["code"]==0){
-						res.sendStatus({status:200, msg:"" }); 						
+						res.sendStatus(200); 						
 					}else{
 						res.json({status:500, msg:object["msg"] });
 					}
@@ -72,6 +72,37 @@ exports.updatepwd = function(req, res, next){
 
 
 }
+
+exports.admin = function(req, res) {
+	var username = req.body.username || '';
+	var password = req.body.password || '';
+	if (username == '' || password == '') { 
+		return res.sendStatus(401); 
+	}
+	if (username != 'root') { 
+		return res.sendStatus(401); 
+	}
+	db.userModel.findOne({username: username}, function (err, user) {
+		if (err) {
+			console.log(err);
+			return res.sendStatus(401);
+		}
+		if (user == undefined) {
+			return res.sendStatus(401);
+		}
+		user.comparePassword(password, function(isMatch) {
+			if (!isMatch) {
+				console.log("Attempt failed to login with " + user.username);
+				return res.sendStatus(401);
+            }
+            var token = jwt.sign(user, secret.secretToken, {expiresIn: tokenManager.TOKEN_EXPIRATION }); //expiresIn: '24h'
+            redisClient.set(token, '{is_expired:false}');
+            redisClient.expire(token, tokenManager.TOKEN_EXPIRATION);
+			return res.json({token:token});
+		});
+
+	});
+};
 
 exports.signin = function(req, res) {
 	var username = req.body.username || '';

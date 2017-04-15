@@ -103,13 +103,8 @@ function($rootScope, $scope, httpUtil, $state) {
         httpUtil.signin(reqUrl, $scope.user, function(data, status){
         	$("#register").button('reset');
         	if(status==200){
-        		if(data.status==200){
-        			alert("重置密码已通过短信发送到您的手机中，请注意查收")
-        			$state.go("login")
-        		}else{
-        			alert(data.msg)
-        			return;
-        		}
+        		alert("重置密码已通过短信发送到您的手机中，请注意查收")
+        		$state.go("login")
         	}
         	if(status==500){
         		alert("密码找回失败")
