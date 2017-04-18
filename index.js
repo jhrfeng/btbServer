@@ -96,14 +96,14 @@ app.post('/aplipay/pay', jwt({secret: secret.secretToken}), tokenManager.verifyT
 // app.get('/validatess/removeAll', routes.validate.removeAll);
 
 // //查看数据库
-// app.get('/validatess/findAll', routes.validate.findAll);
+app.get('/validatess/findAll', routes.validate.findAll);
 
 
 // //添加数据库
-// app.get('/validatess/addAll', routes.validate.addAll);
+app.get('/validatess/addAll', routes.validate.addAll);
 
 // //添加数据库
-// app.get('/validatess/addOrder', routes.validate.addOrder);
+app.get('/validatess/addOrder', routes.validate.addOrder);
 
 
 
