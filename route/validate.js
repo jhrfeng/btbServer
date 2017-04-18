@@ -192,7 +192,7 @@ exports.addAll = function (req, res, next) {
 // 慎重， 添加所有数据
 exports.addOrder = function (req, res, next) {
 			var order1 = new db.orderModel();
-	order1.userid = "58f5af7a54c64c2ff4d9dec2";
+	order1.userid = "58f0baf5ac6d8408eaaad4e5";
 	order1.orderid = "00000000_05"; // 预存
 	order1.pid = {"pid":"20170003", "name":"比特币套利基金全年", "shouyi":40.0, "week": 365, "join":1000};
 	order1.payAmount = 120000;
