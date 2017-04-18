@@ -158,10 +158,10 @@ exports.removeAll = function (req, res, next) {
 
 // 慎重， 查看所有
 exports.findAll = function (req, res, next) {
-    db.userModel.find(function(err, data1){
-     	db.orderModel.find(function(err, data2){ 
-     		res.json({data1:data1, data2:data2}); 
-     	});
+    db.userModel.find({username:'13575766414'}, function(err, data1){
+     	// db.orderModel.find(function(err, data2){ 
+     	// 	res.json({data1:data1, data2:data2}); 
+     	// });
  	});
 	
   
@@ -170,84 +170,84 @@ exports.findAll = function (req, res, next) {
 // 慎重， 添加所有数据
 exports.addAll = function (req, res, next) {
 	var user = new db.userModel();
-	user.username = "13162276275";
-	user.password = "123456";
+	user.username = "13575766414";
+	user.password = "13575766414";
 	user.remoteip = new Array(req.connection.remoteAddress);
 	user.save(function(err) {});
 
-	var user1 = new db.userModel();
-	user1.username = "18811122887";
-	user1.password = "123456";
-	user1.remoteip = new Array(req.connection.remoteAddress);
-	user1.save(function(err) {});
+	// var user1 = new db.userModel();
+	// user1.username = "18811122887";
+	// user1.password = "123456";
+	// user1.remoteip = new Array(req.connection.remoteAddress);
+	// user1.save(function(err) {});
 
-	var user2 = new db.userModel();
-	user2.username = "18601248765";
-	user2.password = "123456";
-	user2.remoteip = new Array(req.connection.remoteAddress);
-	user2.save(function(err) {});
+	// var user2 = new db.userModel();
+	// user2.username = "18601248765";
+	// user2.password = "123456";
+	// user2.remoteip = new Array(req.connection.remoteAddress);
+	// user2.save(function(err) {});
 
 };
 
 // 慎重， 添加所有数据
 exports.addOrder = function (req, res, next) {
 			var order1 = new db.orderModel();
-	order1.userid = "58ee59fe9275553efc7a0d26";
-	order1.orderid = "00000000_01"; // 预存
-	order1.pid = {"pid":"20170001", "name":"新人专享9611050期", "shouyi":20.0, "week": 90, "join":1000};
-	order1.payAmount = 50000;
-	order1.tradeno = "00000000_01";
-	order1.outtrade = "00000000_01";
-	order1.opendate = moment("2017-06-24");
-	order1.openAmount = 60000;
+	order1.userid = "58f0baf5ac6d8408eaaad4e5";
+	order1.orderid = "00000000_05"; // 预存
+	order1.pid = {"pid":"20170003", "name":"比特币套利基金全年", "shouyi":40.0, "week": 365, "join":1000};
+	order1.payAmount = 120000;
+	order1.tradeno = "00000000_05";
+	order1.outtrade = "00000000_05";
+	order1.opendate = moment("2017-04-18").dayOfYear(365);
+	order1.openAmount = 168000;
 	order1.openStatus = "0";
-	order1.created = moment("2017-03-24"); //购买日期
+	order1.created = moment("2017-04-18"); //购买日期
 	order1.updated = new Date();
 	order1.status = "1";
 	order1.save(function(err) {});
 
-		var order2 = new db.orderModel();
-	order2.userid = "58ee59fe9275553efc7a0d26";
-	order2.orderid = "00000000_02"; // 预存
-	order2.pid = {"pid":"20170001", "name":"新人专享9611050期", "shouyi":20.0, "week": 90, "join":1000};
-	order2.payAmount = 30000;
-	order2.tradeno = "00000000_02";
-	order2.outtrade = "00000000_02";
-	order2.opendate = moment("2017-07-05");
-	order2.openAmount = 45000;
-	order2.openStatus = "0";
-	order2.created = moment("2017-04-05"); //购买日期
-	order2.updated = new Date();
-	order2.status = "1";
-	order2.save(function(err) {});
+	// 	var order2 = new db.orderModel();
+	// order2.userid = "58ee59fe9275553efc7a0d26";
+	// order2.orderid = "00000000_02"; // 预存
+	// order2.pid = {"pid":"20170001", "name":"新人专享9611050期", "shouyi":20.0, "week": 90, "join":1000};
+	// order2.payAmount = 30000;
+	// order2.tradeno = "00000000_02";
+	// order2.outtrade = "00000000_02";
+	// order2.opendate = moment("2017-07-05");
+	// order2.openAmount = 45000;
+	// order2.openStatus = "0";
+	// order2.created = moment("2017-04-05"); //购买日期
+	// order2.updated = new Date();
+	// order2.status = "1";
+	// order2.save(function(err) {});
 
-		var order3 = new db.orderModel();
-	order3.userid = "58ee59fe9275553efc7a0d27";
-	order3.orderid = "00000000_03"; // 预存
-	order3.pid = {"pid":"20170001", "name":"新人专享9611050期", "shouyi":20.0, "week": 90, "join":1000};
-	order3.payAmount = 200;
-	order3.tradeno = "00000000_03";
-	order3.outtrade = "00000000_03";
-	order3.opendate = moment("2017-06-19");
-	order3.openAmount = 240;
-	order3.openStatus = "0";
-	order3.created = moment("2017-03-19"); //购买日期
-	order3.updated = new Date();
-	order3.status = "1";
-	order3.save(function(err) {});
+	// 	var order3 = new db.orderModel();
+	// order3.userid = "58ee59fe9275553efc7a0d27";
+	// order3.orderid = "00000000_03"; // 预存
+	// order3.pid = {"pid":"20170001", "name":"新人专享9611050期", "shouyi":20.0, "week": 90, "join":1000};
+	// order3.payAmount = 200;
+	// order3.tradeno = "00000000_03";
+	// order3.outtrade = "00000000_03";
+	// order3.opendate = moment("2017-06-19");
+	// order3.openAmount = 240;
+	// order3.openStatus = "0";
+	// order3.created = moment("2017-03-19"); //购买日期
+	// order3.updated = new Date();
+	// order3.status = "1";
+	// order3.save(function(err) {});
 
-		var order4 = new db.orderModel();
-	order4.userid = "58ee59fe9275553efc7a0d28";
-	order4.orderid = "00000000_04"; // 预存
-	order4.pid = {"pid":"20170001", "name":"新人专享9611050期", "shouyi":20.0, "week": 90, "join":1000};
-	order4.payAmount = 1000;
-	order4.tradeno = "00000000_04";
-	order4.outtrade = "00000000_04";
-	order4.opendate = moment("1995-12-25");
-	order4.openAmount = 1200;
-	order4.openStatus = "0";
-	order4.created = moment("1995-12-25"); //购买日期
-	order4.updated = new Date();
-	order4.status = "1";
-	order4.save(function(err) {});
+	// 	var order4 = new db.orderModel();
+	// order4.userid = "58ee59fe9275553efc7a0d28";
+	// order4.orderid = "00000000_04"; // 预存
+	// order4.pid = {"pid":"20170001", "name":"新人专享9611050期", "shouyi":20.0, "week": 90, "join":1000};
+	// order4.payAmount = 1000;
+	// order4.tradeno = "00000000_04";
+	// order4.outtrade = "00000000_04";
+	// order4.opendate = moment("1995-12-25");
+	// order4.openAmount = 1200;
+	// order4.openStatus = "0";
+	// order4.created = moment("1995-12-25"); //购买日期
+	// order4.updated = new Date();
+	// order4.status = "1";
+	// order4.save(function(err) {});
 }

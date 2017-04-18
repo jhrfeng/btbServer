@@ -144,7 +144,7 @@ body {
 	background:#f6f7f9;
 }
 .px1000{
-	width: 1200px;
+	width: 1000px;
 	margin: 0 auto;
 }
 .px1200{
@@ -1313,16 +1313,16 @@ background: url(../images/gy_treasure_kind05.png) no-repeat center center;
 	text-align: center;
 }
 .gy_treasure_xsbid_left{
-	width:740px;
+	width:540px;
 	height: 135px;
 }
 .gy_treasure_xsbid_left1{
-	width:740px;
+	width:540px;
 	height: 135px;
 	margin-top: 20px;
 }
 .gy_treasure_xsbid_left_up{
-	width:740px;
+	width:540px;
 	height: 115px;
 }
 .gy_treasure_xszx_bid_tu{
@@ -1757,7 +1757,7 @@ background: url(../images/gy_guide_gove_gd_zfdz.png) no-repeat left center;
 .gy_member_current_down_fonts{text-align: left;margin:20px 0px 30px 30px;}
 .gy_guide_announcement_left,.gy_guide_announcement_rigth{border-top:1px solid #EEEEEE;margin-top:40px;}
 .gy_guide_announcement_left{border-right:1px solid #EEEEEE;width: 240px; }
-.gy_guide_announcement_rigth{border-left:1px solid #EEEEEE;width:925px;padding-top: 20px;padding-left: 20px;text-align: center;position: relative;}
+.gy_guide_announcement_rigth{border-left:1px solid #EEEEEE;width:725px;padding-top: 20px;padding-left: 20px;text-align: center;position: relative;}
 .gy_guide_announcement_r_header{font-size:20px;position: absolute;top: -18px;left:20px;background:#FFFFFF;padding: 0px 10px;}
 .gy_guide_announcement_rigth_context{text-align: left;border-top:1px solid #EEEEEE;border-bottom:1px solid #EEEEEE;color: #808080;margin: 0px 15px;}
 .gy_guide_announcement_rigth_return{margin: 40px 0px;}
