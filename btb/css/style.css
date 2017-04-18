@@ -144,7 +144,7 @@ body {
 	background:#f6f7f9;
 }
 .px1000{
-	width: 1200px;
+	width: 1000px;
 	margin: 0 auto;
 }
 .px1200{
@@ -1313,16 +1313,16 @@ background: url(../images/gy_treasure_kind05.png) no-repeat center center;
 	text-align: center;
 }
 .gy_treasure_xsbid_left{
-	width:740px;
+	width:540px;
 	height: 135px;
 }
 .gy_treasure_xsbid_left1{
-	width:740px;
+	width:540px;
 	height: 135px;
 	margin-top: 20px;
 }
 .gy_treasure_xsbid_left_up{
-	width:740px;
+	width:540px;
 	height: 115px;
 }
 .gy_treasure_xszx_bid_tu{
