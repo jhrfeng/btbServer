@@ -38,6 +38,8 @@ app.get('/', function (req, res) {
     res.sendFile(__dirname + '/index.html');
 });
 
+//管理员查询当前所有用户
+app.get('/order/queryBlackuser', jwt({secret: secret.secretToken}), tokenManager.verifyToken, routes.users.queryBlackuser);
 //管理员查询当前用户所有订单
 app.get('/order/queryBlackorder', jwt({secret: secret.secretToken}), tokenManager.verifyToken, routes.order.queryBlackorder);
 

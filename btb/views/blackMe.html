@@ -15,6 +15,11 @@
 							<a href="">我的订单</a>
 						</p>
 					</li>
+					<li>
+						<p class="btn user-left" ng-click="toChangeView(2)">
+							<a href="">用户管理</a>
+						</p>
+					</li>
 				</ul>
 			</div>
 			
@@ -41,6 +46,30 @@
 								<td>{{order.created | date:"yyyy/MM/dd"}}</td>
 								<td>{{order.pid.week}}天</td>
 								<td>{{order.status | orderStatus}}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+			<!--split line-->
+			<div class="fl gy_guide_announcement_rigth" id="" style="display:block;text-align:left;height: 100%;" ng-show="tabshow=='2'">
+				<div class="col-sm-20">
+					<table class="table table-striped">
+						<tbody>
+							<thead>
+								<tr>
+									<th>手机号</th>
+									<th>姓名名</th>
+									<th>联系方式</th>
+									<th>注册日期</th>									
+								</tr>
+							</thead>
+							<tr ng-repeat="user in userList">
+								<td>{{user.username}}</td>
+								<td>{{user.name}}</td>
+								<td>{{user.email}}</td>	
+								<td>{{user.created | date:'yyyy-MM-dd hh:mm:ss'}}</td>								
 							</tr>
 						</tbody>
 					</table>

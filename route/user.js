@@ -196,3 +196,24 @@ exports.sendRegMS = function(req, res) {
 
 }
 
+exports.queryBlackuser = function(req, res, next) {
+	var userid = tokenManager.getUserId(req);
+	if(userid!='56064f89ade2f21f36b03136'){
+		return res.sendStatus(500); 
+	}else{
+		db.userModel.find(function (err, users) {
+			for(i in users){
+				if(users[i]["username"]=="root"){
+					users[i]["username"] = "*****";
+				}
+				users[i]["password"] = "";
+				users[i]["zijinPay"] = "";
+				users[i]["zhifuPay"] = "";
+				users[i]["is_admin"] = "";
+			}
+			return res.json({status:200, user:users, msg:"订单查询成功"});
+		}).sort({ created : -1 });
+	}
+
+};
+

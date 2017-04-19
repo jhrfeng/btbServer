@@ -34,6 +34,14 @@ function($rootScope, $scope, httpUtil, $state) {
 				}
 			})
 		}
+		if(type==2){ 
+			var reqUrl = globalConfig.rootUrl + "/order/queryBlackuser";
+			httpUtil.get(reqUrl, function(data, status){
+				if(status==200){
+					$scope.userList = data.user;
+				}
+			})
+		}
 	}
 	
 	
