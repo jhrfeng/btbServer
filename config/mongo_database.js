@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var md5 = require('md5');
 var SALT_WORK_FACTOR = 10;
-var mongodbURL = 'mongodb://127.0.0.1:27017/btb';
+var mongodbURL = 'mongodb://172.31.92.189:27017/btb';
 var mongodbOptions = { };
 
 mongoose.connect(mongodbURL, mongodbOptions, function (err, db) {
