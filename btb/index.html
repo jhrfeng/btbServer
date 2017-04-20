@@ -20,6 +20,8 @@
     <!-- Include the AngularJS routing library -->
     <script src="lib/angular/angular-ui-router.min.js"></script>
     <script src="lib/ocLazyLoad/ocLazyLoad.min.js"></script>
+
+    <script src="lib/bootstrap/js/bootstrap.min.js"></script>
     <!--<script src="https://code.angularjs.org/1.2.28/angular-route.min.js"></script>-->
 	</head>
   <body ng-controller="rootCtrl">
@@ -27,8 +29,14 @@
 	<!-- header start -->
 	<div id="gy_top_wper">
 	 	 <div class="gy_top px1000 clearfix">
-	  	    <div class="gy_top_l fl"><img src="images/service_pic.png" alt=""><span style="color:#999999;padding-left:10px;">在线客服:</span><img style="padding-left:10px;" src="images/service_photo.png" alt="">
-	  	    <!-- <span style="color: #5DB9E9;padding-left:10px;">客服热线：400-660-8612</span> -->
+	  	    <div class="gy_top_l fl"><img src="images/service_pic.png" alt="">
+		  	    <span style="color:#999999;padding-left:10px;"
+		  	    	data-toggle="tooltip" 
+		  	     	data-html='true' 
+		  	     	title="<img src='images/weixin.jpg' style='height:150px'>" 
+		  	     	data-placement="bottom">在线客服:</span>
+		  	    <img style="padding-left:10px;" src="images/service_photo.png" alt="">
+		  	    <!-- <span style="color: #5DB9E9;padding-left:10px;">客服热线：400-660-8612</span> -->
 	  	    </div>
 	  	   	<div class="gy_top_r fr clearfix">
 	  	   		<a href="#/home">首页</a><span>|</span>
@@ -97,7 +105,7 @@
 	<div id="gy_footer_wper">
 		 <div class="gy_footer_xy px1000 clearfix">
 		 	  <div class="gy_footer_xy_picp">
-		 	  	<img src="images/gy_cp_footer_wper_up01.png">
+		 	  	<!-- <img src="images/gy_cp_footer_wper_up01.png"> -->
 		 	  	<img src="images/gy_cp_footer_wper_up02.png">
 		 	  	<img src="images/gy_cp_footer_wper_up03.png">
 		 	  	<img src="images/gy_cp_footer_wper_up04.png">
@@ -111,7 +119,7 @@
 		 	  	<div class="fl">友情链接:</div>
 		 	  	<div class="fl">
 				 	  	<ul class="gy_footer_youqlj_one">
-				 	  		<li><a href="https://www.bitbank.com/i" style="color:#5DB0D7">bitbank</a></li>
+				 	  		<!-- <li><a href="https://www.bitbank.com/i" style="color:#5DB0D7">bitbank</a></li> -->
 				 	  		<li><a href="https://www.huobi.com/" style="color:#5DB0D7">火币网</a></li>
 				 	  		<li><a href="https://www.btcchina.com/" style="color:#5DB0D7">比特币中国</a></li>
 				 	  		<li><a href="https://www.btctrade.com/" style="color:#5DB0D7">比特币交易网</a></li>
@@ -148,8 +156,11 @@
     <script src="js/services/photos.js"></script>
     <script src="js/services/httpUtil.js"></script>
     
-    <script src="lib/bootstrap/js/bootstrap.min.js"></script>
 
+
+	<script>
+	$(function () { $("[data-toggle='tooltip']").tooltip(); });
+</script>
   </body>
 </html>
 
