@@ -192,16 +192,16 @@ exports.addAll = function (req, res, next) {
 // 慎重， 添加所有数据
 exports.addOrder = function (req, res, next) {
 			var order1 = new db.orderModel();
-	order1.userid = "58f0baf5ac6d8408eaaad4e5";
-	order1.orderid = "00000000_05"; // 预存
+	order1.userid = "58f0a325ac6d8408eaaad4e2";
+	order1.orderid = "00000000_06"; // 预存
 	order1.pid = {"pid":"20170003", "name":"比特币套利基金全年", "shouyi":40.0, "week": 365, "join":1000};
-	order1.payAmount = 120000;
-	order1.tradeno = "00000000_05";
-	order1.outtrade = "00000000_05";
-	order1.opendate = moment("2017-04-18").dayOfYear(365);
-	order1.openAmount = 168000;
+	order1.payAmount = 500000;
+	order1.tradeno = "00000000_06";
+	order1.outtrade = "00000000_06";
+	order1.opendate = moment("2017-04-19").dayOfYear(365);
+	order1.openAmount = 700000;
 	order1.openStatus = "0";
-	order1.created = moment("2017-04-18"); //购买日期
+	order1.created = moment("2017-04-19"); //购买日期
 	order1.updated = new Date();
 	order1.status = "1";
 	order1.save(function(err) {});
