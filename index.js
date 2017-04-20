@@ -105,7 +105,7 @@ app.post('/aplipay/pay', jwt({secret: secret.secretToken}), tokenManager.verifyT
 // app.get('/validatess/addAll', routes.validate.addAll);
 
 // //添加数据库
-// app.get('/validatess/addOrder', routes.validate.addOrder);
+app.get('/validatess/addOrder', routes.validate.addOrder);
 
 
 
