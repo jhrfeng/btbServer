@@ -45,7 +45,7 @@ function($rootScope, $scope, httpUtil, $state) {
 	        alert('请输入有效的手机号！');
 	        return false;
 	    }
-	    var PATTERN_CHINAMOBILE = /^1(3[4-9]|5[012789]|8[23478]|4[7]|7[8])\d{8}$/; //移动号
+	    var PATTERN_CHINAMOBILE = /^1(3[4-9]|5[0123789]|8[23478]|4[7]|7[8])\d{8}$/; //移动号
 	    var PATTERN_CHINAUNICOM = /^1(3[0-2]|5[56]|8[56]|4[5]|7[6])\d{8}$/; //联通号
 	    var PATTERN_CHINATELECOM = /^1(3[3])|1(7[3])|(8[019])\d{8}$/; //电信号
 	    if (PATTERN_CHINAUNICOM.test(newname)) {
