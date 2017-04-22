@@ -141,7 +141,7 @@ input[type="reset"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner, i
 body {
 	font:12px/1.5 "微软雅黑";
 	color:#555555;
-	background:#f6f7f9;
+	/*background:#f6f7f9;*/
 }
 .px1000{
 	width: 1000px;
