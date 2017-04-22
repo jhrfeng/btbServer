@@ -33,7 +33,8 @@
 				</nav>
 			</div>
 			<!--split line-->
-			<div class="fl gy_guide_announcement_rigth" id="gsjj" style="display:block;text-align:left;height: 100%;" ng-show="tabshow=='1'">
+			<div class="fl gy_guide_announcement_rigth" id="gsjj" 
+			style="display:block;text-align:left;height: 100%;" ng-show="tabshow=='1'">
 				<div class="col-sm-20">
 					<table class="table">
 						<tbody>
@@ -50,7 +51,8 @@
 				</div>
 			</div>
 			<!--split line-->
-			<div class="fl gy_guide_announcement_rigth" id="sss" style="display:block;text-align:left;height: 100%;" ng-show="tabshow=='2'">
+			<div class="fl gy_guide_announcement_rigth" id="sss" 
+			style="display:block;text-align:left;height: 100%;" ng-show="tabshow=='2'">
 				<div class="col-sm-20">
 					<table class="table table-striped">
 						<tbody>
@@ -63,7 +65,8 @@
 				</div>
 			</div>
 			<!--split line-->
-			<div class="fl gy_guide_announcement_rigth" id="" style="display:block;text-align:left;height: 100%;" ng-show="tabshow=='3'">
+			<div class="fl gy_guide_announcement_rigth" id="" 
+			style="display:block;text-align:left;height: 100%;" ng-show="tabshow=='3'">
 				<div class="col-sm-20">
 					<table class="table table-striped">
 						<tbody>
@@ -76,6 +79,7 @@
 									<th>周期</th>
 									<th>年收益率</th>
 									<th>累计收益</th>
+									<th>到期收益</th>
 									<th>订单状态</th>
 									<th>操作</th>
 								</tr>
@@ -88,6 +92,7 @@
 								<td>{{order.pid.week}}天</td>
 								<td>{{order.pid.shouyi}}%</td>
 								<td style="color:#20b326">{{order | income}}元</td>
+								<td style="color:#20b326">{{order | incomeEnd}}元</td>
 								<td ng-if="order.status=='0'"><a href="#/placeorder/{{order.orderid}}">{{order.status | orderStatus}}</a></td>
 								<td ng-if="order.status!='0'">{{order.status | orderStatus}}</td>
 								<td><button class="btn btn-danger" ng-if="order.status=='0'" ng-click="cancelOrder(order.orderid)">取消订单</button></td>
@@ -127,5 +132,11 @@
 	td a{
 		color: #03a9f4;
 		font-weight: bold;
+	}
+	.px1000 {
+		width: 1400px;
+	}
+	.gy_guide_announcement_rigth {
+		width: 1110px;
 	}
 </style>

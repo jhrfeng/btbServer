@@ -108,4 +108,12 @@ function($rootScope, $scope, httpUtil, $state) {
 			return income.toFixed(0);
 		}
     }
+}).filter('incomeEnd', function() { //可以注入依赖
+    return function(order) {
+		if(0 == order.payAmount)
+			return order.payAmount;
+
+		var income = order.payAmount*(1 + order.pid.shouyi/100/365*order.pid.week);
+		return income.toFixed(0);
+    }
 });
