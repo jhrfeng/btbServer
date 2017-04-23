@@ -41,11 +41,49 @@
 							<tr>
 								<td>用户名</td>
 								<td>{{user.username}}</td>
+								<td></td>
 							</tr>
 							<tr>
 								<td>登录密码</td>
+								<td></td>
 								<td><button class="btn btn-primary" ng-click="toChangeView(4)">修改密码</button></td>
 							</tr>
+							<tr class="user-status">
+								<td>用户状态</td>
+								<td class="user-status-1">未认证</td>
+								<td>
+									<button class="btn btn-primary"
+									 ng-click="toChangeView(5)">
+									 	补全信息
+									</button>
+								</td>
+							</tr>
+							<tr>
+								<td>真实姓名</td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>身份证</td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>微信号</td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>QQ号</td>
+								<td></td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>邮箱</td>
+								<td></td>
+								<td></td>
+							</tr>
+
 						</tbody>
 					</table>
 				</div>
@@ -138,5 +176,14 @@
 	}
 	.gy_guide_announcement_rigth {
 		width: 1110px;
+	}
+	.user-status{
+		font-weight: bold;
+	}
+	.user-status-1{
+		color:#e91e63;
+	}
+	.user-status-2{
+		/*color: #443333;*/
 	}
 </style>

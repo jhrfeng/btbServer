@@ -20,6 +20,9 @@ function($rootScope, $scope, httpUtil, $state) {
 		if(type==3){ // 查询所有订单
 			queryAllorder();
 		}
+		if(type==5){ // 修改个人信息
+			$state.go("meinfo")
+		}
 	}
 
 	// 取消订单
