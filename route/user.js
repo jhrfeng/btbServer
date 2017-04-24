@@ -191,6 +191,37 @@ exports.register = function(req, res) {
 	
 }
 
+exports.updateInfo = function(req, res) {
+	console.log(req.body)
+	var name = req.body.name || '';
+	var idcard = req.body.idcard || '';
+	var weixin = req.body.weixin || '';
+	var qq = req.body.qq || '';
+	var email = req.body.email || '';
+	var smscode = req.body.smscode || '';
+
+	var user = new db.userModel();
+	user.username = username;
+	user.password = password;
+	user.remoteip = new Array(req.connection.remoteAddress);
+	console.log(user.remoteip)
+	redisClient.get(username, function (err, code) {
+		console.log(err, code);
+		if(err) res.sendStatus(501); //不是绑定短信手机号
+		if(smscode==code){ 
+			user.save(function(err) {
+				if (err) {
+					console.log(err);
+					return res.sendStatus(500);
+				}	
+				return res.sendStatus(200)
+			});
+
+		}else res.sendStatus(502); // 手机验证码不对
+	});
+	
+}
+
 // 发送短信验证码
 exports.sendRegMS = function(req, res) {
 
