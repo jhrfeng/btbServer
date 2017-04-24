@@ -5,8 +5,26 @@ function($rootScope, $scope, httpUtil, $state) {
 	 
 	$scope.update = {}; 
 	$scope.tabshow = 1;
+	$scope.user = {};
 
 	function ngInit(){
+		$scope.getUser();
+		$scope.reSend();
+	}
+
+	// 动态校验码
+	$scope.reSend = function(){
+		var reqUrl = globalConfig.rootUrl + "/validate/reSend";
+		httpUtil.get(reqUrl,  function(data, status){
+			if(status==200){
+				$scope.user.vtext = data.que;
+				$scope.user.vid = data.id;
+			}
+		});
+	}
+
+	// 获取信息
+	$scope.getUser = function(){
 		var reqUrl = globalConfig.rootUrl + "/me";
 		httpUtil.get(reqUrl, function(data, status){
 			if(status==200){
