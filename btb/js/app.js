@@ -174,6 +174,17 @@ app.config(function ($stateProvider, $urlRouterProvider) { //$routeProvider,
 			 		]);
 			 	}]
 			}
+		}).state('meinfo',{
+			url:'/meinfo',
+			templateUrl: 'views/meinfo.html',
+			controller: 'MeinfoController',
+			resolve: {
+			 	load: ['$ocLazyLoad', function($ocLazyLoad) {
+			 		return $ocLazyLoad.load([
+//			 			'js/services/httpUtil.js'
+			 		]);
+			 	}]
+			}
 		});
 
 });

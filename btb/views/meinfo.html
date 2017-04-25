@@ -1,0 +1,112 @@
+<!--公告 -->
+
+<div id="gy_guide_safety_xzk">
+	<div class="px1000" id="gy_guide_announcement">
+		<div class="clearfix gy_guide_announcement_bigbox">
+			<div class="fl gy_guide_announcement_left">
+				<nav>
+					<p class="gy_member_submenu_zc">
+						<a href="">用户中心</a>
+					</p>
+				</nav>
+				<ul style="text-align: center;height: 200px;">
+					<li>
+						<p class="btn user-left" ui-sref="me">
+							<a href="">返回用户信息</a>
+						</p>
+					</li>
+				</ul>
+			</div>
+	
+			<!--split line-->
+			<div class="fl gy_guide_announcement_rigth" id="sss" 
+				style="display:block;text-align:left;height: 100%;" >
+				<div class="col-sm-5">
+					<div class="input-group">
+						<span class="input-group-addon">真实姓名</span>
+						<input ng-model="user.name" type="text" class="form-control" placeholder="请输入真实姓名">
+					</div>
+					<br>
+					<div class="input-group">
+						<span class="input-group-addon">身份证</span>
+						<input ng-model="user.idcard" type="text" class="form-control" placeholder="请输入身份证">
+					</div>
+					<br>
+					<div class="input-group">
+						<span class="input-group-addon">微信号</span>
+						<input ng-model="user.weixin" type="text" class="form-control" placeholder="请输入微信号">
+					</div>
+					<br>
+					<div class="input-group">
+						<span class="input-group-addon">QQ 号</span>
+						<input ng-model="user.qq" type="text" class="form-control" placeholder="请输入QQ 号">
+					</div>
+					<br>
+					<div class="input-group">
+						<span class="input-group-addon">邮箱</span>
+						<input ng-model="user.email" type="text" class="form-control" placeholder="请输入邮箱">
+					</div>
+					<br>
+					<div class="input-group">
+						<span class="input-group-addon">问题校验</span>
+						<input maxlength="4" ng-model="user.vcode" type="text" class="form-control" placeholder="请输入验证码答案">
+						<span class="btn input-group-addon addval"
+							ng-click="reSend()">{{user.vtext}}</span>
+					</div>
+					<br>
+					<div class="input-group">
+						<span class="input-group-addon">验证码&nbsp;&nbsp;</span>
+						<input maxlength="6" ng-model="user.smscode" type="text" class="form-control" placeholder="请输入手机短信验证码">
+						<span class="btn input-group-addon addval"> 
+							<button id="sms" ng-click="sendpwdSms()"  class="btn sms">点击发送</button>
+						</span>
+					</div>
+					<br>
+					<button id="register" class="btn btn-primary" 
+						ng-click="updateInfo()"
+
+						style="width:400px;"
+						data-loading-text="请求中..." 
+		   				type="button"> 确认修改
+		   			</button>
+					<br>
+					<br>
+					<br>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+<style>
+	.user-left {
+		font-size: 16px;
+		line-height: 30px;
+		color: #003147;
+	}
+	td a{
+		color: #03a9f4;
+		font-weight: bold;
+	}
+	.px1000 {
+		width: 1400px;
+	}
+	.gy_guide_announcement_rigth {
+		width: 1110px;
+	}
+	#login1{
+		margin-top:80px;
+	}
+	.addval{
+		background: #828c24;
+		color: #fff;
+	}
+	span{
+		width:100px;
+	}
+	.sms{
+		padding: 0px;
+		background: #828c24;
+	}
+</style>
