@@ -85,6 +85,9 @@ app.get('/validate/reSend', routes.validate.reSend);
 // 短信发送
 app.post('/validate/sendsms', routes.validate.sendsms);
 
+// 短信发送
+app.post('/validate/sendinfosms', routes.validate.sendinfosms);
+
 // 忘记密码短信发送
 app.post('/validate/sendpwdsms', routes.validate.sendpwdsms);
 
