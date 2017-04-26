@@ -30,13 +30,14 @@ var User = new Schema({
     zijinPay: { type: String, default: ""}, // 资金管理密码 MD5加密
     zhifuPay: { type: String, default: ""}, // 支付管理密码 MD5加密
     is_admin: { type: Boolean, default: false }, // 账号类型
-    userStatus: { type: String, default:"0"},  // 用户状态，是否认证， 0没有认证
+    userStatus: { type: String, default:"0"},  // 用户状态，是否认证， 0没有认证,1认证中，2已认证
     mobStatus:  { type: String, default:"0"}, // 手机状态, 0未认证
     roletype: { type: String, default: "0"}, // 用户类型，默认0
     idcard:   { type: String, default: ""}, // 身份证号
     name:     { type: String, default: ""}, // 真实姓名
     bankcode: { type: String, default: ""}, // 银行代码
     bankcount:{ type: String, default: ""}, // 银行账号
+    updated:  { type: Date, default: Date.now},
     created:  { type: Date, default: Date.now }
 });
 

@@ -65,10 +65,14 @@ function($rootScope, $scope, httpUtil, $state) {
 		var reqUrl = globalConfig.rootUrl + "/user/updateInfo";
 		if(validate()){
 			$("#register").button('loading');
-			httpUtil.signin(reqUrl, $scope.user, function(data, status){
+			httpUtil.post(reqUrl, $scope.user, function(data, status){
 	        	$("#register").button('reset');
+	        	if(status==200){
+	        		alert("修改成功！")
+	        		$state.go('me');
+	        	}
 	        	if(status==500){
-	        		alert("密码找回失败")
+	        		alert("修改失败")
 	        		return;
 	        	}
 	        	if(status==501){

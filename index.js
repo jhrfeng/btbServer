@@ -76,6 +76,10 @@ app.get('/me', jwt({secret: secret.secretToken}), tokenManager.verifyToken, rout
 //修改密码
 app.post('/user/updatepwd', jwt({secret: secret.secretToken}), tokenManager.verifyToken, routes.users.updatepwd);
 
+//修改个人信息
+app.post('/user/updateInfo', jwt({secret: secret.secretToken}), tokenManager.verifyToken, routes.users.updateInfo);
+
+
 //购买量,首页动态展示
 app.get('/home/percenter', routes.home.percenter); 
 
@@ -86,7 +90,7 @@ app.get('/validate/reSend', routes.validate.reSend);
 app.post('/validate/sendsms', routes.validate.sendsms);
 
 // 短信发送
-app.post('/validate/sendinfosms', routes.validate.sendinfosms);
+app.post('/validate/sendinfosms',  jwt({secret: secret.secretToken}), tokenManager.verifyToken, routes.validate.sendinfosms);
 
 // 忘记密码短信发送
 app.post('/validate/sendpwdsms', routes.validate.sendpwdsms);

@@ -155,7 +155,20 @@ exports.logout = function(req, res) {
 }
 
 exports.me = function(req, res){
-	res.json(tokenManager.getUser(req));
+	var user = tokenManager.getUser(req);
+
+	db.userModel.findOne({username: user.username}, function (err, user) {
+		if (err) {
+			return res.sendStatus(401);
+		}
+		user.password = "***";
+		user.updated = "";
+		user.zijinPay = "";
+		user.zhifuPay = "";
+
+		res.json(user);
+		
+	});
 }
 
 
@@ -199,24 +212,25 @@ exports.updateInfo = function(req, res) {
 	var qq = req.body.qq || '';
 	var email = req.body.email || '';
 	var smscode = req.body.smscode || '';
+	var user = tokenManager.getUser(req);
+	var username = user.username;
 
-	var user = new db.userModel();
-	user.username = username;
-	user.password = password;
-	user.remoteip = new Array(req.connection.remoteAddress);
-	console.log(user.remoteip)
+	var whereData = {username:user.username};
+    var updateDat = {$set: {name:name, idcard:idcard,
+    						weixin:weixin, qq:qq,
+    						userStatus:'1',
+    						email:email, updated:new Date()
+    						}
+    			    }; //如果不用$set，替换整条数据
+
 	redisClient.get(username, function (err, code) {
-		console.log(err, code);
 		if(err) res.sendStatus(501); //不是绑定短信手机号
 		if(smscode==code){ 
-			user.save(function(err) {
-				if (err) {
-					console.log(err);
-					return res.sendStatus(500);
-				}	
-				return res.sendStatus(200)
-			});
-
+			console.log(whereData, updateDat)
+			db.userModel.update(whereData, updateDat, function(err, user){
+				if(err){res.sendStatus(500)}
+				res.sendStatus(200);	
+			})
 		}else res.sendStatus(502); // 手机验证码不对
 	});
 	
