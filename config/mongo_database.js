@@ -20,6 +20,8 @@ var User = new Schema({
     username: { type: String, required: true, unique: true }, //手机号
     password: { type: String, required: true }, // 密码 md5
     header:   { type: String, default: ""}, //头像
+    qq:       { type: String, default: ""}, //qq
+    weixin:   { type: String, default: ""}, //weixin
     email:    { type: String, default: ""}, //邮箱
     mailSec:  { type: Boolean, default: false },  //邮箱认证，是否安全是自己的
     address:  { type: String, default: ""}, //地址
@@ -28,14 +30,14 @@ var User = new Schema({
     zijinPay: { type: String, default: ""}, // 资金管理密码 MD5加密
     zhifuPay: { type: String, default: ""}, // 支付管理密码 MD5加密
     is_admin: { type: Boolean, default: false }, // 账号类型
-    userStatus: { type: String, default:"0"},  // 用户状态，是否认证， 0没有认证
+    userStatus: { type: String, default:"0"},  // 用户状态，是否认证， 0没有认证,1认证中，2已认证
     mobStatus:  { type: String, default:"0"}, // 手机状态, 0未认证
     roletype: { type: String, default: "0"}, // 用户类型，默认0
     idcard:   { type: String, default: ""}, // 身份证号
     name:     { type: String, default: ""}, // 真实姓名
     bankcode: { type: String, default: ""}, // 银行代码
-
     bankcount:{ type: String, default: ""}, // 银行账号
+    updated:  { type: Date, default: Date.now},
     created:  { type: Date, default: Date.now }
 });
 
