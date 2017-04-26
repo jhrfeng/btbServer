@@ -119,4 +119,13 @@ function($rootScope, $scope, httpUtil, $state) {
 		var income = order.payAmount*(1 + order.pid.shouyi/100/365*order.pid.week);
 		return income.toFixed(0);
     }
-});
+}).filter('userstatus', function() { //可以注入依赖
+    return function(val) {
+		if(val==0)
+			return '未认证';
+		if(val==1)
+			return '审核中';
+		if(val==2)
+			return '已认证';
+    }
+});;

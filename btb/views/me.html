@@ -50,7 +50,7 @@
 							</tr>
 							<tr class="user-status">
 								<td>用户状态</td>
-								<td class="user-status-1">未认证</td>
+								<td class="user-status-1">{{user.userStatus | userstatus}}</td>
 								<td>
 									<button class="btn btn-primary"
 									 ng-click="toChangeView(5)">
