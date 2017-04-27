@@ -11,6 +11,8 @@ routes.order = require('./route/order.js');
 routes.aplipay = require('./route/aplipay.js');
 routes.validate = require('./route/validate.js');
 routes.home = require('./route/home.js');
+routes.superOrder = require('./route/superOrder.js');
+routes.superAplipay = require('./route/superAplipay.js');
 
 var app = express();
 var serverPort = process.env.PORT || 3000;
@@ -54,6 +56,30 @@ app.post('/order/neworder', jwt({secret: secret.secretToken}), tokenManager.veri
 
 //取消订单
 app.post('/order/cancelOrder', jwt({secret: secret.secretToken}), tokenManager.verifyToken, routes.order.cancelOrder);
+
+
+
+//管理员查询当前用户所有指数型订单
+app.get('/superorder/queryBlackorder', jwt({secret: secret.secretToken}), tokenManager.verifyToken, routes.superOrder.queryBlackorder);
+
+//查询当前用户所有指数型订单
+app.get('/superorder/queryAllorder', jwt({secret: secret.secretToken}), tokenManager.verifyToken, routes.superOrder.queryAllOrder);
+
+//查询指数型订单
+app.post('/superorder/queryorder', jwt({secret: secret.secretToken}), tokenManager.verifyToken, routes.superOrder.queryOrder);
+
+//生成指数型订单
+app.post('/superorder/neworder', jwt({secret: secret.secretToken}), tokenManager.verifyToken, routes.superOrder.newOrder);
+
+//取消指数型订单
+app.post('/superorder/cancelOrder', jwt({secret: secret.secretToken}), tokenManager.verifyToken, routes.superOrder.cancelOrder);
+
+//指数基金支付宝回调
+app.get('/superaplipay/return', routes.superAplipay.return);
+
+//指数基金支付宝交易
+app.post('/superaplipay/pay', jwt({secret: secret.secretToken}), tokenManager.verifyToken, routes.superAplipay.pay);
+
 
 //Logout
 app.get('/user/logout', jwt({secret: secret.secretToken}), routes.users.logout); 

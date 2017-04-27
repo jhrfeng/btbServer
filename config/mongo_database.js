@@ -77,6 +77,20 @@ var Order = new Schema({
     status:   { type: String, default: "0" },   // 状态有效， 0未完成订单，1已完成订单
 });
 
+// 指数型订单
+var Superorder = new Schema({
+    userid:   { type: String, required: true }, // 关联的用户
+    orderid:  { type: String, required: true, unique: true }, // 订单号号
+    pid:      { type: Object, required: true }, // 商品id
+    payAmount:{ type: Number, required: true }, // 订单金额
+    opendate: { type: Date                   }, // 赎回日期
+    openAmount:{type: Number, default: 0}, // 预期收益
+    openStatus:{type: String, default: "0"}, // 0未清算，1已清算
+    created:  { type: Date, default: Date.now }, //
+    updated:  { type: Date, default: Date.now },
+    status:   { type: String, default: "0" },   // 状态有效， 0未完成订单，1已完成订单
+});
+
 
 // Bcrypt middleware on UserSchema
 User.pre('save', function(next) {
@@ -99,6 +113,7 @@ User.methods.comparePassword = function(password, cb) {
 //Define Models
 var userModel = mongoose.model('User', User);
 var orderModel = mongoose.model('Order', Order);
+var superorderModel = mongoose.model('Superorder', Superorder);
 var logModel = mongoose.model('Log', Log);
 
 
@@ -106,3 +121,4 @@ var logModel = mongoose.model('Log', Log);
 exports.userModel = userModel;
 exports.orderModel = orderModel;
 exports.logModel = logModel;
+exports.superorderModel = superorderModel;
