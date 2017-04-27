@@ -33,32 +33,56 @@
 		});
 	});
 	</script>
-<!--
 
-	<div id="gy_bargain_sum">
-		<div class="px1000 gy_bargain_sum_main">
-			<div class="gy_bargain_sum_main_mover">
-				<span class="gybargain_summain_dv">成交总金额<span class="gy_bargain_sum_sz"><b>4,210,214,02</b></span>万元</span>
-				<span class="gy_bargain_sum_jg">|</span>
-				<span class="gybargain_summain_dv">成交总金额<span class="gy_bargain_sum_sz"><b>4,210,214,02</b></span>万元</span>
-				<span class="gy_bargain_sum_jg">|</span>
-				<span class="gybargain_summain_dv">累计投资<span class="gy_bargain_sum_sz"><b>12491</b></span>万元</span>
-				<span class="gy_bargain_sum_jg">|</span>
-				<span class="gybargain_summain_dv">累计为投资人赚取<span class="gy_bargain_sum_sz"><b>12491.00</b></span>万元</span>
+	
+	<div id="gy_guide_goverfirm_debt">
+		<div class="px1000">
+			<div class="gy_guide_gf_de_main_vbc clearfix">
+				<div class="fl">
+					<div class="gy_guide_gf_onetwo">
+						<div class="fl gy_guide_gf_thrch">
+							<p class="gy_guide_gf_poing">热门畅销</p>
+							<p class="title">陆家嘴超级比特币一号</p>
+							<p><span class="gy_guide_gf_sz">100</span>
+							<span class="gy_guide_gfc_bfh">%</span>
+							预期收益
+							</p>
+							<p class="gy_guide_gf_cnima">浮动收益，到期结算赎回</p>
+							<p style="padding-top:30px;">正在募集</p>
+							<div class="gy_treasur_bg3">
+								<div class="gy_treasur_bg2" style="width:100%;background-color:#29A7E1;">
+								</div>
+							</div>
+							<div><span class="gy_guide_gf_cnidie">尚未开始</div>
+							<div class="gy_guide_gf_cnidie_ljtbst">
+								<div class="gy_guide_gf_cnidie_ljtbs">
+									<a href="" ui-sref="btc1">立即抢购</a>
+								</div>
+							</div>
+							
+						</div>
+
+						<div class="fl gy_guide_gf_thrch">
+							<p class="gy_guide_gf_cnima forwell">敬请期待</p>	
+						</div>
+					</div>
+				</div>
+
+				<div class="fl">
+					<div class="gy_guide_gf_threefour">
+						<div class="fl gy_guide_gf_thrch">
+							<p class="gy_guide_gf_cnima forwell">敬请期待</p>
+						</div>
+						<div class="fl  gy_guide_gf_thrch" >
+							<p class="gy_guide_gf_cnima forwell">敬请期待</p>
+						</div>
+					
+				  </div>
+				</div>
 			</div>
 		</div>
-	</div>-->
-		
+	</div>
 
-	<!--<div id="gy_guide_help">
-		<div class="px1000 clearfix">
-			<div class="fl gy_guide_help_l"><a href=""><img src="images/gy_guide_help_zl.png"></a></div>
-			<div class="fl gy_guide_help_r" ><img src="images/gy_guide_help_zlxx.png"></div>
-		</div>
-	</div>-->
-	<!--1-->
-	
-	<br>
 	<div ng-repeat="(index, product) in productList">
 		<div id="gy_treasure_xszx_bids">
 			<div class="gy_treasure_xsbid_masin px1000 clearfix">
@@ -142,7 +166,29 @@
 	}
 	.gy_treasure_bili_bid {
     	padding-left: 40px;
+	}
+	#gy_guide_goverfirm_debt {
+	    height: 100%;
+	}
+	.gy_guide_gf_poing{
+		background: #ff5f53;
+		color: #fff;
+		font-weight: bold;
+		font-size: 18px;
+		line-height: 30px;
+	}
+	.title{
+		margin-left: -80px;
+		font-weight: bold;
+		font-size: 16px;
+   		padding-left: 12px
 	}	
+	.forwell{
+		padding-top: 100px;
+	    height: 330px;
+		color: #ddd;
+	}
+
 </style>
 </body>
 </html>

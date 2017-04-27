@@ -50,37 +50,37 @@
 							</tr>
 							<tr class="user-status">
 								<td>用户状态</td>
-								<td class="user-status-1">未认证</td>
+								<td class="user-status-1">{{user.userStatus | userstatus}}</td>
 								<td>
-									<!-- <button class="btn btn-primary"
+									<button class="btn btn-primary"
 									 ng-click="toChangeView(5)">
 									 	补全信息
-									</button> -->
+									</button>
 								</td>
 							</tr>
 							<tr>
 								<td>真实姓名</td>
-								<td></td>
+								<td>{{user.name}}</td>
 								<td></td>
 							</tr>
 							<tr>
 								<td>身份证</td>
-								<td></td>
+								<td>{{user.idcard}}</td>
 								<td></td>
 							</tr>
 							<tr>
 								<td>微信号</td>
-								<td></td>
+								<td>{{user.weixin}}</td>
 								<td></td>
 							</tr>
 							<tr>
 								<td>QQ号</td>
-								<td></td>
+								<td>{{user.qq}}</td>
 								<td></td>
 							</tr>
 							<tr>
 								<td>邮箱</td>
-								<td></td>
+								<td>{{user.email}}</td>
 								<td></td>
 							</tr>
 

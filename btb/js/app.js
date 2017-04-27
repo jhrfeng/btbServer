@@ -106,6 +106,11 @@ app.config(function ($stateProvider, $urlRouterProvider) { //$routeProvider,
 			 	}]
 			}
 		})
+		.state('btc1',{
+			url:'/btc1',
+			templateUrl: 'views/btc1.html',
+			controller: 'particularsController'
+		})
 		.state('safety',{
 			url:'/safety',
 			templateUrl: 'views/safety.html',

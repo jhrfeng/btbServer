@@ -11,6 +11,8 @@ routes.order = require('./route/order.js');
 routes.aplipay = require('./route/aplipay.js');
 routes.validate = require('./route/validate.js');
 routes.home = require('./route/home.js');
+routes.superOrder = require('./route/superOrder.js');
+routes.superAplipay = require('./route/superAplipay.js');
 
 var app = express();
 var serverPort = process.env.PORT || 3000;
@@ -55,6 +57,30 @@ app.post('/order/neworder', jwt({secret: secret.secretToken}), tokenManager.veri
 //取消订单
 app.post('/order/cancelOrder', jwt({secret: secret.secretToken}), tokenManager.verifyToken, routes.order.cancelOrder);
 
+
+
+//管理员查询当前用户所有指数型订单
+app.get('/superorder/queryBlackorder', jwt({secret: secret.secretToken}), tokenManager.verifyToken, routes.superOrder.queryBlackorder);
+
+//查询当前用户所有指数型订单
+app.get('/superorder/queryAllorder', jwt({secret: secret.secretToken}), tokenManager.verifyToken, routes.superOrder.queryAllOrder);
+
+//查询指数型订单
+app.post('/superorder/queryorder', jwt({secret: secret.secretToken}), tokenManager.verifyToken, routes.superOrder.queryOrder);
+
+//生成指数型订单
+app.post('/superorder/neworder', jwt({secret: secret.secretToken}), tokenManager.verifyToken, routes.superOrder.newOrder);
+
+//取消指数型订单
+app.post('/superorder/cancelOrder', jwt({secret: secret.secretToken}), tokenManager.verifyToken, routes.superOrder.cancelOrder);
+
+//指数基金支付宝回调
+app.get('/superaplipay/return', routes.superAplipay.return);
+
+//指数基金支付宝交易
+app.post('/superaplipay/pay', jwt({secret: secret.secretToken}), tokenManager.verifyToken, routes.superAplipay.pay);
+
+
 //Logout
 app.get('/user/logout', jwt({secret: secret.secretToken}), routes.users.logout); 
 
@@ -76,6 +102,10 @@ app.get('/me', jwt({secret: secret.secretToken}), tokenManager.verifyToken, rout
 //修改密码
 app.post('/user/updatepwd', jwt({secret: secret.secretToken}), tokenManager.verifyToken, routes.users.updatepwd);
 
+//修改个人信息
+app.post('/user/updateInfo', jwt({secret: secret.secretToken}), tokenManager.verifyToken, routes.users.updateInfo);
+
+
 //购买量,首页动态展示
 app.get('/home/percenter', routes.home.percenter); 
 
@@ -86,7 +116,7 @@ app.get('/validate/reSend', routes.validate.reSend);
 app.post('/validate/sendsms', routes.validate.sendsms);
 
 // 短信发送
-app.post('/validate/sendinfosms', routes.validate.sendinfosms);
+app.post('/validate/sendinfosms',  jwt({secret: secret.secretToken}), tokenManager.verifyToken, routes.validate.sendinfosms);
 
 // 忘记密码短信发送
 app.post('/validate/sendpwdsms', routes.validate.sendpwdsms);
