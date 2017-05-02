@@ -25,6 +25,11 @@
 							<a href="">我的订单</a>
 						</p>
 					</li>
+					<li>
+						<p class="btn user-left" ng-click="toChangeView(6)">
+							<a href="">我的基金</a>
+						</p>
+					</li>
 				</ul>
 				<nav>
 					<p class="gy_member_submenu_zc">
@@ -134,6 +139,44 @@
 								<td ng-if="order.status=='0'"><a href="#/placeorder/{{order.orderid}}">{{order.status | orderStatus}}</a></td>
 								<td ng-if="order.status!='0'">{{order.status | orderStatus}}</td>
 								<td><button class="btn btn-danger" ng-if="order.status=='0'" ng-click="cancelOrder(order.orderid)">取消订单</button></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+			<!--split line-->
+			<div class="fl gy_guide_announcement_rigth" id="" 
+			style="display:block;text-align:left;height: 100%;" ng-show="tabshow=='6'">
+				<div class="col-sm-20">
+					<table class="table table-striped">
+						<tbody>
+							<thead>
+								<tr>
+									<th>订单号</th>
+									<th>产品名称</th>
+									<th>购买金额</th>
+									<th>购买日期</th>
+									<th>周期</th>
+									<th>年收益率</th>
+									<th>累计收益</th>
+									<th>到期收益</th>
+									<th>订单状态</th>
+									<th>操作</th>
+								</tr>
+							</thead>
+							<tr ng-repeat="order in sorderList">
+								<td>{{order.orderid}}</td>
+								<td>{{order.pid.name}}</td>
+								<td>{{order.payAmount}}元</td>
+								<td>{{order.created | date:"yyyy/MM/dd"}}</td>
+								<td>{{order.pid.week}}天</td>
+								<td>待开盘</td>
+								<td style="color:#20b326"></td>
+								<td style="color:#20b326"></td>
+								<td ng-if="order.status=='0'"><a href="#/splaceorder/{{order.orderid}}">{{order.status | orderStatus}}</a></td>
+								<td ng-if="order.status!='0'">{{order.status | orderStatus}}</td>
+								<td><button class="btn btn-danger" ng-if="order.status=='0'" ng-click="scancelOrder(order.orderid)">取消订单</button></td>
 							</tr>
 						</tbody>
 					</table>

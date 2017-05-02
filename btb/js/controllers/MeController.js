@@ -20,6 +20,9 @@ function($rootScope, $scope, httpUtil, $state) {
 		if(type==3){ // 查询所有订单
 			queryAllorder();
 		}
+		if(type==6){ // 查询所有订单
+			squeryAllorder();
+		}
 		if(type==5){ // 修改个人信息
 			$state.go("meinfo")
 		}
@@ -32,6 +35,17 @@ function($rootScope, $scope, httpUtil, $state) {
 			if(status==200){
 				alert("订单取消成功");
 				queryAllorder();
+			}
+		})
+	}
+
+	// 取消订单
+	$scope.scancelOrder = function(orderid){
+		var reqUrl = globalConfig.rootUrl + "/superorder/cancelOrder";
+		httpUtil.post(reqUrl, {orderid:orderid}, function(data, status){
+			if(status==200){
+				alert("订单取消成功");
+				squeryAllorder();
 			}
 		})
 	} 
@@ -71,6 +85,15 @@ function($rootScope, $scope, httpUtil, $state) {
 		httpUtil.get(reqUrl, function(data, status){
 			if(status==200){
 				$scope.orderList = data.order;
+			}
+		})
+	}
+
+	function squeryAllorder(){
+		var reqUrl = globalConfig.rootUrl + "/superorder/queryAllorder";
+		httpUtil.get(reqUrl, function(data, status){
+			if(status==200){
+				$scope.sorderList = data.order;
 			}
 		})
 	}

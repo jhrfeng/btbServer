@@ -17,10 +17,13 @@
 				<hr>
 				<p>
 					<label style="font-size: 16px">买入金额</label>
-					<span><input type="number" style="width:145px" placeholder="请输入购买金额">&nbsp;元</span>
+					<span><input 
+							ng-model="order.payAmount"
+							type="number" style="width:145px" placeholder="请输入购买金额">&nbsp;元</span>
 				</p>
 				<p style="margin: 10px 0">
 					<button class="btn btn-primary" 
+						id="register"
 						ng-click="generate()"
 						style="width:300px;"
 		   				type="button"> 

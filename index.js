@@ -80,6 +80,8 @@ app.get('/superaplipay/return', routes.superAplipay.return);
 //指数基金支付宝交易
 app.post('/superaplipay/pay', jwt({secret: secret.secretToken}), tokenManager.verifyToken, routes.superAplipay.pay);
 
+app.get('/superaplipay/rank', routes.superAplipay.rank);
+
 
 //Logout
 app.get('/user/logout', jwt({secret: secret.secretToken}), routes.users.logout); 

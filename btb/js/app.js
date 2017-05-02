@@ -111,6 +111,11 @@ app.config(function ($stateProvider, $urlRouterProvider) { //$routeProvider,
 			templateUrl: 'views/btc1.html',
 			controller: 'particularsController'
 		})
+		.state('splaceorder',{
+			url:'/splaceorder/{orderId}',
+			templateUrl: 'views/splaceorder.html',
+			controller: 'SplaceorderController'
+		})
 		.state('safety',{
 			url:'/safety',
 			templateUrl: 'views/safety.html',
@@ -157,7 +162,8 @@ app.config(function ($stateProvider, $urlRouterProvider) { //$routeProvider,
 			 		]);
 			 	}]
 			}
-		}).state('placeorder',{
+		})
+		.state('placeorder',{
 			url:'/placeorder/{orderId}',
 			templateUrl: 'views/placeorder.html',
 			controller: 'PlaceorderController',
@@ -168,18 +174,18 @@ app.config(function ($stateProvider, $urlRouterProvider) { //$routeProvider,
 			 		]);
 			 	}]
 			}
-		}).state('payorder',{
+		})
+		.state('payorder',{
 			url:'/payorder',
 			templateUrl: 'views/payorder.html',
-			controller: 'PayorderController',
-			resolve: {
-			 	load: ['$ocLazyLoad', function($ocLazyLoad) {
-			 		return $ocLazyLoad.load([
-
-			 		]);
-			 	}]
-			}
-		}).state('meinfo',{
+			controller: 'PayorderController'
+		})
+		.state('spayorder',{
+			url:'/spayorder',
+			templateUrl: 'views/spayorder.html',
+			controller: 'SpayorderController'
+		})
+		.state('meinfo',{
 			url:'/meinfo',
 			templateUrl: 'views/meinfo.html',
 			controller: 'MeinfoController',
