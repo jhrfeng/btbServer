@@ -159,8 +159,8 @@
 									<th>购买日期</th>
 									<th>周期</th>
 									<th>年收益率</th>
-									<th>累计收益</th>
-									<th>到期收益</th>
+									<th>今日收益</th>
+									
 									<th>订单状态</th>
 									<th>操作</th>
 								</tr>
@@ -172,7 +172,7 @@
 								<td>{{order.created | date:"yyyy/MM/dd"}}</td>
 								<td>{{order.pid.week}}天</td>
 								<td>待开盘</td>
-								<td style="color:#20b326"></td>
+								
 								<td style="color:#20b326"></td>
 								<td ng-if="order.status=='0'"><a href="#/splaceorder/{{order.orderid}}">{{order.status | orderStatus}}</a></td>
 								<td ng-if="order.status!='0'">{{order.status | orderStatus}}</td>

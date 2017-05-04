@@ -14,8 +14,8 @@ directAlipay.config({
     //支付宝服务器通知的页面
     notify_url: 'https://www.ljzbtcbank.com/spayorder/notify',
     //支付后跳转后的页面
-   	 return_url: 'http://127.0.0.1:3000/#/spayorder'
-    // return_url: 'https://www.ljzbtcbank.com/#/spayorder'
+   	 // return_url: 'http://127.0.0.1:3000/#/spayorder'
+    return_url: 'https://www.ljzbtcbank.com/#/spayorder'
     // return_url: 'http://www.ljzbtcbank.xyz/#/payorder'
 }); 
 
@@ -34,7 +34,7 @@ exports.pay = function(req, res) {
 		    out_trade_no: order.orderid, //'你的网站订单系统中的唯一订单号匹配',
 		    subject: order.pid.name,//'订单名称显示在支付宝收银台里的“商品名称”里，显示在支付宝的交易管理的“商品名称”的列表里',
 		    body: "周期"+order.pid.week+"天，"+"到期收益率:"+order.pid.shouyi,//'订单描述、订单详细、订单备注，显示在支付宝收银台里的“商品描述”里',
-		    total_fee: 0.01  //order.payAmount  //
+		    total_fee: order.payAmount  //0.01  //
 		});
 		updateOrderpay({orderid:orderid, userid:userid});
 		if(url=="" || url===undefined)
@@ -92,13 +92,12 @@ exports.return = function(req, res){
 
 exports.rank = function(req, res){
 	redisClient.get('ljzcj1', function (err, rank) {
-
 		var total = 1000000;
 		console.log((rank/total*100)) // res.json((rank/total).toFixed(2)*100);
 		if(rank==null)
 			res.json(0);
 		else
-			res.json((rank/total*100))
+			res.json((rank/total*100)) //(rank/total*100)
 	})
 	
 };
@@ -114,7 +113,7 @@ function updateOrderStatus(params){
 		if(rank==null){
 			redisClient.set('ljzcj1',0);
 		}
-		redisClient.incrbyfloat('ljzcj1', Number(params.total_fee));
+		redisClient.incrby('ljzcj1', Number(params.total_fee));
 	})
 
 	var whereData = {orderid:params.out_trade_no};

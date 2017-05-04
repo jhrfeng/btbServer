@@ -1,7 +1,11 @@
 app.controller('particularsController', 
 ['$scope', 'httpUtil', '$state', function($scope, httpUtil, $state) {
 
-	$scope.order = {pid:"s20170000"};
+	$scope.order = {pid:"s20170000", payAmount:100};
+
+	httpUtil.get(globalConfig.rootUrl + "/superaplipay/rank", function(data, status){
+		$scope.percenter = data;
+	})
 
 	$scope.generate = function(){
 		var reqUrl = globalConfig.rootUrl + "/superorder/neworder";
