@@ -126,6 +126,9 @@ app.post('/validate/sendpwdsms', routes.validate.sendpwdsms);
 //支付宝回调
 app.get('/aplipay/return', routes.aplipay.return);
 
+//支付宝异步回调
+app.get('/aplipay/notify', routes.aplipay.notify);
+
 //支付宝交易
 app.post('/aplipay/pay', jwt({secret: secret.secretToken}), tokenManager.verifyToken, routes.aplipay.pay);
 

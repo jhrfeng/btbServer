@@ -11,12 +11,19 @@ directAlipay.config({
     //交易安全检验码，由数字和字母组成的32位字符串
     key:'4nhzzd0qkf8awyu7q613l1sdbidyj1ua', //'tws3ri4d3sg8ohc4t7k9dnj8kumvia05',  //
     //支付宝服务器通知的页面
-    notify_url: 'https://www.ljzbtcbank.com/aplipay/notify',
+    // notify_url: 'https://www.ljzbtcbank.com/aplipay/notify',
+    notify_url: 'http://cat-vip.vicp.io/aplipay/notify',
     //支付后跳转后的页面
-   	 // return_url: 'http://127.0.0.1:3000/#/payorder'
-    return_url: 'https://www.ljzbtcbank.com/#/payorder'
+   	return_url: 'http://cat-vip.vicp.io/#/payorder'
+    // return_url: 'https://www.ljzbtcbank.com/#/payorder'
     // return_url: 'http://www.ljzbtcbank.xyz/#/payorder'
 }); 
+
+exports.notify = function(req, res){
+	console.log(req);
+	var params = req.query;
+	console.log(params);	
+}
 
 exports.pay = function(req, res) {
 	var orderid = req.body.orderid || '';
@@ -33,7 +40,7 @@ exports.pay = function(req, res) {
 		    out_trade_no: order.orderid, //'你的网站订单系统中的唯一订单号匹配',
 		    subject: order.pid.name,//'订单名称显示在支付宝收银台里的“商品名称”里，显示在支付宝的交易管理的“商品名称”的列表里',
 		    body: "周期"+order.pid.week+"天，"+"到期收益率"+order.pid.shouyi,//'订单描述、订单详细、订单备注，显示在支付宝收银台里的“商品描述”里',
-		    total_fee: order.payAmount  //0.01  //
+		    total_fee: 0.01  //order.payAmount  //
 		});
 		updateOrderpay({orderid:orderid, userid:userid});
 		if(url=="" || url===undefined)
