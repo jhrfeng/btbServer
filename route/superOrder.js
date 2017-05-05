@@ -3,7 +3,7 @@ var db = require('../config/mongo_database');
 var tokenManager = require('../config/token_manager');
 
 var product = {
-	"s20170000": {"pid":"s20170000", "name":"陆家嘴比特币一号",   "shouyi":"浮动收益",  "week": 365, "join":100}
+	"s20170000": {"pid":"s20170000", "name":"陆家嘴比特币一号",   "shouyi":"浮动收益",  "week": 365, "join":5000}
 }
 
 // 取消订单
