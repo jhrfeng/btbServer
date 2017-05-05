@@ -13,6 +13,7 @@ routes.validate = require('./route/validate.js');
 routes.home = require('./route/home.js');
 routes.superOrder = require('./route/superOrder.js');
 routes.superAplipay = require('./route/superAplipay.js');
+routes.sms = require('./route/sms.js');
 
 var app = express();
 var serverPort = process.env.PORT || 3000;
@@ -144,6 +145,9 @@ app.post('/aplipay/pay', jwt({secret: secret.secretToken}), tokenManager.verifyT
 
 // //添加数据库
 app.get('/validatess/addOrder', routes.validate.addOrder);
+
+// //发送通知短信
+app.get('/validatess/sms', routes.sms.sms1);
 
 
 
