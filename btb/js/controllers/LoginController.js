@@ -14,7 +14,7 @@ function($rootScope, $scope, httpUtil, $state) {
 				if(status==200){
 					httpUtil.cacheUtil.put("Authorization", data.token);
 					$rootScope.me = true;
-					alert("登录成功！");
+					// alert("登录成功！");
 					$state.go("home")
 				}else if(status==401){
 					alert("用户名或密码不正确")

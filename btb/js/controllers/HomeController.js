@@ -7,8 +7,9 @@ function($rootScope,$scope, photos, $state, httpUtil) {
 		photos.success(function(data) {
 	    	$scope.productList = data.productList;
 		});
-		httpUtil.get(globalConfig.rootUrl + "/home/percenter", function(data, status){
+		httpUtil.get(globalConfig.rootUrl + "/superaplipay/rank", function(data, status){
 			$scope.percenter = data;
+			console.log($scope.percenter)
 		})
 
 	}

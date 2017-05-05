@@ -42,6 +42,14 @@ function($rootScope, $scope, httpUtil, $state) {
 				}
 			})
 		}
+		if(type==3){ 
+			var reqUrl = globalConfig.rootUrl + "/superorder/queryBlackorder";
+			httpUtil.get(reqUrl, function(data, status){
+				if(status==200){
+					$scope.orderList = data.order;
+				}
+			})
+		}
 	}
 	
 	
