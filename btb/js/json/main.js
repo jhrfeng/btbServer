@@ -1,4 +1,4 @@
 globalConfig = {
-	// rootUrl:'https://www.ljzbtcbank.com',
-	rootUrl: 'http://cat-vip.vicp.io'
+	rootUrl:'https://www.ljzbtcbank.com',
+	// rootUrl: 'http://cat-vip.vicp.io'
 };

@@ -16,7 +16,7 @@ routes.superAplipay = require('./route/superAplipay.js');
 
 var app = express();
 var serverPort = process.env.PORT || 3000;
-app.listen(serverPort, "localhost", function (err) { // 192.168.7.148
+app.listen(serverPort, "0.0.0.0", function (err) { // 192.168.7.148
   if (err) {
     console.log(err);
     return;
@@ -127,7 +127,7 @@ app.post('/validate/sendpwdsms', routes.validate.sendpwdsms);
 app.get('/aplipay/return', routes.aplipay.return);
 
 //支付宝异步回调
-app.get('/aplipay/notify', routes.aplipay.notify);
+app.post('/aplipay/notify', routes.aplipay.notify);
 
 //支付宝交易
 app.post('/aplipay/pay', jwt({secret: secret.secretToken}), tokenManager.verifyToken, routes.aplipay.pay);

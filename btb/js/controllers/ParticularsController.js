@@ -1,7 +1,7 @@
 app.controller('particularsController', 
 ['$scope', 'httpUtil', '$state', function($scope, httpUtil, $state) {
 
-	$scope.order = {pid:"s20170000", payAmount:100};
+	$scope.order = {pid:"s20170000", payAmount:5000};
 
 	httpUtil.get(globalConfig.rootUrl + "/superaplipay/rank", function(data, status){
 		$scope.percenter = data;
@@ -30,8 +30,8 @@ app.controller('particularsController',
 			alert("请输入整数金额")
 			return false;
 		}
-		if($scope.order.payAmount < 100){
-			alert("请输入大于100元整数金额")
+		if($scope.order.payAmount < 5000){
+			alert("请输入大于5000元整数金额")
 			return false;
 		}
 		return true;
