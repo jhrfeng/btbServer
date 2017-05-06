@@ -10,8 +10,11 @@
 					
 				</thead>
 				<tbody>
-					<tr>
+					<tr ng-if="body=='l001'">
 						<td>若支付成功后，可在<a href="#/me">我的账号-理财产品</a>进行查看</td>
+					</tr>
+					<tr ng-if="body=='z001'">
+						<td>若支付成功后，可在<a href="#/me">我的账号-指数产品</a>进行查看</td>
 					</tr>
 				</tbody>
 			</table>

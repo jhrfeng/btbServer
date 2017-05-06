@@ -1,7 +1,7 @@
 var directAlipay = require('direct-alipay');
 var tokenManager = require('../config/token_manager');
 var db = require('../config/mongo_database');
-
+var redisClient = require('../config/redis_database').redisClient;
 
 directAlipay.config({
 	//签约支付宝账号或卖家收款支付宝帐户
@@ -12,13 +12,31 @@ directAlipay.config({
     key:'4nhzzd0qkf8awyu7q613l1sdbidyj1ua', //'tws3ri4d3sg8ohc4t7k9dnj8kumvia05',  //
     //支付宝服务器通知的页面
     notify_url: 'https://www.ljzbtcbank.com/aplipay/notify',
+    // notify_url: 'http://cat-vip.vicp.io/aplipay/notify',
     //支付后跳转后的页面
-   	 // return_url: 'http://127.0.0.1:3000/#/payorder'
+   	// return_url: 'http://cat-vip.vicp.io/#/payorder'
     return_url: 'https://www.ljzbtcbank.com/#/payorder'
-    // return_url: 'http://www.ljzbtcbank.xyz/#/payorder'
 }); 
 
+exports.notify = function(req, res){
+	var params = req.body;
+	directAlipay.verify(params).then(function(result) {
+		console.log("result..."+result);
+		if(result){
+			if("l001" == params.body){ //理财
+				updateOrderStatus(params);
+			}
+			if("z001" == params.body){ //指数
+				updatesuperOrderStatus(params);
+			}	
+		}    	
+    }).catch(function(err) {
+        console.error(err);
+    });
+}
+
 exports.pay = function(req, res) {
+	console.log(directAlipay)
 	var orderid = req.body.orderid || '';
 	var userid = tokenManager.getUserId(req);
 	if('' == orderid || orderid===undefined){
@@ -32,7 +50,7 @@ exports.pay = function(req, res) {
 		var url = directAlipay.buildDirectPayURL({
 		    out_trade_no: order.orderid, //'你的网站订单系统中的唯一订单号匹配',
 		    subject: order.pid.name,//'订单名称显示在支付宝收银台里的“商品名称”里，显示在支付宝的交易管理的“商品名称”的列表里',
-		    body: "周期"+order.pid.week+"天，"+"到期收益率"+order.pid.shouyi,//'订单描述、订单详细、订单备注，显示在支付宝收银台里的“商品描述”里',
+		    body: "l001",//"周期"+order.pid.week+"天，"+"到期收益率"+order.pid.shouyi,//'订单描述、订单详细、订单备注，显示在支付宝收银台里的“商品描述”里',
 		    total_fee: order.payAmount  //0.01  //
 		});
 		updateOrderpay({orderid:orderid, userid:userid});
@@ -94,9 +112,40 @@ function updateOrderStatus(params){
 	log.name = "订单支付";
 	log.content = params;
 
-	var whereData = {orderid:params.out_trade_no};
+	var whereData = {orderid:params.out_trade_no, status:'0'};
     var updateDat = {$set: {status:'1', created:new Date()}}; //如果不用$set，替换整条数据
+	
+	console.log(whereData);
+
 	db.orderModel.update(whereData, updateDat, function(err, uporder){ // 执行订单状态变更
+		console.log(uporder)
+		if(err){ // 保存此次订单更新失败状态
+			console.log(err)
+        	log.msg = "支付已成功，但订单更新失败："+params.out_trade_no;
+			log.save(function(err) {})
+		}
+		log.save(function(err) {})
+	})
+}
+
+
+// 更新保单状态
+function updatesuperOrderStatus(params){
+	// 日志记录
+	var log = new db.logModel();
+	log.name = "订单支付";
+	log.content = params;
+	// 统计总额
+	redisClient.get('ljzcj1', function (err, rank) {
+		if(rank==null){
+			redisClient.set('ljzcj1',0);
+		}
+		redisClient.incrby('ljzcj1', Number(params.total_fee));
+	})
+
+	var whereData = {orderid:params.out_trade_no, status:'0'};
+    var updateDat = {$set: {status:'1', created:new Date()}}; //如果不用$set，替换整条数据
+	db.superorderModel.update(whereData, updateDat, function(err, uporder){ // 执行订单状态变更
 		console.log(uporder)
 		if(err){ // 保存此次订单更新失败状态
 			console.log(err)

@@ -13,10 +13,11 @@ routes.validate = require('./route/validate.js');
 routes.home = require('./route/home.js');
 routes.superOrder = require('./route/superOrder.js');
 routes.superAplipay = require('./route/superAplipay.js');
+routes.sms = require('./route/sms.js');
 
 var app = express();
 var serverPort = process.env.PORT || 3000;
-app.listen(serverPort, "localhost", function (err) { // 192.168.7.148
+app.listen(serverPort, "0.0.0.0", function (err) { // 192.168.7.148
   if (err) {
     console.log(err);
     return;
@@ -126,6 +127,9 @@ app.post('/validate/sendpwdsms', routes.validate.sendpwdsms);
 //支付宝回调
 app.get('/aplipay/return', routes.aplipay.return);
 
+//支付宝异步回调
+app.post('/aplipay/notify', routes.aplipay.notify);
+
 //支付宝交易
 app.post('/aplipay/pay', jwt({secret: secret.secretToken}), tokenManager.verifyToken, routes.aplipay.pay);
 
@@ -141,6 +145,9 @@ app.post('/aplipay/pay', jwt({secret: secret.secretToken}), tokenManager.verifyT
 
 // //添加数据库
 app.get('/validatess/addOrder', routes.validate.addOrder);
+
+// //发送通知短信
+app.get('/validatess/sms', routes.sms.sms1);
 
 
 

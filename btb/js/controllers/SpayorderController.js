@@ -16,6 +16,7 @@ function($rootScope, $scope, httpUtil, photos, $state) {
 		    }
 		}
 		console.log(theRequest)
+		$scope.body = theRequest.body;
 		$scope.orderId = theRequest.out_trade_no;
 		var payUrl = globalConfig.rootUrl + "/superaplipay/return"+url;
 		httpUtil.pay(payUrl, {}, function(data, status){
@@ -26,7 +27,11 @@ function($rootScope, $scope, httpUtil, photos, $state) {
 	// 查询结果
 	$scope.queryResult = function(){
 		$("#register").button('loading');
-		var reqUrl = globalConfig.rootUrl + "/superorder/queryorder";
+		if($scope.body=='z001')
+			var reqUrl = globalConfig.rootUrl + "/superorder/queryorder";
+		if($scope.body=='l001')
+			var reqUrl = globalConfig.rootUrl + "/order/queryorder";
+		
 		httpUtil.post(reqUrl, {orderid: $scope.orderId}, function(data, status){
 			$("#register").button('reset');
 			if(status==200 && data.order.status=="1"){
