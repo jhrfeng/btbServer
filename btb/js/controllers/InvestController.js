@@ -4,7 +4,8 @@ app.controller('InvestController', ['$scope', 'photos', '$state', 'httpUtil', fu
 		// 初始化产品加载
 		photos.success(function(data) {
 	    	$scope.questionList = data.questionList;
-    	$scope.productList = data.productList;
+    		$scope.productList = data.productList;
+    		$scope.sproductList = data.sproductList;
 		});
 		httpUtil.get(globalConfig.rootUrl + "/home/percenter", function(data, status){
 			$scope.percenter = data;
@@ -14,6 +15,10 @@ app.controller('InvestController', ['$scope', 'photos', '$state', 'httpUtil', fu
 
 	$scope.goOrder = function(pid){
 		$state.go("order", {pid:pid});
+	}
+
+	$scope.goSorder = function(pid){
+		$state.go("btc1");
 	}
 
 	ngInit();

@@ -30,6 +30,11 @@
 							<a href="">指数产品</a>
 						</p>
 					</li>
+					<li>
+						<p class="btn user-left" ng-click="toChangeView(7)">
+							<a href="">赎回管理</a>
+						</p>
+					</li>
 				</ul>
 				<nav>
 					<p class="gy_member_submenu_zc">
@@ -138,7 +143,10 @@
 								<td style="color:#20b326">{{order | incomeEnd}}元</td>
 								<td ng-if="order.status=='0'"><a href="#/placeorder/{{order.orderid}}">{{order.status | orderStatus}}</a></td>
 								<td ng-if="order.status!='0'">{{order.status | orderStatus}}</td>
-								<td><button class="btn btn-danger" ng-if="order.status=='0'" ng-click="cancelOrder(order.orderid)">取消订单</button></td>
+								<td>
+									<button class="btn btn-danger" ng-if="order.status=='0'" ng-click="cancelOrder(order.orderid)">取消订单</button>
+									<button class="btn btn-primary" ng-if="order.status=='1'" ng-click="backpay(order)">到期赎回</button>
+								</td>
 							</tr>
 						</tbody>
 					</table>
@@ -176,7 +184,10 @@
 								<td style="color:#20b326"></td>
 								<td ng-if="order.status=='0'"><a href="#/splaceorder/{{order.orderid}}">{{order.status | orderStatus}}</a></td>
 								<td ng-if="order.status!='0'">{{order.status | orderStatus}}</td>
-								<td><button class="btn btn-danger" ng-if="order.status=='0'" ng-click="scancelOrder(order.orderid)">取消订单</button></td>
+								<td>
+									<button class="btn btn-danger" ng-if="order.status=='0'" ng-click="scancelOrder(order.orderid)">取消订单</button>
+									<button class="btn btn-primary" ng-if="order.status=='1'" ng-click="sbackPay(order.orderid)">到期赎回</button>
+								</td>
 							</tr>
 						</tbody>
 					</table>

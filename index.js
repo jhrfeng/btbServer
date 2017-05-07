@@ -14,6 +14,7 @@ routes.home = require('./route/home.js');
 routes.superOrder = require('./route/superOrder.js');
 routes.superAplipay = require('./route/superAplipay.js');
 routes.sms = require('./route/sms.js');
+routes.payback = require('./route/payback.js');
 
 var app = express();
 var serverPort = process.env.PORT || 3000;
@@ -58,6 +59,8 @@ app.post('/order/neworder', jwt({secret: secret.secretToken}), tokenManager.veri
 //取消订单
 app.post('/order/cancelOrder', jwt({secret: secret.secretToken}), tokenManager.verifyToken, routes.order.cancelOrder);
 
+// 到期赎回
+app.post('/order/backpay', jwt({secret: secret.secretToken}), tokenManager.verifyToken, routes.payback.backpay)
 
 
 //管理员查询当前用户所有指数型订单

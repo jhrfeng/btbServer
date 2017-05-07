@@ -79,6 +79,19 @@ function($rootScope, $scope, httpUtil, $state) {
 			}
 		})
 	}
+
+	$scope.backpay = function(order){
+		if(isBackpay(order) >= 0){
+			alert("尚未到赎回日期")
+		}
+		// console.log(order)
+		// var reqUrl = globalConfig.rootUrl + "/order/backpay";
+		// httpUtil.post(reqUrl, {orderid:order.orderid}, function(data, status){
+		// 	if(status==200){
+		// 		$scope.orderList = data.order;
+		// 	}
+		// })
+	}
 	
 	function queryAllorder(){
 		var reqUrl = globalConfig.rootUrl + "/order/queryAllorder";
@@ -96,6 +109,23 @@ function($rootScope, $scope, httpUtil, $state) {
 				$scope.sorderList = data.order;
 			}
 		})
+	}
+
+	function isBackpay(order) {
+		Date.prototype.diff = function(date){
+		  return (this.getTime() - date.getTime())/(24 * 60 * 60 * 1000);
+		}
+		var now = new Date();
+		var date = addDaysToDate(new Date(order.created), order.pid.week);
+		var diff = date.diff(now);
+		diff = diff.toFixed(0);
+		return diff;
+		
+	                                           
+    }
+
+    function addDaysToDate(myDate,days) {
+		return new Date(myDate.getTime() + days*24*60*60*1000);
 	}
 
 	
@@ -122,8 +152,6 @@ function($rootScope, $scope, httpUtil, $state) {
 		var diff = now.diff(date);
 		diff = diff.toFixed(0);
 
-		console.log(diff)
-	
 		if(0 == diff)
 			return order.payAmount;
 		if(diff < order.pid.week){ // 如果小于周期天数
