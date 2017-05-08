@@ -4,6 +4,7 @@ function($rootScope, $scope, httpUtil, $state) {
 	$rootScope.header = true;
 	 
 	$scope.update = {}; 
+	$scope.vo = {};
 	$scope.tabshow = 1;
 
 	function ngInit(){
@@ -81,16 +82,29 @@ function($rootScope, $scope, httpUtil, $state) {
 	}
 
 	$scope.backpay = function(order){
-		if(isBackpay(order) >= 0){
-			alert("尚未到赎回日期")
-		}
+		$scope.vo.orderid = order.orderid;
+		$('#myModal').modal('show')
+		// if(isBackpay(order) >= 0){
+		// 	alert("尚未到赎回日期")
+		// }
 		// console.log(order)
-		// var reqUrl = globalConfig.rootUrl + "/order/backpay";
-		// httpUtil.post(reqUrl, {orderid:order.orderid}, function(data, status){
-		// 	if(status==200){
-		// 		$scope.orderList = data.order;
-		// 	}
-		// })
+		var reqUrl = globalConfig.rootUrl + "/order/backpay";
+		httpUtil.post(reqUrl, {orderid:order.orderid}, function(data, status){
+			if(status==200){
+				$scope.orderList = data.order;
+			}
+			if(status==402){
+				// alert("尚未到赎回日期")
+			}
+		})
+	}
+
+	$scope.confirmPayback = function(){
+		var reqUrl = globalConfig.rootUrl + "/order/backpay";
+		httpUtil.post(reqUrl, {orderid: $scope.vo.orderid}, function(data, status){
+			if(status==200){
+			}
+		})
 	}
 	
 	function queryAllorder(){

@@ -11,6 +11,9 @@ exports.backpay = function(req, res){
 	var whereData = {orderid:orderid, userid:userid, status:"1"};
 	db.orderModel.findOne(whereData, function(err, order){
 		if(order){
+			if(isBackpay(order) >= 0){
+				res.status(402); //尚未到时间
+			}
 			res.json(order);
 		}else{
 			res.status(400); // 未发现订单
@@ -18,6 +21,15 @@ exports.backpay = function(req, res){
 		
 	})
 
+}
+
+exports.confirmPayback = function(req, res){
+	var orderid = req.body.orderid || '';
+	var user = tokenManager.getUser(req);
+	var whereData = {orderid:orderid, userid:user.userid, status:"1"};
+	db.orderModel.findOne(whereData, function(err, order){
+		
+	})
 }
 
 
@@ -52,3 +64,20 @@ function sendSms(mobile){
 	});	
 }
 
+
+function isBackpay(order) {
+		Date.prototype.diff = function(date){
+		  return (this.getTime() - date.getTime())/(24 * 60 * 60 * 1000);
+		}
+		var now = new Date();
+		var date = addDaysToDate(new Date(order.created), order.pid.week);
+		var diff = date.diff(now);
+		diff = diff.toFixed(0);
+		return diff;
+		
+	                                           
+    }
+
+function addDaysToDate(myDate,days) {
+	return new Date(myDate.getTime() + days*24*60*60*1000);
+}

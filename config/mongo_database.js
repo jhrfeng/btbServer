@@ -77,6 +77,23 @@ var Order = new Schema({
     status:   { type: String, default: "0" },   // 状态有效， 0未完成订单，1已完成订单
 });
 
+// 赎回订单
+var Backorder = new Schema({
+    userid:   { type: String, required: true }, // 关联的用户
+    user:     { type: Object, required: true }, // 商品id
+    orderid:  { type: String, required: true, unique: true }, // 订单号号
+    product:  { type: String, required: true }, // 商品名称
+    account:  { type: String, required: true }, // 赎回账号
+    paytype:  { type: String,   required: true, default: "1" },   // 赎回账号类型，1支付宝 2暂定
+    companyAccount:{ type: String, required: true }, // 公司支付宝账号
+    tradeno:  { type: String, unique: true }, // 交易流水号凭证
+    openStatus:{type: String, default: "0"}, // 0未打款，1已打款
+    findate:  { type: Date, default: Date.now }, // 财务打款时间 
+    created:  { type: Date, default: Date.now }, // 赎回日期
+    updated:  { type: Date, default: Date.now },
+    status:   { type: String, default: "0" },   // 状态有效， 0未完成订单，1已完成订单
+});
+
 // 指数型订单
 var Superorder = new Schema({
     userid:   { type: String, required: true }, // 关联的用户
@@ -115,6 +132,7 @@ var userModel = mongoose.model('User', User);
 var orderModel = mongoose.model('Order', Order);
 var superorderModel = mongoose.model('Superorder', Superorder);
 var logModel = mongoose.model('Log', Log);
+var backorderModel = mongoose.model('backorder', Backorder);
 
 
 // Export Models
@@ -122,3 +140,4 @@ exports.userModel = userModel;
 exports.orderModel = orderModel;
 exports.logModel = logModel;
 exports.superorderModel = superorderModel;
+exports.backorderModel = backorderModel;
