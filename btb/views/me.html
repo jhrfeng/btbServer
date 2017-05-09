@@ -145,10 +145,10 @@
 								<td ng-if="order.status!='0'">{{order.status | orderStatus}}</td>
 								<td>
 									<button class="btn btn-danger" ng-if="order.status=='0'" ng-click="cancelOrder(order.orderid)">取消订单</button>
-									<button class="btn btn-primary"
+									<!-- <button class="btn btn-primary"
 										data-toggle="modal" 
 										ng-if="order.status=='1'" 
-										ng-click="backpay(order)">到期赎回</button>
+										ng-click="backpay(order)">到期赎回</button> -->
 								</td>
 							</tr>
 						</tbody>
@@ -189,7 +189,7 @@
 								<td ng-if="order.status!='0'">{{order.status | orderStatus}}</td>
 								<td>
 									<button class="btn btn-danger" ng-if="order.status=='0'" ng-click="scancelOrder(order.orderid)">取消订单</button>
-									<button class="btn btn-primary" ng-if="order.status=='1'" ng-click="sbackPay(order.orderid)">到期赎回</button>
+									<!-- <button class="btn btn-primary" ng-if="order.status=='1'" ng-click="sbackPay(order.orderid)">到期赎回</button> -->
 								</td>
 							</tr>
 						</tbody>

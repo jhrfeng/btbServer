@@ -42,6 +42,12 @@ app.get('/', function (req, res) {
     res.sendFile(__dirname + '/index.html');
 });
 
+// 统计量
+app.get('/source', routes.home.sources);
+
+// 获取访问量
+app.get('/getSource', routes.home.getSource);
+
 //管理员查询当前所有用户
 app.get('/order/queryBlackuser', jwt({secret: secret.secretToken}), tokenManager.verifyToken, routes.users.queryBlackuser);
 //管理员查询当前用户所有订单
