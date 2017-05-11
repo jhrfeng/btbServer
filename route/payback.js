@@ -11,6 +11,7 @@ exports.backpay = function(req, res){
 	var whereData = {orderid:orderid, userid:userid, status:"1"};
 	db.orderModel.findOne(whereData, function(err, order){
 		if(order){
+			console.log(isBackpay(order))
 			if(isBackpay(order) >= 0){
 				res.status(402); //尚未到时间
 			}
@@ -27,8 +28,9 @@ exports.confirmPayback = function(req, res){
 	var orderid = req.body.orderid || '';
 	var user = tokenManager.getUser(req);
 	var whereData = {orderid:orderid, userid:user.userid, status:"1"};
+	console.log(whereData)
 	db.orderModel.findOne(whereData, function(err, order){
-		
+		console.log(order)
 	})
 }
 
@@ -64,6 +66,18 @@ function sendSms(mobile){
 	});	
 }
 
+function updateOrderStatus(status){
+	var updateDat = {$set: {status:'', updated:new Date()}}; //如果不用$set，替换整条数据
+	db.orderModel.update(whereData, updateDat, function(err, uporder){ // 执行订单状态变更
+		log.content = uporder;
+		if(err){ // 保存此次订单更新失败状态
+			console.log(err)
+        	log.msg = "支付链接更新失败："+whereData.orderid;
+			log.save(function(err) {})
+		}
+		log.save(function(err) {})
+	})
+}
 
 function isBackpay(order) {
 		Date.prototype.diff = function(date){

@@ -84,19 +84,20 @@ function($rootScope, $scope, httpUtil, $state) {
 	$scope.backpay = function(order){
 		$scope.vo.orderid = order.orderid;
 		$('#myModal').modal('show')
-		// if(isBackpay(order) >= 0){
-		// 	alert("尚未到赎回日期")
-		// }
-		// console.log(order)
-		var reqUrl = globalConfig.rootUrl + "/order/backpay";
-		httpUtil.post(reqUrl, {orderid:order.orderid}, function(data, status){
-			if(status==200){
-				$scope.orderList = data.order;
-			}
-			if(status==402){
-				// alert("尚未到赎回日期")
-			}
-		})
+		if(isBackpay(order) >= 0){
+			alert("尚未到赎回日期")
+		}else{
+			var reqUrl = globalConfig.rootUrl + "/order/backpay";
+			httpUtil.post(reqUrl, {orderid:order.orderid}, function(data, status){
+				if(status==200){
+					$scope.orderList = data.order;
+				}
+				if(status==402){
+					alert("尚未到赎回日期")
+				}
+			})
+		}
+		
 	}
 
 	$scope.confirmPayback = function(){

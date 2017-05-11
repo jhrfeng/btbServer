@@ -145,10 +145,10 @@
 								<td ng-if="order.status!='0'">{{order.status | orderStatus}}</td>
 								<td>
 									<button class="btn btn-danger" ng-if="order.status=='0'" ng-click="cancelOrder(order.orderid)">取消订单</button>
-									<!-- <button class="btn btn-primary"
+									<button class="btn btn-primary"
 										data-toggle="modal" 
 										ng-if="order.status=='1'" 
-										ng-click="backpay(order)">到期赎回</button> -->
+										ng-click="backpay(order)">到期赎回</button>
 								</td>
 							</tr>
 						</tbody>
@@ -239,7 +239,7 @@
 				<p class="tip">赎回资金预计1-3个工作日内会转账到您的支付宝账户，请您耐心等待。</p>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-primary" ng-click="confirmPayback()">
+				<button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="confirmPayback()">
 					确认
 				</button>
 				<button type="button" class="btn btn-default" data-dismiss="modal">
