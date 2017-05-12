@@ -21,6 +21,11 @@
 						</p>
 					</li>
 					<li>
+						<p class="btn user-left" ng-click="toChangeView(4)">
+							<a href="">赎回管理</a>
+						</p>
+					</li>
+					<li>
 						<p class="btn user-left" ng-click="toChangeView(2)">
 							<a href="">用户管理</a>
 						</p>
@@ -107,6 +112,140 @@
 					</table>
 				</div>
 			</div>
+
+			<!--split line-->
+			<div class="fl gy_guide_announcement_rigth" id="" 
+			style="display:block;text-align:left;height: 100%;" ng-show="tabshow=='4'">
+				<div class="col-sm-20">
+					<table class="table table-striped">
+						<tbody>
+							<thead>
+								<tr>
+									<th>订单号</th>
+									<th>产品名称</th>
+									<th>订单金额</th>
+									<th>赎回金额</th>
+									<th>赎回状态</th>
+									<th>操作</th>
+								</tr>
+							</thead>
+							<tr ng-repeat="order in backorderList">
+								<td>{{order.orderid}}</td>
+								<td>{{order.product}}</td>
+								<td>{{order.payAmount}}元</td>
+								<td style="color:#20b326">{{order.openAmount}}元</td>
+								<td>{{order.status | backStatus}}</td>
+								<td>
+									<button class="btn btn-primary" ng-click="backDetail(order)">
+									 	详情
+									</button>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+			<!--split line-->
+			<div class="fl gy_guide_announcement_rigth" id="sss" style="display:block;text-align:left;height: 100%;" ng-show="tabshow=='5'">
+				<div class="col-sm-20">
+					<table class="table">
+						<tbody>
+							<tr>
+								<td>用户名</td>
+								<td>{{backOrder.user.username}}</td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>姓名</td>
+								<td>{{backOrder.user.name}}</td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>手机号</td>
+								<td>{{backOrder.user.username}}</td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>身份证</td>
+								<td>{{backOrder.user.idcard}}</td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>产品名称</td>
+								<td>{{backOrder.product}}</td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>订单号</td>
+								<td>{{backOrder.orderid}}</td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>订单金额</td>
+								<td>{{backOrder.payAmount}}</td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>赎回金额</td>
+								<td>{{backOrder.openAmount}}</td>
+								<td class="danger">*请人工计算核实一遍</td>
+							</tr>
+							<tr>
+								<td>转入支付宝账号</td>
+								<td>
+									<input type="text" ng-model="backOrder.account">
+								</td>
+								<td class="danger">若客户账号变动可进行修改</td>
+							</tr>
+							<tr>
+								<td>资金账号</td>
+								<td>{{backOrder.companyAccount}}</td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>转入流水号</td>
+								<td>
+									<input type="text" 
+									placeholder="请输入交易流水号" 
+									ng-model="backOrder.tradeno">
+								</td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>申请赎回时间</td>
+								<td>{{backOrder.created | date:"yyyy/MM/dd HH:mm"}}</td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>赎回状态</td>
+								<td>{{backOrder.openStatus | backStatus}}</td>
+								<td></td>
+							</tr>
+							<tr>
+								<td>财务打款时间</td>
+								<td>{{backOrder.findate | date:"yyyy/MM/dd HH:mm"}}</td>
+								<td></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td>
+									<button id="register" 
+									class="btn btn-primary" 
+									ng-click="confirmPay(backOrder)"
+									style="width:200px;"
+									data-loading-text="处理中..." 
+					   				type="button"> 
+					   					确认打款
+						   			</button>
+								</td>
+								<td></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+
 
 			
 		</div>

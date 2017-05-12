@@ -24,9 +24,9 @@ function($rootScope, $scope, httpUtil, $state) {
 		if(type==6){ // 查询所有订单
 			squeryAllorder();
 		}
-		if(type==7){ // 查询所有赎回订单
-			queryAllbackorder();
-		}
+		// if(type==7){ // 查询所有赎回订单
+		// 	queryAllbackorder();
+		// }
 		if(type==5){ // 修改个人信息
 			$state.go("meinfo")
 		}
@@ -98,6 +98,7 @@ function($rootScope, $scope, httpUtil, $state) {
 		httpUtil.post(reqUrl, {orderid: $scope.vo.orderid}, function(data, status){
 			if(status==200){
 				alert("提交成功")
+				queryAllorder();
 			}
 			if(status==402){
 				alert("尚未到赎回日期")
@@ -112,15 +113,6 @@ function($rootScope, $scope, httpUtil, $state) {
 				$scope.orderList = data.order;
 			}
 		})
-	}
-
-	function queryAllbackorder(){
-		var reqUrl = globalConfig.rootUrl + "/order/queryAllbackorder";
-		httpUtil.get(reqUrl, function(data, status){
-			if(status==200){
-				$scope.backorderList = data.order;
-			}
-		})	
 	}
 
 	function squeryAllorder(){
@@ -158,6 +150,10 @@ function($rootScope, $scope, httpUtil, $state) {
         	return "待支付"
         if(value=="1")
         	return "支付已生效"	
+        if(value=="2")
+        	return "待赎回"	
+        if(value=="3")
+        	return "已赎回"	
     }
 }).filter('income', function() { //可以注入依赖
     return function(order) {
@@ -200,4 +196,11 @@ function($rootScope, $scope, httpUtil, $state) {
 		if(val==2)
 			return '已认证';
     }
-});;
+}).filter('backStatus', function() { //可以注入依赖
+    return function(value) {
+        if(value=="0")
+        	return "未打款"
+        if(value=="1")
+        	return "已打款"	
+    }
+});

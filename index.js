@@ -52,6 +52,8 @@ app.get('/getSource', routes.home.getSource);
 app.get('/order/queryBlackuser', jwt({secret: secret.secretToken}), tokenManager.verifyToken, routes.users.queryBlackuser);
 //管理员查询当前用户所有订单
 app.get('/order/queryBlackorder', jwt({secret: secret.secretToken}), tokenManager.verifyToken, routes.order.queryBlackorder);
+//管理员查询当前用户所有赎回订单
+app.get('/order/queryBlackbackorder', jwt({secret: secret.secretToken}), tokenManager.verifyToken, routes.order.queryBlackbackorder);
 
 //查询当前用户所有赎回订单
 app.get('/order/queryAllbackorder', jwt({secret: secret.secretToken}), tokenManager.verifyToken, routes.order.queryAllbackorder);

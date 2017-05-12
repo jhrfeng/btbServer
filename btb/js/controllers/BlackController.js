@@ -50,6 +50,27 @@ function($rootScope, $scope, httpUtil, $state) {
 				}
 			})
 		}
+		if(type==4){ 
+			queryAllbackorder()
+		}
+	}
+
+	$scope.backDetail = function(order){
+		$scope.tabshow = 5;
+		$scope.backOrder = order;
+	}
+
+	$scope.confirmPay = function(order){
+		$("#register").button('loading');
+	}
+
+	function queryAllbackorder(){
+		var reqUrl = globalConfig.rootUrl + "/order/queryBlackbackorder";
+		httpUtil.get(reqUrl, function(data, status){
+			if(status==200){
+				$scope.backorderList = data.order;
+			}
+		})	
 	}
 	
 	

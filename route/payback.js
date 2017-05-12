@@ -21,7 +21,7 @@ exports.backpay = function(req, res){
 			if(isBackpay(order) >= 0){
 				res.sendStatus(402); //尚未到时间
 			}else{
-				updateOrderStatus(orderid, "1");
+				updateOrderStatus(orderid, "2");
 				generateBackorder(order, user);
 				sendCustomer(user.username, orderid);
 				sendAdmin(user.username, orderid);
@@ -62,7 +62,7 @@ function sendAdmin(mobile, orderid){
 				text:"【陆家嘴比特币】手机号为"+mobile+"的客户正在申请赎回"+orderid+"订单，请您及时处理。",
 				mobile:""
 			};
-    smsJson.mobile = mobile;
+    smsJson.mobile = '15821950727';
 	request.post({url:SMS_URL, form: smsJson}, function(err,httpResponse,body){
 		console.log(body)
 	});	
@@ -80,7 +80,9 @@ function generateBackorder(order, user){
 
 	backOrder.userid  = order.userid;
 	backOrder.orderid = order.orderid;
-	backOrder.product = order.pid.name
+	backOrder.product = order.pid.name;
+	backOrder.payAmount = order.payAmount;
+	backOrder.openAmount = order.openAmount;
 	backOrder.account = user.username;
 	// 先处理掉user中敏感的字段信息
 	backOrder.user = user;

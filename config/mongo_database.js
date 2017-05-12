@@ -84,14 +84,16 @@ var Backorder = new Schema({
     orderid:  { type: String, required: true, unique: true }, // 订单号号
     product:  { type: String, required: true }, // 商品名称
     account:  { type: String, required: true }, // 赎回账号
-    paytype:  { type: String,   required: true, default: "1" },   // 赎回账号类型，1支付宝 2暂定
+    payAmount:{ type: String},
+    openAmount:{type: String},
+    paytype:  { type: String, required: true, default: "1" },   // 赎回账号类型，1支付宝 2暂定
     companyAccount:{ type: String, required: true, default: "2876073312@qq.com"  }, // 公司支付宝账号
     tradeno:  { type: String, unique: true }, // 交易流水号凭证
     openStatus:{type: String, default: "0"}, // 0未打款，1已打款
-    findate:  { type: Date, default: Date.now }, // 财务打款时间 
+    findate:  { type: Date}, // 财务打款时间 
     created:  { type: Date, default: Date.now }, // 赎回日期
     updated:  { type: Date, default: Date.now },
-    status:   { type: String, default: "0" },   // 状态有效， 0未完成订单，1已完成订单
+    status:   { type: String, default: "0" },   // 状态有效
 });
 
 // 指数型订单

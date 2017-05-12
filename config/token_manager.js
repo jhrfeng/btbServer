@@ -38,6 +38,7 @@ exports.getUser = function(req){
 	user.id = json._doc._id;
 	user.username = json._doc.username;
 	user.name = json._doc.name;
+	user.idcard = json._doc.idcard;
 	return user;
 }
 
