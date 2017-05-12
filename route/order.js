@@ -85,6 +85,19 @@ exports.queryAllOrder = function(req, res, next) {
 	}).sort({ created : -1 });
 };
 
+// 赎回订单
+exports.queryAllbackorder = function(req, res, next) {
+	var userid = tokenManager.getUserId(req);
+	
+	db.backorderModel.find({userid: userid}, function (err, order) {
+		if (err) {
+			console.log(err);
+			return res.sendStatus(500);
+		}
+		return res.json({status:200, order:order, msg:"订单查询成功"});
+	}).sort({ created : -1 });
+};
+
 exports.queryBlackorder = function(req, res, next) {
 	var userid = tokenManager.getUserId(req);
 	if(userid!='56064f89ade2f21f36b03136'){

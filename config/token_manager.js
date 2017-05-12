@@ -35,7 +35,9 @@ exports.getUser = function(req){
 	var token = getToken(req.headers);
 	var json = jwt.decode(token, secret.secretToken);
 	var user = {};
+	user.id = json._doc._id;
 	user.username = json._doc.username;
+	user.name = json._doc.name;
 	return user;
 }
 

@@ -24,6 +24,9 @@ function($rootScope, $scope, httpUtil, $state) {
 		if(type==6){ // 查询所有订单
 			squeryAllorder();
 		}
+		if(type==7){ // 查询所有赎回订单
+			queryAllbackorder();
+		}
 		if(type==5){ // 修改个人信息
 			$state.go("meinfo")
 		}
@@ -83,27 +86,21 @@ function($rootScope, $scope, httpUtil, $state) {
 
 	$scope.backpay = function(order){
 		$scope.vo.orderid = order.orderid;
-		$('#myModal').modal('show')
 		if(isBackpay(order) >= 0){
 			alert("尚未到赎回日期")
 		}else{
-			var reqUrl = globalConfig.rootUrl + "/order/backpay";
-			httpUtil.post(reqUrl, {orderid:order.orderid}, function(data, status){
-				if(status==200){
-					$scope.orderList = data.order;
-				}
-				if(status==402){
-					alert("尚未到赎回日期")
-				}
-			})
+			$('#myModal').modal('show');
 		}
-		
 	}
 
 	$scope.confirmPayback = function(){
 		var reqUrl = globalConfig.rootUrl + "/order/backpay";
 		httpUtil.post(reqUrl, {orderid: $scope.vo.orderid}, function(data, status){
 			if(status==200){
+				alert("提交成功")
+			}
+			if(status==402){
+				alert("尚未到赎回日期")
 			}
 		})
 	}
@@ -115,6 +112,15 @@ function($rootScope, $scope, httpUtil, $state) {
 				$scope.orderList = data.order;
 			}
 		})
+	}
+
+	function queryAllbackorder(){
+		var reqUrl = globalConfig.rootUrl + "/order/queryAllbackorder";
+		httpUtil.get(reqUrl, function(data, status){
+			if(status==200){
+				$scope.backorderList = data.order;
+			}
+		})	
 	}
 
 	function squeryAllorder(){

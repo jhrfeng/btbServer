@@ -161,11 +161,6 @@ exports.me = function(req, res){
 		if (err) {
 			return res.sendStatus(401);
 		}
-		user.password = "***";
-		user.updated = "";
-		user.zijinPay = "";
-		user.zhifuPay = "";
-
 		res.json(user);
 		
 	});

@@ -4,20 +4,31 @@ var secret = require('../config/secret');
 let SMS_URL = 'https://sms.yunpian.com/v2/sms/single_send.json';
 var tokenManager = require('../config/token_manager');
 
+/**
+  1.判断订单是否到赎回期，
+  2，Y更新订单状态为2
+  3，同时插入到赎回订单中一条记录
+  4，发送短信通知客户和管理员
 
+**/
 exports.backpay = function(req, res){
 	var orderid = req.body.orderid || '';
-	var userid = tokenManager.getUserId(req);
-	var whereData = {orderid:orderid, userid:userid, status:"1"};
+	var user = tokenManager.getUser(req);
+	var whereData = {orderid:orderid, userid:user.id, status:"1"};
+	console.log(whereData)
 	db.orderModel.findOne(whereData, function(err, order){
 		if(order){
-			console.log(isBackpay(order))
 			if(isBackpay(order) >= 0){
-				res.status(402); //尚未到时间
+				res.sendStatus(402); //尚未到时间
+			}else{
+				updateOrderStatus(orderid, "1");
+				generateBackorder(order, user);
+				sendCustomer(user.username, orderid);
+				sendAdmin(user.username, orderid);
+				res.sendStatus(200);
 			}
-			res.json(order);
 		}else{
-			res.status(400); // 未发现订单
+			res.sendStatus(400); // 未发现订单
 		} 
 		
 	})
@@ -27,70 +38,66 @@ exports.backpay = function(req, res){
 exports.confirmPayback = function(req, res){
 	var orderid = req.body.orderid || '';
 	var user = tokenManager.getUser(req);
-	var whereData = {orderid:orderid, userid:user.userid, status:"1"};
+	var whereData = {orderid:orderid, userid:user.id, status:"1"};
 	console.log(whereData)
 	db.orderModel.findOne(whereData, function(err, order){
-		console.log(order)
 	})
 }
 
-
-exports.sms1 = function(req, res){
-	db.userModel.find(function (err, users) {
-			for(i in users){
-				if(users[i]["username"]!="root"){
-					console.log(users[i]["username"])
-					sendSms(users[i]["username"])
-				}
-			}
-			res.json({msg:"发送成功"}); 
-		}).sort({ created : -1 });	
-}
-
-
-function sendSms(mobile){
+//】尊敬的用户：已收到您赎回#orderid#的订单请求，我们会在1~3个工作日处理完毕，再次感谢您对我们的支持和信任。
+function sendCustomer(mobile, orderid){
 	var smsJson = {
 				apikey:"966f88af7f6c20b51bb758ffa50c197c",
-				text:"【陆家嘴比特币】尊敬的用户：您的新产品陆家嘴比特币一号已授权完成，可以进行查看。",
+				text:"【陆家嘴比特币】尊敬的用户：已收到您赎回"+orderid+"的订单请求，我们会在1~3个工作日处理完毕，再次感谢您对我们的支持和信任。",
+				mobile:mobile
+			};
+	request.post({url:SMS_URL, form: smsJson}, function(err,httpResponse,body){
+		console.log(body)
+	});	
+}
+
+function sendAdmin(mobile, orderid){
+	var smsJson = {
+				apikey:"966f88af7f6c20b51bb758ffa50c197c",
+				text:"【陆家嘴比特币】手机号为"+mobile+"的客户正在申请赎回"+orderid+"订单，请您及时处理。",
 				mobile:""
 			};
     smsJson.mobile = mobile;
 	request.post({url:SMS_URL, form: smsJson}, function(err,httpResponse,body){
-		var object = JSON.parse(body);
-		if(object["code"]!=0){
-			var log = new db.logModel();
-			log.name = "短信通知";
-			log.content = { msg:object["msg"], mobile:mobile };
-			log.save(function(err) {})
-		}
+		console.log(body)
 	});	
 }
 
-function updateOrderStatus(status){
-	var updateDat = {$set: {status:'', updated:new Date()}}; //如果不用$set，替换整条数据
-	db.orderModel.update(whereData, updateDat, function(err, uporder){ // 执行订单状态变更
-		log.content = uporder;
-		if(err){ // 保存此次订单更新失败状态
-			console.log(err)
-        	log.msg = "支付链接更新失败："+whereData.orderid;
-			log.save(function(err) {})
-		}
-		log.save(function(err) {})
+function updateOrderStatus(orderid, status){
+	var updateDat = {$set: {status:status, updated:new Date()}}; //如果不用$set，替换整条数据
+	db.orderModel.update({orderid:orderid}, updateDat, function(err, uporder){ // 执行订单状态变更
 	})
 }
 
+// 生成一笔赎回单
+function generateBackorder(order, user){
+	var backOrder = new db.backorderModel();
+
+	backOrder.userid  = order.userid;
+	backOrder.orderid = order.orderid;
+	backOrder.product = order.pid.name
+	backOrder.account = user.username;
+	// 先处理掉user中敏感的字段信息
+	backOrder.user = user;
+	backOrder.save(function(err) {});
+	
+}
+
 function isBackpay(order) {
-		Date.prototype.diff = function(date){
-		  return (this.getTime() - date.getTime())/(24 * 60 * 60 * 1000);
-		}
-		var now = new Date();
-		var date = addDaysToDate(new Date(order.created), order.pid.week);
-		var diff = date.diff(now);
-		diff = diff.toFixed(0);
-		return diff;
-		
-	                                           
-    }
+	Date.prototype.diff = function(date){
+	  return (this.getTime() - date.getTime())/(24 * 60 * 60 * 1000);
+	}
+	var now = new Date();
+	var date = addDaysToDate(new Date(order.created), order.pid.week);
+	var diff = date.diff(now);
+	diff = diff.toFixed(0);
+	return diff;
+}
 
 function addDaysToDate(myDate,days) {
 	return new Date(myDate.getTime() + days*24*60*60*1000);
