@@ -73,6 +73,9 @@ app.post('/order/cancelOrder', jwt({secret: secret.secretToken}), tokenManager.v
 // 到期赎回
 app.post('/order/backpay', jwt({secret: secret.secretToken}), tokenManager.verifyToken, routes.payback.backpay)
 
+// 赎回付款
+app.post('/order/confirmPay', jwt({secret: secret.secretToken}), tokenManager.verifyToken, routes.payback.confirmPay)
+
 
 //管理员查询当前用户所有指数型订单
 app.get('/superorder/queryBlackorder', jwt({secret: secret.secretToken}), tokenManager.verifyToken, routes.superOrder.queryBlackorder);

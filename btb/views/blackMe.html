@@ -134,7 +134,7 @@
 								<td>{{order.product}}</td>
 								<td>{{order.payAmount}}元</td>
 								<td style="color:#20b326">{{order.openAmount}}元</td>
-								<td>{{order.status | backStatus}}</td>
+								<td>{{order.openStatus | backStatus}}</td>
 								<td>
 									<button class="btn btn-primary" ng-click="backDetail(order)">
 									 	详情
@@ -229,7 +229,7 @@
 							</tr>
 							<tr>
 								<td></td>
-								<td>
+								<td ng-if="backOrder.openStatus!=1">
 									<button id="register" 
 									class="btn btn-primary" 
 									ng-click="confirmPay(backOrder)"

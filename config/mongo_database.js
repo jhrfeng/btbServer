@@ -74,7 +74,7 @@ var Order = new Schema({
     openStatus:{type: String, default: "0"}, // 0未清算，1已清算
     created:  { type: Date, default: Date.now }, //
     updated:  { type: Date, default: Date.now },
-    status:   { type: String, default: "0" },   // 状态有效， 0未完成订单，1已完成订单, 2赎回中
+    status:   { type: String, default: "0" },   // 状态有效， 0未完成订单，1已完成订单, 2赎回中, 3已赎回
 });
 
 // 赎回订单
@@ -93,6 +93,7 @@ var Backorder = new Schema({
     findate:  { type: Date}, // 财务打款时间 
     created:  { type: Date, default: Date.now }, // 赎回日期
     updated:  { type: Date, default: Date.now },
+    updateid: { type: String, required: true }, // 操作人
     status:   { type: String, default: "0" },   // 状态有效
 });
 

@@ -35,12 +35,30 @@ exports.backpay = function(req, res){
 
 }
 
-exports.confirmPayback = function(req, res){
+exports.confirmPay = function(req, res){
 	var orderid = req.body.orderid || '';
+	var account = req.body.account || '';
+	var tradeno = req.body.tradeno || '';
 	var user = tokenManager.getUser(req);
-	var whereData = {orderid:orderid, userid:user.id, status:"1"};
-	console.log(whereData)
-	db.orderModel.findOne(whereData, function(err, order){
+	var whereData = {orderid:orderid,openStatus:"0"};
+	db.backorderModel.findOne(whereData, function(err, order){
+		console.log(order)
+		if(order){
+			var updateDat = {$set: {openStatus:'1',
+									updateid:user.id,
+									tradeno:tradeno,
+									account:account,
+									updated:new Date(), 
+									findate:new Date()
+							}}; 
+			console.log(updateDat)
+			db.backorderModel.update({orderid:orderid}, updateDat, function(err, uporder){})
+			updateOrderStatus(orderid, '3');
+			sendHasPay(user.username, orderid)
+			res.sendStatus(200);
+		}
+		res.sendStatus(400);
+			
 	})
 }
 
@@ -68,6 +86,19 @@ function sendAdmin(mobile, orderid){
 	});	
 }
 
+function sendHasPay(mobile, orderid){
+	var smsJson = {
+				apikey:"966f88af7f6c20b51bb758ffa50c197c",
+				text:"【陆家嘴比特币】尊敬的用户："+orderid+"订单已成功赎回，请您及时查询结果。",
+				mobile:""
+			};
+    smsJson.mobile = mobile;
+	request.post({url:SMS_URL, form: smsJson}, function(err,httpResponse,body){
+		console.log(body)
+	});	
+}
+
+
 function updateOrderStatus(orderid, status){
 	var updateDat = {$set: {status:status, updated:new Date()}}; //如果不用$set，替换整条数据
 	db.orderModel.update({orderid:orderid}, updateDat, function(err, uporder){ // 执行订单状态变更
@@ -83,6 +114,7 @@ function generateBackorder(order, user){
 	backOrder.product = order.pid.name;
 	backOrder.payAmount = order.payAmount;
 	backOrder.openAmount = order.openAmount;
+	backOrder.updateid = user.id;
 	backOrder.account = user.username;
 	// 先处理掉user中敏感的字段信息
 	backOrder.user = user;

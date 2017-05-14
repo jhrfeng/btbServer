@@ -198,9 +198,18 @@ function($rootScope, $scope, httpUtil, $state) {
     }
 }).filter('backStatus', function() { //可以注入依赖
     return function(value) {
+    	console.log(value)
         if(value=="0")
         	return "未打款"
         if(value=="1")
         	return "已打款"	
+    }
+}).filter('sincome', function() { //可以注入依赖
+    return function(amount) {
+        var rate = 0.5;
+		var now = new Date();
+		var date = new Date('2017-05-13'); 
+		var diff = now.diff(date).toFixed(0);
+        return	amount + (amount*rate*diff/365).toFixed(2);
     }
 });

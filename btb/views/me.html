@@ -182,7 +182,7 @@
 								<td>{{order.created | date:"yyyy/MM/dd"}}</td>
 								<td>{{order.pid.week}}天</td>
 								<td>50%</td>
-								<td style="color:#20b326">{{order.payAmount + (order.payAmount*0.5*2/365).toFixed(2)}}</td>
+								<td style="color:#20b326">{{order.payAmount | sincome}}</td>
 								<td ng-if="order.status=='0'"><a href="#/splaceorder/{{order.orderid}}">{{order.status | orderStatus}}</a></td>
 								<td ng-if="order.status!='0'">{{order.status | orderStatus}}</td>
 								<td>

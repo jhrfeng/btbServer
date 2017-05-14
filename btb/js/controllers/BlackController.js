@@ -61,7 +61,24 @@ function($rootScope, $scope, httpUtil, $state) {
 	}
 
 	$scope.confirmPay = function(order){
+		if(order.tradeno=='' || order.tradeno==null){
+			alert("交易流水号不能为空")
+			return false;
+		}
+		if(order.account=='' || order.account==null){
+			alert("客户支付宝账号不能为空")
+			return false;
+		}
+		var reqUrl = globalConfig.rootUrl + "/order/confirmPay";
 		$("#register").button('loading');
+		httpUtil.post(reqUrl, order, function(data, status){
+			$("#register").button('reset');
+			if(status==200){
+				$scope.toChangeView(4)
+			}else{
+				alert('提交失败')
+			}
+		})	
 	}
 
 	function queryAllbackorder(){
