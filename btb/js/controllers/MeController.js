@@ -210,6 +210,7 @@ function($rootScope, $scope, httpUtil, $state) {
 		var now = new Date();
 		var date = new Date('2017-05-13'); 
 		var diff = now.diff(date).toFixed(0);
-        return	amount + (amount*rate*diff/365).toFixed(2);
+		// console.log(diff)
+        return	Number(amount) + Number((amount*rate*diff/365).toFixed(2));
     }
 });
