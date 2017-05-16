@@ -15,9 +15,8 @@ exports.getSource = function(req, res) {
 		redisClient.get(today, function (err, rank) {
 			res.json(rank);
 		})
-	}
-	if(params.source==1){
-		redisClient.get(today+'1', function (err, rank) {
+	}else{
+		redisClient.get(today+params.source, function (err, rank) {
 			res.json(rank);
 		})
 	}
@@ -29,7 +28,8 @@ exports.sources = function(req, res) {
 	var params = req.query;
 	var today = moment(new Date()).format("YYYYMMDD");
 	add(today);
-	if(params.source==1){
+	add(today+params.source);
+	if(params.source!=0){
 		add(today+params.source);
 	}
 	res.sendStatus(200);
