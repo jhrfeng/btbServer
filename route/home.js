@@ -14,8 +14,8 @@ exports.getRate = function(req, res){
 		if(rank==null){
 			redisClient.set('ljzbtc1', 0.5);
 			res.json(0.5);
-		}
-		res.json(rank);
+		}else
+			res.json(rank);
 	})
 }
 

@@ -88,7 +88,7 @@ var Backorder = new Schema({
     openAmount:{type: String},
     paytype:  { type: String, required: true, default: "1" },   // 赎回账号类型，1支付宝 2暂定
     companyAccount:{ type: String, required: true, default: "2876073312@qq.com"  }, // 公司支付宝账号
-    tradeno:  { type: String, unique: true }, // 交易流水号凭证
+    tradeno:  { type: String, default: "" }, // 交易流水号凭证
     openStatus:{type: String, default: "0"}, // 0未打款，1已打款
     findate:  { type: Date}, // 财务打款时间 
     created:  { type: Date, default: Date.now }, // 赎回日期
