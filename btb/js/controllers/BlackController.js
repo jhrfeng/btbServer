@@ -4,6 +4,7 @@ function($rootScope, $scope, httpUtil, $state) {
 	$rootScope.header = true;
 	
 	$scope.tabshow = '1';
+	$scope.vo = {rate:null};
 	$scope.user = {};
 	
 	$scope.login = function(){
@@ -22,6 +23,18 @@ function($rootScope, $scope, httpUtil, $state) {
 			}
 		});
 
+	}
+
+	$scope.setRate = function(){
+		console.log($scope.vo.rate);
+		if($scope.vo.rate>2){
+			alert("请输入合理的小数利率")
+			return false;
+		}
+		var reqUrl = globalConfig.rootUrl + "/home/setRate";
+		httpUtil.post(reqUrl, $scope.vo, function(data, status){
+			alert("设置成功")
+		})	
 	}
 
 	$scope.toChangeView = function(type) {

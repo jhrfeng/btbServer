@@ -14,6 +14,14 @@ function($rootScope, $scope, httpUtil, $state) {
 				$scope.user = data;
 			}
 		})
+
+		var reqUrl2 = globalConfig.rootUrl + "/home/getRate";
+		httpUtil.get(reqUrl2, function(data, status){
+			if(status==200){
+				console.log(data);
+				httpUtil.cacheUtil.put("ljzbtc1", data);
+			}
+		})
 	}
 
 	$scope.toChangeView = function(type) {
@@ -117,9 +125,16 @@ function($rootScope, $scope, httpUtil, $state) {
 
 	function squeryAllorder(){
 		var reqUrl = globalConfig.rootUrl + "/superorder/queryAllorder";
+		var rate = httpUtil.cacheUtil.get("ljzbtc1");
+		rate = rate.replace('"', '')
+		rate = rate.replace('"', '')
+		rate = Number(rate)*100;
 		httpUtil.get(reqUrl, function(data, status){
 			if(status==200){
 				$scope.sorderList = data.order;
+				angular.forEach($scope.sorderList, function(key, obj){
+					key.rate = rate;
+				})
 			}
 		})
 	}
@@ -206,11 +221,12 @@ function($rootScope, $scope, httpUtil, $state) {
     }
 }).filter('sincome', function() { //可以注入依赖
     return function(amount) {
-        var rate = 0.5;
+        var rate = Number(amount.rate)/100;
 		var now = new Date();
 		var date = new Date('2017-05-13'); 
 		var diff = now.diff(date).toFixed(0);
-		// console.log(diff)
-        return	Number(amount) + Number((amount*rate*diff/365).toFixed(2));
+		console.log(amount.payAmount, rate)
+		var payAmount = Number(amount.payAmount);
+        return	payAmount + Number((payAmount*rate*diff/365).toFixed(2));
     }
 });

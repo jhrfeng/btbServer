@@ -169,7 +169,7 @@
 									<th>购买金额</th>
 									<th>购买日期</th>
 									<th>周期</th>
-									<th>今日年化收益率</th>
+									<th>本周收益率</th>
 									<th>今日收益</th>
 									<th>订单状态</th>
 									<th>操作</th>
@@ -181,8 +181,8 @@
 								<td>{{order.payAmount}}元</td>
 								<td>{{order.created | date:"yyyy/MM/dd"}}</td>
 								<td>{{order.pid.week}}天</td>
-								<td>50%</td>
-								<td style="color:#20b326">{{order.payAmount | sincome}}</td>
+								<td>{{order.rate}}%</td>
+								<td style="color:#20b326">{{order | sincome}}</td>
 								<td ng-if="order.status=='0'"><a href="#/splaceorder/{{order.orderid}}">{{order.status | orderStatus}}</a></td>
 								<td ng-if="order.status!='0'">{{order.status | orderStatus}}</td>
 								<td>

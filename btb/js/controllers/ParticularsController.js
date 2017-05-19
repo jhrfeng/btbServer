@@ -1,10 +1,16 @@
 app.controller('particularsController', 
 ['$scope', 'httpUtil', '$state', function($scope, httpUtil, $state) {
 
-	$scope.order = {pid:"s20170000", payAmount:5000};
+	$scope.order = {pid:"s20170000", payAmount:5000, rate:0};
 
 	httpUtil.get(globalConfig.rootUrl + "/superaplipay/rank", function(data, status){
 		$scope.percenter = data;
+	})
+
+	httpUtil.get(globalConfig.rootUrl + "/home/getRate", function(data, status){
+		if(status==200){
+			$scope.order.rate = Number(data)*100;
+		}
 	})
 
 	$scope.generate = function(){

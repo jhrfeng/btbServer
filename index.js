@@ -42,6 +42,14 @@ app.get('/', function (req, res) {
     res.sendFile(__dirname + '/index.html');
 });
 
+
+//设置陆家嘴一号利率
+app.post('/home/setRate', jwt({secret: secret.secretToken}), tokenManager.verifyToken, routes.home.setRate);
+
+//获取陆家嘴一号利率
+app.get('/home/getRate', routes.home.getRate);
+
+
 // 统计量
 app.get('/source', routes.home.sources);
 

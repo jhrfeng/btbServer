@@ -30,6 +30,11 @@
 							<a href="">用户管理</a>
 						</p>
 					</li>
+					<li>
+						<p class="btn user-left" ng-click="toChangeView(6)">
+							<a href="">利率控制</a>
+						</p>
+					</li>
 				</ul>
 			</div>
 			
@@ -246,7 +251,37 @@
 				</div>
 			</div>
 
-
+			<!--split line-->
+			<div class="fl gy_guide_announcement_rigth" id="" 
+			style="display:block;text-align:left;height: 100%;" ng-show="tabshow=='6'">
+				<div class="col-sm-20">
+					<table class="table table-striped">
+						<tbody>
+							<thead>
+								<tr>
+									<th>利率控制</th>
+									<th></th>
+									<th>操作</th>
+									<th></th>
+								</tr>
+							</thead>
+							<tr>
+								<td>
+									<input type="number" class="form-control" placeholder="请输入小数利率：如0.5" ng-model="vo.rate">
+								</td>
+								<td></td>
+								<td>
+									<button class="btn btn-primary" 
+									ng-click="setRate()">
+									 	设置
+									</button>
+								</td>
+								<td></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
 			
 		</div>
 	</div>
